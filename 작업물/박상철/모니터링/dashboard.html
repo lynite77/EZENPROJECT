@@ -1,0 +1,3129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>NEXPOM - demo_02</title>
+
+<link rel="stylesheet" type="text/css" href="/css/application_white.css"/>
+<link rel="stylesheet" type="text/css" href="/css/application_white.css" media="print" />
+			
+				<link rel="stylesheet" type="text/css" href="/css/nexpom.v2.0.css" />
+				<link rel="stylesheet" type="text/css" href="/css/nexpom_add.css" />
+
+<!-- <link rel="stylesheet" type="text/css" href="/static/demo/src/style.css" /> -->
+
+<link rel="stylesheet" type="text/css" href="/css/flags/flag-icon.css"/>
+<link rel="stylesheet" type="text/css" href="/css/weather-icons.css"/>
+<!-- <link rel="shortcut icon" href="/images/nexpom/com/favicon.ico" /> -->
+<meta http-equiv="X-UA-Compatible" content="IE=11;" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge;" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<meta charset="utf-8" />
+<meta name="mobile-web-app-capable" content="yes"> 
+
+
+
+
+<!-- common libraries. required for every page-->
+<script src="/lib/jquery/dist/jquery.min.js"></script>
+<script src="/lib/jquery-pjax/jquery.pjax.js"></script>
+<script src="/lib/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
+<script src="/lib/widgster/widgster.js"></script>
+<script src="/lib/underscore/underscore.js"></script>
+
+<!-- common application js -->
+
+<script src="/lib/messenger/build/js/messenger.js"></script>
+<script src="/lib/messenger/build/js/messenger-theme-flat.js"></script>
+
+<script src="/js/nexpom/com/app.js"></script>
+<script src="/js/nexpom/com/settings.js"></script>
+
+<script src="/lib/backbone/backbone.js"></script>
+<script src="/lib/messenger/docs/welcome/javascripts/location-sel.js"></script>
+<script src="/js/nexpom/com/ui-notifications.js"></script>
+
+<script type="text/javascript" src="/lib/HoldOn.js-master/src/js/HoldOn.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/lib/HoldOn.js-master/src/css/HoldOn.css" />
+<script src="/lib/moment/moment.js"></script>
+<script src="/lib/moment/min/moment-with-locales.js"></script>
+<script src="/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/lib/select2/select2.min.js"></script>
+<script src="/lib/colorbrewer/colorbrewer.js"></script>
+<script src="/lib/toastr/toastr.min.js"></script>
+<script src="/lib/jquery-cookie/jquery.cookie.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/lib/toastr/toastr.min.css" />
+
+<style>
+#toast-container>div{
+	width: 380px !important;
+}
+
+.toast-top-right{
+	top: 75px !important;
+    right: 65px !important;
+}
+
+#toast-container{
+	pointer-events: auto;
+	height:750px !important;
+    overflow-y: auto;
+    //-ms-overflow-style: none;
+}
+
+/*
+#toast-container::webkit-scrollbar{
+  display:none;
+}
+*/
+
+#toast-container::-webkit-scrollbar {
+	width: 8px;
+}
+#toast-container::-webkit-scrollbar-thumb {
+	background-color: #2f3542;
+}
+#toast-container::-webkit-scrollbar-track {
+	background-color: #fff;
+}
+
+</style>
+
+<link rel="stylesheet" type="text/css" href="/lib/jquery-ui/themes/base/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="/lib/jquery-multiselect/css/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="/lib/jquery-multiselect/css/jquery.multiselect.filter.css" />
+<link rel="stylesheet" type="text/css" href="/lib/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="/lib/bootstrap-switch/css/bootstrap3/bootstrap-switch.css" />
+
+
+<script src="/lib/JSONSelect/src/jsonselect.min.js"></script>
+<script src="/lib/jsel-master/jsel.js"></script>
+<script src="/lib/jquery.websocket/jquery.websocket.js"></script>
+<script src="/lib/daterangepicker/daterangepicker.js"></script>
+<script src="/js/nexpom/com/lib/jquery.dashboard-draw.js"></script>
+<!-- fullCalendar -->
+<link rel="stylesheet" href="/lib/fullcalendar/main.min.css">
+<link rel="stylesheet" href="/lib/fullcalendar-daygrid/main.min.css">
+<link rel="stylesheet" href="/lib/fullcalendar-timegrid/main.min.css">
+<link rel="stylesheet" href="/lib/fullcalendar-bootstrap/main.min.css">
+<style>
+.ui-widget.ui-widget-content.ui-tooltip-red, .arrow-red:after {
+	background: black;
+	border: 1px solid #ff0000;
+}
+
+.ui-widget.ui-widget-content.ui-tooltip-green, .arrow-green:after {
+	background: black;
+	border: 1px solid #75ff59;
+}
+
+.ui-widget.ui-widget-content.ui-tooltip-yellow, .arrow-yellow:after {
+	background: black;
+	border: 1px solid #f5e800;
+}
+
+.ui-tooltip {
+	padding: 10px 20px;
+	color: white;
+	border-radius: 5px;
+	font: bold 14px "Helvetica Neue", Sans-Serif;
+	box-shadow: 0 0 3px black;
+}
+
+.arrow {
+	width: 70px;
+	height: 16px;
+	overflow: hidden;
+	position: absolute;
+	left: 50%;
+	margin-left: -35px;
+	bottom: -16px;
+}
+
+.arrow.top {
+	top: -16px;
+	bottom: auto;
+}
+
+.arrow.left {
+	left: 20%;
+}
+
+.arrow:after {
+	content: "";
+	position: absolute;
+	left: 20px;
+	top: -20px;
+	width: 25px;
+	height: 25px;
+	box-shadow: 6px 5px 9px -9px black;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.arrow.top:after {
+	bottom: -20px;
+	top: auto;
+}
+</style>
+<input type="hidden" id="pageNm" name="pageNm" value="demo_02">
+</head>
+<body class="background-v1_0   hide-menu">
+	
+		
+	
+
+
+
+
+<div class="logo">
+	
+	
+		
+			
+			
+			
+			
+				
+			
+		
+	
+    <h4><a href="#" class="app_icon" data-app_dir="demo" ><strong>CUSTOM</strong></a></h4>
+    
+    <div class="form-group col-md-12 text-center hidden-xs">
+	    <select id="app_list" name="app_list" class="select-block-level select2" 
+			data-width="on"
+			data-minimum-results-for-search="10" 
+			>
+			
+			<option data-link_type="self" data-app_dir="demo" value="1110" selected="selected">demo</option>
+			
+		</select>
+	</div>
+	
+</div>
+	
+		
+			
+			
+		
+
+
+
+
+<nav id="sidebar" class="sidebar nav-collapse collapse">
+    <ul id="side-nav" class="side-nav">
+    	
+		
+	    	<li class="panel ">
+	    		
+           		
+	    		
+	    			
+	    			
+	    				<a class="menu_link" data-target-url="/demo/dsb/dashboard.do?sid=demo_main" title="MAIN page move" href="#"><i class="fa fa-home fa"></i> <span class="name">MAIN</span></a>
+	    			
+	    		
+	        </li>
+		
+	    	<li class="panel ">
+	    		
+           		
+	    		
+	    			
+	    			
+	    				<a class="menu_link" data-target-url="/demo/dsb/dashboard.do?sid=demo_01" title="demo_01 page move" href="#"><i class="fa fa-cube fa"></i> <span class="name">demo_01</span></a>
+	    			
+	    		
+	        </li>
+		
+	    	<li class="panel ">
+	    		
+           		
+	    		
+	    			
+	    			
+	    				<a class="menu_link" data-target-url="/demo/dsb/dashboard.do?sid=demo_02" title="demo_02 page move" href="#"><i class="fa fa-cube fa"></i> <span class="name">demo_02</span></a>
+	    			
+	    		
+	        </li>
+		
+	    	<li class="panel ">
+	    		
+           		
+	    		
+	    			
+	    			
+	    				<a class="menu_link" data-target-url="/demo/dsb/dashboard.do?sid=demo_03" title="demo_03 page move" href="#"><i class="fa fa-cube"></i> <span class="name">demo_03</span></a>
+	    			
+	    		
+	        </li>
+		
+        <li class="panel visible-xs">
+            <a href="/actionLogout.do"><i class="fa fa-sign-out"></i> <span class="name">로그아웃</span></a>
+        </li>
+    </ul>
+</nav>
+	
+	<div class="wrap ">
+		
+			
+		
+
+
+
+
+		<header class="page-header">
+            <div class="navbar">
+                <ul class="nav navbar-nav navbar-right pull-right">
+                	<li id="alarm_info" class="nav-item">
+        				<a id="alarm_hide" class="nav-link">
+        					<i class="fa fa-bell"></i>
+        					<span id="alarm_cnt" class="badge badge-warning navbar-badge" style="background-color: #007bff;top:0px; right:-5px;">0</span>
+        				</a>
+        				<div class="dropdown-alarm-menu">
+       			        </div>
+       				</li>
+                    <li id="clock"><span id="clocky"></span> <span id="clockh"></span></li>
+                    
+                    
+                    <li><a class="hidden-xs change_option" href="#" title="change opt"><i class="fa fa-refresh"></i></a></li>
+                    <li><a class="admin_link" href="#" title="Admin Home"><i class="fa fa-gear"></i></a></li>
+                    
+                    
+                    <li class="hidden-xs"><a href="/actionLogout.do"><i class="fa fa-sign-out"></i></a></li>
+                    
+                    <li class="visible-xs">
+                        <a href="#" class="btn-navbar" data-toggle="collapse" data-target=".sidebar" title="">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </li>
+                </ul>
+                <form id="searchForm" name="searchForm" class="form-horizontal navbar-form form-label-left" method="post" role="search"></form>
+            </div>
+        </header>
+		<div class="content container PrintArea">
+			<h2 class="page-title">DEMO
+				<small>demo</small><span
+					class="page-description"></span>
+			</h2>
+			<table class="normal printCheck formRemove"></table>
+			<input type="hidden" class="arg_list" id="d_id" value="demo_02" />
+			
+			<input class="arg_list" type="hidden" name="intervalTime" id="intervalTime" value="" />
+			<input type="hidden" id="d_file_name" name="d_file_name" value="demo_02.json" />
+			<input type="hidden" id="app" name="app" value="demo" />
+			<input type="hidden" id="nextPageId" value="" />
+			<input type="hidden" id="nextPageUrl" value="" />
+			<input type="hidden" id="param_csrf_token" name="param_csrf_token" value="5c23afd1-bd7c-4249-be3f-d29fa03d1f56" />
+			
+				
+					
+						
+						
+						
+					
+
+
+
+
+
+
+<input type="hidden" id="all_label" value="전체" />
+
+<script type="text/javascript">
+$(function(){
+	/* 넘어온 파라미터 값을 input 값에 셋팅 */
+	$( ".searchInput" ).each(function( index ) {
+		var el_name = $(this).attr("name");
+		var el_id = $(this).attr("id");
+		var el_value = $(this).val();
+		
+		var el_input_type = $(this).attr("id");
+		
+		if(!isNull($(".arg_list#"+el_name ).val())){
+			if($(this)[0].nodeName == 'SELECT'){
+				$(this).val($('.arg_list[name="'+el_name+'"]').val());
+			}else if($(this)[0].nodeName == 'INPUT'){
+				$(this).val($('.arg_list[name="'+el_name+'"]').val());
+			}
+		}
+	});
+	
+	/*if($("#startDate").length > 0 && $("#endDate").length > 0){
+		$("#startDate").on("dp.change", function (e) {
+	        $('#endDate').data("DateTimePicker").minDate(e.date);
+	    });
+	    $("#endDate").on("dp.change", function (e) {
+	        $('#startDate').data("DateTimePicker").maxDate(e.date);
+	    });
+	}*/
+});
+
+</script>
+
+<div id="row_content">
+
+
+
+	
+	
+		
+			
+			
+			
+		
+
+
+
+
+
+
+	<div class="row ">
+    		<div class="col-md-6">
+    				<section class="widget  header">
+						<header>
+								<h4>
+									<span>
+												싱글밸류
+									</span>
+								</h4>
+							<div class="widget-controls">
+									<!-- New Window -->
+									<a title="" href="#" class="scenario_btn"><i class="fa fa-file-code-o"></i></a>
+									<a title="" href="#" class="dashboard_btn"><i class="fa fa-dashboard"></i></a>
+							</div>
+						</header>
+						<div class="body " style=" height:100px;" id="chart_7" >
+										<div class="chart_content" id="chart_7_con" style=" height:100%;"></div>
+								<input type="hidden" class="d_search_id" value="" />
+								<input type="hidden" class="d_scenario_id" value="874e982411a5438688aa887224705a75" />
+								<input type="hidden" class="d_recipe_name" value="demo_01" />
+								<input type="hidden" class="d_search_span_key" value="" />
+			                    <input type="hidden" class="d_search_span_unit" value="" />
+			                    <input type="hidden" class="d_search_span_num" value="" />
+								<input type="hidden" class="d_search_type" value="" />
+								<input type="hidden" class="d_spec_object" value="" />
+								<input type="hidden" class="d_search_obj" value="" />
+								<input type="hidden" class="d_chart_type" value="SINGLE_VAL" />
+								<input type="hidden" class="d_chart_de" value="SINGLE" />
+								<input type="hidden" class="d_height" value="100px" />
+								<input type="hidden" class="d_fields" value="" />
+								<input type="hidden" class="d_classes" value="" />
+								<input type="hidden" class="d_data_add" value="" />
+								<input type="hidden" class="d_data_field" value="{&#034;widget_bg&#034;:&#034;&#034;,&#034;pres&#034;:[&#034;&#034;],&#034;unit_size&#034;:[&#034;&#034;],&#034;format_string&#034;:&#034;&#034;,&#034;units&#034;:[&#034;&#034;],&#034;align&#034;:[&#034;&#034;],&#034;widget_color_range&#034;:&#034;&#034;,&#034;colors&#034;:[&#034;&#034;],&#034;header_font_size&#034;:&#034;&#034;,&#034;sizes&#034;:[&#034;35px&#034;],&#034;setInterval&#034;:&#034;true&#034;,&#034;widget_data_color&#034;:&#034;&#034;,&#034;value&#034;:&#034;VALUE&#034;,&#034;setIntervalTime&#034;:&#034;5000&#034;,&#034;key&#034;:&#034;&#034;,&#034;widget_font_color&#034;:&#034;&#034;,&#034;sub_title&#034;:&#034;&#034;,&#034;units_colors&#034;:[&#034;&#034;],&#034;icons&#034;:[&#034;&#034;],&#034;widget_color&#034;:&#034;&#034;,&#034;format_type&#034;:&#034;&#034;,&#034;widget_font_sub_color&#034;:&#034;&#034;,&#034;font_family&#034;:&#034;&#034;,&#034;background_position&#034;:&#034;&#034;,&#034;desc&#034;:&#034;&#034;}" />
+								<input type="hidden" class="d_search_arg" value="" />
+								<input type="hidden" class="d_search_url" value="/selectDataList.do" />
+								<input type="hidden" class="d_param_str" value="" />
+								<input type="hidden" class="d_required_values" value="" />
+								<input type="hidden" class="searchElementStr" value="" />
+								<script type="text/javascript">
+								$(function chart_param(){
+									var d_chart_id =  "chart_7";
+									if(!isNull(d_chart_id)){
+										var el = "#"+d_chart_id;
+										
+										var fields = [];
+										var classes = [];
+										
+										
+										$(el+" .d_fields").val(fields);
+										$(el+" .d_classes").val(classes);
+									}
+								});
+								</script>
+							
+						</div>
+						<div class="loader-wrap hiding hide">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</div>
+					</section>
+    			
+    		</div>
+    	
+    		<div class="col-md-6">
+    			
+    				<section class="widget  header">
+						<header>
+							
+								<h4>
+									<span>
+										
+												멀티밸류
+										
+										
+									</span>
+								</h4>
+							
+							
+							
+							<div class="widget-controls">
+								
+									<!-- New Window -->
+									<a title="" href="#" class="scenario_btn"><i class="fa fa-file-code-o"></i></a>
+									<a title="" href="#" class="dashboard_btn"><i class="fa fa-dashboard"></i></a>
+								
+								
+									
+									
+									
+								
+								
+							</div>
+						</header>
+						<div class="body " 
+							style=" height:100px;" 
+							id="demo_02" >
+							
+							
+							
+								
+									
+									
+										<div class="chart_content" id="demo_02_con" style=" height:100%;"></div>
+									
+								
+								<input type="hidden" class="d_search_id" value="" />
+								<input type="hidden" class="d_scenario_id" value="874e982411a5438688aa887224705a75" />
+								<input type="hidden" class="d_recipe_name" value="demo_02" />
+								<input type="hidden" class="d_search_span_key" value="" />
+			                    <input type="hidden" class="d_search_span_unit" value="" />
+			                    <input type="hidden" class="d_search_span_num" value="" />
+								<input type="hidden" class="d_search_type" value="" />
+								<input type="hidden" class="d_spec_object" value="" />
+								<input type="hidden" class="d_search_obj" value="" />
+								<input type="hidden" class="d_chart_type" value="MULTI_VAL" />
+								<input type="hidden" class="d_chart_de" value="" />
+								<input type="hidden" class="d_height" value="100px" />
+								<input type="hidden" class="d_fields" value="" />
+								<input type="hidden" class="d_classes" value="" />
+								<input type="hidden" class="d_data_add" value="" />
+								<input type="hidden" class="d_data_field" value="{&#034;multi_width&#034;:&#034;&#034;,&#034;multi_direction&#034;:&#034;&#034;,&#034;setInterval&#034;:&#034;true&#034;,&#034;add_field_info&#034;:[{&#034;value_type&#034;:&#034;NUMBER&#034;,&#034;unit&#034;:&#034;&#034;,&#034;align_type&#034;:&#034;&#034;,&#034;color&#034;:&#034;&#034;,&#034;label_text&#034;:&#034;&#034;,&#034;value_format&#034;:&#034;.0&#034;,&#034;length&#034;:&#034;&#034;,&#034;width&#034;:&#034;50%&#034;,&#034;label&#034;:&#034;&#034;,&#034;type&#034;:&#034;&#034;,&#034;value&#034;:&#034;VALUE&#034;},{&#034;value_type&#034;:&#034;NUMBER&#034;,&#034;unit&#034;:&#034;&#034;,&#034;align_type&#034;:&#034;&#034;,&#034;color&#034;:&#034;&#034;,&#034;label_text&#034;:&#034;&#034;,&#034;value_format&#034;:&#034;.0&#034;,&#034;length&#034;:&#034;&#034;,&#034;width&#034;:&#034;50%&#034;,&#034;label&#034;:&#034;&#034;,&#034;type&#034;:&#034;&#034;,&#034;value&#034;:&#034;VALUE2&#034;}],&#034;font_size&#034;:&#034;35px&#034;,&#034;setIntervalTime&#034;:&#034;5000&#034;,&#034;key&#034;:&#034;&#034;}" />
+								<input type="hidden" class="d_search_arg" value="" />
+								<input type="hidden" class="d_search_url" value="/selectDataList.do" />
+								<input type="hidden" class="d_param_str" value="" />
+								<input type="hidden" class="d_required_values" value="" />
+								<input type="hidden" class="searchElementStr" value="" />
+								<script type="text/javascript">
+								$(function chart_param(){
+									var d_chart_id =  "demo_02";
+									if(!isNull(d_chart_id)){
+										var el = "#"+d_chart_id;
+										
+										var fields = [];
+										var classes = [];
+										
+										
+										$(el+" .d_fields").val(fields);
+										$(el+" .d_classes").val(classes);
+									}
+								});
+								</script>
+							
+						</div>
+						<div class="loader-wrap hiding hide">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</div>
+					</section>
+    			
+    		</div>
+    	
+	</div>
+
+	<div class="row ">
+		
+    		<div class="col-md-3">
+    			
+    				<section class="widget  header">
+						<header>
+							
+								<h4>
+									<span>
+										
+												PIE
+										
+										
+									</span>
+								</h4>
+							
+							
+							
+							<div class="widget-controls">
+								
+									<!-- New Window -->
+									<a title="" href="#" class="scenario_btn"><i class="fa fa-file-code-o"></i></a>
+									<a title="" href="#" class="dashboard_btn"><i class="fa fa-dashboard"></i></a>
+								
+								
+									
+									
+									
+								
+								
+							</div>
+						</header>
+						<div class="body " 
+							style=" height:200px;" 
+							id="demo_03" >
+							
+							
+							
+								
+									
+									
+										<div class="chart_content" id="demo_03_con" style=" height:100%;"></div>
+									
+								
+								<input type="hidden" class="d_search_id" value="" />
+								<input type="hidden" class="d_scenario_id" value="874e982411a5438688aa887224705a75" />
+								<input type="hidden" class="d_recipe_name" value="demo_03" />
+								<input type="hidden" class="d_search_span_key" value="" />
+			                    <input type="hidden" class="d_search_span_unit" value="" />
+			                    <input type="hidden" class="d_search_span_num" value="" />
+								<input type="hidden" class="d_search_type" value="" />
+								<input type="hidden" class="d_spec_object" value="" />
+								<input type="hidden" class="d_search_obj" value="" />
+								<input type="hidden" class="d_chart_type" value="PIE" />
+								<input type="hidden" class="d_chart_de" value="PIE-NORMAL" />
+								<input type="hidden" class="d_height" value="200px" />
+								<input type="hidden" class="d_fields" value="" />
+								<input type="hidden" class="d_classes" value="" />
+								<input type="hidden" class="d_data_add" value="" />
+								<input type="hidden" class="d_data_field" value="{&#034;legend_loc&#034;:{&#034;bottom&#034;:&#034;10&#034;,&#034;right&#034;:&#034;10&#034;},&#034;color&#034;:[],&#034;href_type&#034;:&#034;move&#034;,&#034;valueFormat&#034;:&#034;&#034;,&#034;showLegend&#034;:&#034;true&#034;,&#034;labelType&#034;:&#034;percent&#034;,&#034;color_group&#034;:[&#034;#99AECE&#034;,&#034;#C1BA9A&#034;,&#034;#595858&#034;,&#034;#D9D9D8&#034;,&#034;#63A3BA&#034;],&#034;href_param&#034;:[],&#034;arcRadius&#034;:&#034;N&#034;,&#034;setInterval&#034;:&#034;true&#034;,&#034;value_unit&#034;:&#034;%&#034;,&#034;value_decimal_point&#034;:&#034;&#034;,&#034;value&#034;:&#034;VALUE&#034;,&#034;setIntervalTime&#034;:&#034;5000&#034;,&#034;key&#034;:&#034;GBN&#034;,&#034;legend_orient&#034;:&#034;vertical&#034;,&#034;href_url&#034;:&#034;&#034;}" />
+								<input type="hidden" class="d_search_arg" value="" />
+								<input type="hidden" class="d_search_url" value="/selectDataList.do" />
+								<input type="hidden" class="d_param_str" value="" />
+								<input type="hidden" class="d_required_values" value="" />
+								<input type="hidden" class="searchElementStr" value="" />
+								<script type="text/javascript">
+								$(function chart_param(){
+									var d_chart_id =  "demo_03";
+									if(!isNull(d_chart_id)){
+										var el = "#"+d_chart_id;
+										
+										var fields = [];
+										var classes = [];
+										
+										
+										$(el+" .d_fields").val(fields);
+										$(el+" .d_classes").val(classes);
+									}
+								});
+								</script>
+							
+						</div>
+						<div class="loader-wrap hiding hide">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</div>
+					</section>
+    			
+    		</div>
+    	
+    		<div class="col-md-3">
+    			
+    				<section class="widget  header">
+						<header>
+							
+								<h4>
+									<span>
+										
+												PIE
+										
+										
+									</span>
+								</h4>
+							
+							
+							
+							<div class="widget-controls">
+								
+									<!-- New Window -->
+									<a title="" href="#" class="scenario_btn"><i class="fa fa-file-code-o"></i></a>
+									<a title="" href="#" class="dashboard_btn"><i class="fa fa-dashboard"></i></a>
+								
+								
+									
+									
+									
+								
+								
+							</div>
+						</header>
+						<div class="body " 
+							style=" height:200px;" 
+							id="demo_04" >
+							
+							
+							
+								
+									
+									
+										<div class="chart_content" id="demo_04_con" style=" height:100%;"></div>
+									
+								
+								<input type="hidden" class="d_search_id" value="" />
+								<input type="hidden" class="d_scenario_id" value="874e982411a5438688aa887224705a75" />
+								<input type="hidden" class="d_recipe_name" value="demo_04" />
+								<input type="hidden" class="d_search_span_key" value="" />
+			                    <input type="hidden" class="d_search_span_unit" value="" />
+			                    <input type="hidden" class="d_search_span_num" value="" />
+								<input type="hidden" class="d_search_type" value="" />
+								<input type="hidden" class="d_spec_object" value="" />
+								<input type="hidden" class="d_search_obj" value="" />
+								<input type="hidden" class="d_chart_type" value="PIE" />
+								<input type="hidden" class="d_chart_de" value="PIE-SUN" />
+								<input type="hidden" class="d_height" value="200px" />
+								<input type="hidden" class="d_fields" value="" />
+								<input type="hidden" class="d_classes" value="" />
+								<input type="hidden" class="d_data_add" value="" />
+								<input type="hidden" class="d_data_field" value="{&#034;legend_loc&#034;:{&#034;bottom&#034;:&#034;10&#034;,&#034;right&#034;:&#034;10&#034;},&#034;color&#034;:[],&#034;href_type&#034;:&#034;move&#034;,&#034;valueFormat&#034;:&#034;&#034;,&#034;showLegend&#034;:&#034;true&#034;,&#034;labelType&#034;:&#034;percent&#034;,&#034;color_group&#034;:[&#034;#99AECE&#034;,&#034;#C1BA9A&#034;,&#034;#595858&#034;,&#034;#D9D9D8&#034;,&#034;#63A3BA&#034;],&#034;href_param&#034;:[],&#034;arcRadius&#034;:&#034;N&#034;,&#034;setInterval&#034;:&#034;true&#034;,&#034;value_unit&#034;:&#034;%&#034;,&#034;value_decimal_point&#034;:&#034;&#034;,&#034;radius&#034;:[&#034;40%&#034;,&#034;70%&#034;],&#034;value&#034;:&#034;VALUE&#034;,&#034;setIntervalTime&#034;:&#034;5000&#034;,&#034;key&#034;:&#034;GBN&#034;,&#034;legend_orient&#034;:&#034;vertical&#034;,&#034;href_url&#034;:&#034;&#034;}" />
+								<input type="hidden" class="d_search_arg" value="" />
+								<input type="hidden" class="d_search_url" value="/selectDataList.do" />
+								<input type="hidden" class="d_param_str" value="" />
+								<input type="hidden" class="d_required_values" value="" />
+								<input type="hidden" class="searchElementStr" value="" />
+								<script type="text/javascript">
+								$(function chart_param(){
+									var d_chart_id =  "demo_04";
+									if(!isNull(d_chart_id)){
+										var el = "#"+d_chart_id;
+										
+										var fields = [];
+										var classes = [];
+										
+										
+										$(el+" .d_fields").val(fields);
+										$(el+" .d_classes").val(classes);
+									}
+								});
+								</script>
+							
+						</div>
+						<div class="loader-wrap hiding hide">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</div>
+					</section>
+    			
+    		</div>
+    	
+    		<div class="col-md-3">
+    			
+    				<section class="widget  header">
+						<header>
+							
+								<h4>
+									<span>
+										
+												GAUGE
+										
+										
+									</span>
+								</h4>
+							
+							
+							
+							<div class="widget-controls">
+								
+									<!-- New Window -->
+									<a title="" href="#" class="scenario_btn"><i class="fa fa-file-code-o"></i></a>
+									<a title="" href="#" class="dashboard_btn"><i class="fa fa-dashboard"></i></a>
+								
+								
+									
+									
+									
+								
+								
+							</div>
+						</header>
+						<div class="body " 
+							style=" height:200px;" 
+							id="demo_05" >
+							
+							
+							
+								
+									
+									
+										<div class="chart_content" id="demo_05_con" style=" height:100%;"></div>
+									
+								
+								<input type="hidden" class="d_search_id" value="" />
+								<input type="hidden" class="d_scenario_id" value="874e982411a5438688aa887224705a75" />
+								<input type="hidden" class="d_recipe_name" value="demo_05" />
+								<input type="hidden" class="d_search_span_key" value="" />
+			                    <input type="hidden" class="d_search_span_unit" value="" />
+			                    <input type="hidden" class="d_search_span_num" value="" />
+								<input type="hidden" class="d_search_type" value="" />
+								<input type="hidden" class="d_spec_object" value="" />
+								<input type="hidden" class="d_search_obj" value="" />
+								<input type="hidden" class="d_chart_type" value="GAUGE" />
+								<input type="hidden" class="d_chart_de" value="GAUGE-FULL" />
+								<input type="hidden" class="d_height" value="200px" />
+								<input type="hidden" class="d_fields" value="" />
+								<input type="hidden" class="d_classes" value="" />
+								<input type="hidden" class="d_data_add" value="" />
+								<input type="hidden" class="d_data_field" value="{&#034;unit&#034;:&#034; %&#034;,&#034;min&#034;:&#034;0&#034;,&#034;color&#034;:[],&#034;max&#034;:&#034;100&#034;,&#034;setInterval&#034;:&#034;true&#034;,&#034;decimals&#034;:1,&#034;maxField&#034;:&#034;maxField&#034;,&#034;label&#034;:&#034;LABEL&#034;,&#034;color_group&#034;:&#034;nexpom&#034;,&#034;value&#034;:&#034;VALUE&#034;,&#034;setIntervalTime&#034;:&#034;5000&#034;,&#034;href_param&#034;:[]}" />
+								<input type="hidden" class="d_search_arg" value="" />
+								<input type="hidden" class="d_search_url" value="/selectDataList.do" />
+								<input type="hidden" class="d_param_str" value="" />
+								<input type="hidden" class="d_required_values" value="" />
+								<input type="hidden" class="searchElementStr" value="" />
+								<script type="text/javascript">
+								$(function chart_param(){
+									var d_chart_id =  "demo_05";
+									if(!isNull(d_chart_id)){
+										var el = "#"+d_chart_id;
+										
+										var fields = [];
+										var classes = [];
+										
+										
+										$(el+" .d_fields").val(fields);
+										$(el+" .d_classes").val(classes);
+									}
+								});
+								</script>
+							
+						</div>
+						<div class="loader-wrap hiding hide">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</div>
+					</section>
+    			
+    		</div>
+    	
+    		<div class="col-md-3">
+    			
+    				<section class="widget  header">
+						<header>
+							
+								<h4>
+									<span>
+										
+												GAUGE
+										
+										
+									</span>
+								</h4>
+							
+							
+							
+							<div class="widget-controls">
+								
+									<!-- New Window -->
+									<a title="" href="#" class="scenario_btn"><i class="fa fa-file-code-o"></i></a>
+									<a title="" href="#" class="dashboard_btn"><i class="fa fa-dashboard"></i></a>
+								
+								
+									
+									
+									
+								
+								
+							</div>
+						</header>
+						<div class="body " 
+							style=" height:200px;" 
+							id="demo_06" >
+							
+							
+							
+								
+									
+									
+										<div class="chart_content" id="demo_06_con" style=" height:100%;"></div>
+									
+								
+								<input type="hidden" class="d_search_id" value="" />
+								<input type="hidden" class="d_scenario_id" value="874e982411a5438688aa887224705a75" />
+								<input type="hidden" class="d_recipe_name" value="demo_06" />
+								<input type="hidden" class="d_search_span_key" value="" />
+			                    <input type="hidden" class="d_search_span_unit" value="" />
+			                    <input type="hidden" class="d_search_span_num" value="" />
+								<input type="hidden" class="d_search_type" value="" />
+								<input type="hidden" class="d_spec_object" value="" />
+								<input type="hidden" class="d_search_obj" value="" />
+								<input type="hidden" class="d_chart_type" value="GAUGE" />
+								<input type="hidden" class="d_chart_de" value="GAUGE-HALF-NORMAL" />
+								<input type="hidden" class="d_height" value="200px" />
+								<input type="hidden" class="d_fields" value="" />
+								<input type="hidden" class="d_classes" value="" />
+								<input type="hidden" class="d_data_add" value="" />
+								<input type="hidden" class="d_data_field" value="{&#034;unit&#034;:&#034; %&#034;,&#034;min&#034;:&#034;0&#034;,&#034;color&#034;:[],&#034;max&#034;:&#034;100&#034;,&#034;setInterval&#034;:&#034;true&#034;,&#034;decimals&#034;:0,&#034;maxField&#034;:&#034;maxField&#034;,&#034;label&#034;:&#034;LABEL&#034;,&#034;color_group&#034;:&#034;nexpom&#034;,&#034;value&#034;:&#034;VALUE&#034;,&#034;setIntervalTime&#034;:&#034;5000&#034;,&#034;href_param&#034;:[]}" />
+								<input type="hidden" class="d_search_arg" value="" />
+								<input type="hidden" class="d_search_url" value="/selectDataList.do" />
+								<input type="hidden" class="d_param_str" value="" />
+								<input type="hidden" class="d_required_values" value="" />
+								<input type="hidden" class="searchElementStr" value="" />
+								<script type="text/javascript">
+								$(function chart_param(){
+									var d_chart_id =  "demo_06";
+									if(!isNull(d_chart_id)){
+										var el = "#"+d_chart_id;
+										
+										var fields = [];
+										var classes = [];
+										
+										
+										$(el+" .d_fields").val(fields);
+										$(el+" .d_classes").val(classes);
+									}
+								});
+								</script>
+							
+						</div>
+						<div class="loader-wrap hiding hide">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</div>
+					</section>
+    			
+    		</div>
+    	
+    		<div class="col-md-6">
+    			
+    				<section class="widget  header">
+						<header>
+							
+								<h4>
+									<span>
+										
+												LINE
+										
+										
+									</span>
+								</h4>
+							
+							
+							
+							<div class="widget-controls">
+								
+									<!-- New Window -->
+									<a title="" href="#" class="scenario_btn"><i class="fa fa-file-code-o"></i></a>
+									<a title="" href="#" class="dashboard_btn"><i class="fa fa-dashboard"></i></a>
+								
+								
+									
+									
+									
+								
+								
+							</div>
+						</header>
+						<div class="body " 
+							style=" height:200px;" 
+							id="demo_07" >
+							
+							
+							
+								
+									
+									
+										<div class="chart_content" id="demo_07_con" style=" height:100%;"></div>
+									
+								
+								<input type="hidden" class="d_search_id" value="" />
+								<input type="hidden" class="d_scenario_id" value="874e982411a5438688aa887224705a75" />
+								<input type="hidden" class="d_recipe_name" value="demo_07" />
+								<input type="hidden" class="d_search_span_key" value="" />
+			                    <input type="hidden" class="d_search_span_unit" value="" />
+			                    <input type="hidden" class="d_search_span_num" value="" />
+								<input type="hidden" class="d_search_type" value="" />
+								<input type="hidden" class="d_spec_object" value="" />
+								<input type="hidden" class="d_search_obj" value="" />
+								<input type="hidden" class="d_chart_type" value="LINE" />
+								<input type="hidden" class="d_chart_de" value="LineA" />
+								<input type="hidden" class="d_height" value="200px" />
+								<input type="hidden" class="d_fields" value="" />
+								<input type="hidden" class="d_classes" value="" />
+								<input type="hidden" class="d_data_add" value="" />
+								<input type="hidden" class="d_data_field" value="{&#034;x_format&#034;:&#034;&#034;,&#034;margin&#034;:{&#034;top&#034;:30,&#034;left&#034;:60,&#034;bottom&#034;:50,&#034;right&#034;:20},&#034;y_label&#034;:&#034;&#034;,&#034;y_format&#034;:&#034;&#034;,&#034;color&#034;:[],&#034;showLegend&#034;:&#034;true&#034;,&#034;x_label&#034;:&#034;&#034;,&#034;type&#034;:&#034;line&#034;,&#034;color_group&#034;:&#034;nexpom&#034;,&#034;href_param&#034;:[],&#034;x_format_type&#034;:&#034;&#034;,&#034;x_rotate&#034;:&#034;&#034;,&#034;setInterval&#034;:&#034;true&#034;,&#034;y_format_type&#034;:&#034;&#034;,&#034;x&#034;:&#034;DATA&#034;,&#034;value&#034;:&#034;VALUE&#034;,&#034;setIntervalTime&#034;:&#034;5000&#034;,&#034;key&#034;:&#034;GBN&#034;}" />
+								<input type="hidden" class="d_search_arg" value="" />
+								<input type="hidden" class="d_search_url" value="/selectDataList.do" />
+								<input type="hidden" class="d_param_str" value="" />
+								<input type="hidden" class="d_required_values" value="" />
+								<input type="hidden" class="searchElementStr" value="" />
+								<script type="text/javascript">
+								$(function chart_param(){
+									var d_chart_id =  "demo_07";
+									if(!isNull(d_chart_id)){
+										var el = "#"+d_chart_id;
+										
+										var fields = [];
+										var classes = [];
+										
+										
+										$(el+" .d_fields").val(fields);
+										$(el+" .d_classes").val(classes);
+									}
+								});
+								</script>
+							
+						</div>
+						<div class="loader-wrap hiding hide">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</div>
+					</section>
+    			
+    		</div>
+    	
+    		<div class="col-md-6">
+    			
+    				<section class="widget  header">
+						<header>
+							
+								<h4>
+									<span>
+										
+												LINE & BAR
+										
+										
+									</span>
+								</h4>
+							
+							
+							
+							<div class="widget-controls">
+								
+									<!-- New Window -->
+									<a title="" href="#" class="scenario_btn"><i class="fa fa-file-code-o"></i></a>
+									<a title="" href="#" class="dashboard_btn"><i class="fa fa-dashboard"></i></a>
+								
+								
+									
+									
+									
+								
+								
+							</div>
+						</header>
+						<div class="body " 
+							style=" height:200px;" 
+							id="demo_08" >
+							
+							
+							
+								
+									
+									
+										<div class="chart_content" id="demo_08_con" style=" height:100%;"></div>
+									
+								
+								<input type="hidden" class="d_search_id" value="" />
+								<input type="hidden" class="d_scenario_id" value="874e982411a5438688aa887224705a75" />
+								<input type="hidden" class="d_recipe_name" value="demo_08" />
+								<input type="hidden" class="d_search_span_key" value="" />
+			                    <input type="hidden" class="d_search_span_unit" value="" />
+			                    <input type="hidden" class="d_search_span_num" value="" />
+								<input type="hidden" class="d_search_type" value="" />
+								<input type="hidden" class="d_spec_object" value="" />
+								<input type="hidden" class="d_search_obj" value="" />
+								<input type="hidden" class="d_chart_type" value="LINE" />
+								<input type="hidden" class="d_chart_de" value="LineB" />
+								<input type="hidden" class="d_height" value="200px" />
+								<input type="hidden" class="d_fields" value="" />
+								<input type="hidden" class="d_classes" value="" />
+								<input type="hidden" class="d_data_add" value="" />
+								<input type="hidden" class="d_data_field" value="{&#034;area&#034;:[&#034;false&#034;,&#034;false&#034;],&#034;x_format&#034;:&#034;&#034;,&#034;margin&#034;:{&#034;top&#034;:30,&#034;left&#034;:60,&#034;bottom&#034;:50,&#034;right&#034;:20},&#034;y_label&#034;:&#034;&#034;,&#034;y_format&#034;:&#034;&#034;,&#034;color&#034;:[],&#034;showLegend&#034;:&#034;true&#034;,&#034;x_label&#034;:&#034;&#034;,&#034;type&#034;:[&#034;line&#034;,&#034;bar&#034;],&#034;color_group&#034;:&#034;nexpom&#034;,&#034;href_param&#034;:[],&#034;x_format_type&#034;:&#034;&#034;,&#034;x_rotate&#034;:&#034;&#034;,&#034;setInterval&#034;:&#034;true&#034;,&#034;reduceXTicks&#034;:&#034;true&#034;,&#034;y_format_type&#034;:&#034;&#034;,&#034;x&#034;:&#034;DATA&#034;,&#034;setIntervalTime&#034;:&#034;5000&#034;,&#034;key&#034;:[&#034;VALUE&#034;,&#034;VALUE2&#034;],&#034;desc&#034;:[&#034;A&#034;,&#034;B&#034;]}" />
+								<input type="hidden" class="d_search_arg" value="" />
+								<input type="hidden" class="d_search_url" value="/selectDataList.do" />
+								<input type="hidden" class="d_param_str" value="" />
+								<input type="hidden" class="d_required_values" value="" />
+								<input type="hidden" class="searchElementStr" value="" />
+								<script type="text/javascript">
+								$(function chart_param(){
+									var d_chart_id =  "demo_08";
+									if(!isNull(d_chart_id)){
+										var el = "#"+d_chart_id;
+										
+										var fields = [];
+										var classes = [];
+										
+										
+										$(el+" .d_fields").val(fields);
+										$(el+" .d_classes").val(classes);
+									}
+								});
+								</script>
+							
+						</div>
+						<div class="loader-wrap hiding hide">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</div>
+					</section>
+    			
+    		</div>
+    	
+    		<div class="col-md-6">
+    			
+    				<section class="widget  header">
+						<header>
+							
+								<h4>
+									<span>
+										
+												TABLE
+										
+										
+										<small>Basic Table</small>
+										
+									</span>
+								</h4>
+							
+							
+							
+							<div class="widget-controls">
+								
+									<!-- New Window -->
+									<a title="" href="#" class="scenario_btn"><i class="fa fa-file-code-o"></i></a>
+									<a title="" href="#" class="dashboard_btn"><i class="fa fa-dashboard"></i></a>
+								
+								
+									
+									
+									
+								
+								
+							</div>
+						</header>
+						<div class="body " 
+							style=" height:200px;" 
+							id="demo_09" >
+							
+							
+							
+								
+									
+									
+										<div class="chart_content" id="demo_09_con" style=" height:100%;"></div>
+									
+								
+								<input type="hidden" class="d_search_id" value="" />
+								<input type="hidden" class="d_scenario_id" value="874e982411a5438688aa887224705a75" />
+								<input type="hidden" class="d_recipe_name" value="demo_09" />
+								<input type="hidden" class="d_search_span_key" value="" />
+			                    <input type="hidden" class="d_search_span_unit" value="" />
+			                    <input type="hidden" class="d_search_span_num" value="" />
+								<input type="hidden" class="d_search_type" value="" />
+								<input type="hidden" class="d_spec_object" value="" />
+								<input type="hidden" class="d_search_obj" value="" />
+								<input type="hidden" class="d_chart_type" value="TABLE" />
+								<input type="hidden" class="d_chart_de" value="TABLE-NORMAL" />
+								<input type="hidden" class="d_height" value="200px" />
+								<input type="hidden" class="d_fields" value="" />
+								<input type="hidden" class="d_classes" value="" />
+								<input type="hidden" class="d_data_add" value="" />
+								<input type="hidden" class="d_data_field" value="{&#034;key_field_use&#034;:&#034;false&#034;,&#034;between_color&#034;:&#034;#6f25fd&#034;,&#034;lower_color&#034;:&#034;#fd253c&#034;,&#034;lower_font_color&#034;:&#034;#ffffff&#034;,&#034;key_desc&#034;:&#034;&#034;,&#034;between_font_color&#034;:&#034;#ffffff&#034;,&#034;fieldInfo&#034;:[{&#034;fieldWidth&#034;:&#034;10%&#034;,&#034;fieldName&#034;:&#034;DATA&#034;,&#034;fieldMerge&#034;:&#034;false&#034;,&#034;fieldDesc&#034;:&#034;순번&#034;},{&#034;fieldWidth&#034;:&#034;10%&#034;,&#034;fieldName&#034;:&#034;VALUE&#034;,&#034;fieldMerge&#034;:&#034;false&#034;,&#034;fieldDesc&#034;:&#034;VALUE1&#034;},{&#034;fieldWidth&#034;:&#034;10%&#034;,&#034;fieldName&#034;:&#034;VALUE2&#034;,&#034;fieldMerge&#034;:&#034;false&#034;,&#034;fieldDesc&#034;:&#034;VALUE2&#034;},{&#034;fieldWidth&#034;:&#034;10%&#034;,&#034;fieldName&#034;:&#034;VALUE3&#034;,&#034;fieldMerge&#034;:&#034;false&#034;,&#034;fieldDesc&#034;:&#034;VALUE3&#034;}],&#034;href_param&#034;:[],&#034;href_setting&#034;:&#034;&#034;,&#034;upper_font_color&#034;:&#034;#000000&#034;,&#034;outColumns&#034;:&#034;false&#034;,&#034;setInterval&#034;:&#034;true&#034;,&#034;file_export&#034;:&#034;false&#034;,&#034;setIntervalTime&#034;:&#034;5000&#034;,&#034;upper_color&#034;:&#034;#62f884&#034;}" />
+								<input type="hidden" class="d_search_arg" value="" />
+								<input type="hidden" class="d_search_url" value="/selectDataList.do" />
+								<input type="hidden" class="d_param_str" value="" />
+								<input type="hidden" class="d_required_values" value="" />
+								<input type="hidden" class="searchElementStr" value="" />
+								<script type="text/javascript">
+								$(function chart_param(){
+									var d_chart_id =  "demo_09";
+									if(!isNull(d_chart_id)){
+										var el = "#"+d_chart_id;
+										
+										var fields = [];
+										var classes = [];
+										
+										
+										$(el+" .d_fields").val(fields);
+										$(el+" .d_classes").val(classes);
+									}
+								});
+								</script>
+							
+						</div>
+						<div class="loader-wrap hiding hide">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</div>
+					</section>
+    			
+    		</div>
+    	
+    		<div class="col-md-6">
+    			
+    				<section class="widget  header">
+						<header>
+							
+								<h4>
+									<span>
+										
+												TABLE
+										
+										
+										<small>Data Table</small>
+										
+									</span>
+								</h4>
+							
+							
+							
+							<div class="widget-controls">
+								
+									<!-- New Window -->
+									<a title="" href="#" class="scenario_btn"><i class="fa fa-file-code-o"></i></a>
+									<a title="" href="#" class="dashboard_btn"><i class="fa fa-dashboard"></i></a>
+								
+								
+									
+									
+									
+								
+								
+							</div>
+						</header>
+						<div class="body " 
+							style=" height:200px;" 
+							id="demo_10" >
+							
+							
+							
+								
+									
+									
+										<div class="chart_content" id="demo_10_con" style=" height:100%;"></div>
+									
+								
+								<input type="hidden" class="d_search_id" value="" />
+								<input type="hidden" class="d_scenario_id" value="874e982411a5438688aa887224705a75" />
+								<input type="hidden" class="d_recipe_name" value="demo_10" />
+								<input type="hidden" class="d_search_span_key" value="" />
+			                    <input type="hidden" class="d_search_span_unit" value="" />
+			                    <input type="hidden" class="d_search_span_num" value="" />
+								<input type="hidden" class="d_search_type" value="" />
+								<input type="hidden" class="d_spec_object" value="" />
+								<input type="hidden" class="d_search_obj" value="" />
+								<input type="hidden" class="d_chart_type" value="TABLE" />
+								<input type="hidden" class="d_chart_de" value="DATA_TABLE" />
+								<input type="hidden" class="d_height" value="200px" />
+								<input type="hidden" class="d_fields" value="" />
+								<input type="hidden" class="d_classes" value="" />
+								<input type="hidden" class="d_data_add" value="" />
+								<input type="hidden" class="d_data_field" value="{&#034;outColumns&#034;:&#034;true&#034;,&#034;setInterval&#034;:&#034;true&#034;,&#034;href_type&#034;:&#034;window&#034;,&#034;file_export&#034;:&#034;false&#034;,&#034;fieldInfo&#034;:[{&#034;fieldWidth&#034;:&#034;10%&#034;,&#034;fieldName&#034;:&#034;DATA&#034;,&#034;fieldMerge&#034;:&#034;false&#034;,&#034;fieldDesc&#034;:&#034;순번&#034;},{&#034;fieldWidth&#034;:&#034;10%&#034;,&#034;fieldName&#034;:&#034;VALUE&#034;,&#034;fieldMerge&#034;:&#034;false&#034;,&#034;fieldDesc&#034;:&#034;VALUE1&#034;},{&#034;fieldWidth&#034;:&#034;10%&#034;,&#034;fieldName&#034;:&#034;VALUE2&#034;,&#034;fieldMerge&#034;:&#034;false&#034;,&#034;fieldDesc&#034;:&#034;VALUE2&#034;},{&#034;fieldWidth&#034;:&#034;10%&#034;,&#034;fieldName&#034;:&#034;VALUE3&#034;,&#034;fieldMerge&#034;:&#034;false&#034;,&#034;fieldDesc&#034;:&#034;VALUE3&#034;}],&#034;setIntervalTime&#034;:&#034;5000&#034;,&#034;href_url&#034;:&#034;\/demo\/dsb\/dashboard.do?sid=demo_main&#034;,&#034;href_param&#034;:[{&#034;param_value&#034;:&#034;DATA&#034;,&#034;param_key&#034;:&#034;DATA&#034;},{&#034;param_value&#034;:&#034;VALUE&#034;,&#034;param_key&#034;:&#034;VALUE&#034;}]}" />
+								<input type="hidden" class="d_search_arg" value="" />
+								<input type="hidden" class="d_search_url" value="/selectDataList.do" />
+								<input type="hidden" class="d_param_str" value="" />
+								<input type="hidden" class="d_required_values" value="" />
+								<input type="hidden" class="searchElementStr" value="" />
+								<script type="text/javascript">
+								$(function chart_param(){
+									var d_chart_id =  "demo_10";
+									if(!isNull(d_chart_id)){
+										var el = "#"+d_chart_id;
+										
+										var fields = [];
+										var classes = [];
+										
+										
+										$(el+" .d_fields").val(fields);
+										$(el+" .d_classes").val(classes);
+									}
+								});
+								</script>
+							
+						</div>
+						<div class="loader-wrap hiding hide">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</div>
+					</section>
+    			
+    		</div>
+    	
+    		<div class="col-md-6">
+    			
+    				<section class="widget  header">
+						<header>
+							
+								<h4>
+									<span>
+										
+												BAR
+										
+										
+										<small>Normal Bar</small>
+										
+									</span>
+								</h4>
+							
+							
+							
+							<div class="widget-controls">
+								
+									<!-- New Window -->
+									<a title="" href="#" class="scenario_btn"><i class="fa fa-file-code-o"></i></a>
+									<a title="" href="#" class="dashboard_btn"><i class="fa fa-dashboard"></i></a>
+								
+								
+									
+									
+									
+								
+								
+							</div>
+						</header>
+						<div class="body " 
+							style=" height:200px;" 
+							id="demo_11" >
+							
+							
+							
+								
+									
+									
+										<div class="chart_content" id="demo_11_con" style=" height:100%;"></div>
+									
+								
+								<input type="hidden" class="d_search_id" value="" />
+								<input type="hidden" class="d_scenario_id" value="874e982411a5438688aa887224705a75" />
+								<input type="hidden" class="d_recipe_name" value="demo_11" />
+								<input type="hidden" class="d_search_span_key" value="" />
+			                    <input type="hidden" class="d_search_span_unit" value="" />
+			                    <input type="hidden" class="d_search_span_num" value="" />
+								<input type="hidden" class="d_search_type" value="" />
+								<input type="hidden" class="d_spec_object" value="" />
+								<input type="hidden" class="d_search_obj" value="" />
+								<input type="hidden" class="d_chart_type" value="BAR" />
+								<input type="hidden" class="d_chart_de" value="NORMAL" />
+								<input type="hidden" class="d_height" value="200px" />
+								<input type="hidden" class="d_fields" value="" />
+								<input type="hidden" class="d_classes" value="" />
+								<input type="hidden" class="d_data_add" value="" />
+								<input type="hidden" class="d_data_field" value="{&#034;x_format&#034;:&#034;&#034;,&#034;margin&#034;:{&#034;top&#034;:30,&#034;left&#034;:60,&#034;bottom&#034;:50,&#034;right&#034;:20},&#034;y_format&#034;:&#034;&#034;,&#034;y_axis&#034;:&#034;false&#034;,&#034;color&#034;:[],&#034;staggerLabels&#034;:&#034;false&#034;,&#034;label&#034;:&#034;DATA&#034;,&#034;color_group&#034;:&#034;nexpom&#034;,&#034;href_param&#034;:[],&#034;x_format_type&#034;:&#034;&#034;,&#034;x_rotate&#034;:&#034;&#034;,&#034;setInterval&#034;:&#034;true&#034;,&#034;y_format_type&#034;:&#034;&#034;,&#034;value&#034;:&#034;VALUE&#034;,&#034;setIntervalTime&#034;:&#034;5000&#034;}" />
+								<input type="hidden" class="d_search_arg" value="" />
+								<input type="hidden" class="d_search_url" value="/selectDataList.do" />
+								<input type="hidden" class="d_param_str" value="" />
+								<input type="hidden" class="d_required_values" value="" />
+								<input type="hidden" class="searchElementStr" value="" />
+								<script type="text/javascript">
+								$(function chart_param(){
+									var d_chart_id =  "demo_11";
+									if(!isNull(d_chart_id)){
+										var el = "#"+d_chart_id;
+										
+										var fields = [];
+										var classes = [];
+										
+										
+										$(el+" .d_fields").val(fields);
+										$(el+" .d_classes").val(classes);
+									}
+								});
+								</script>
+							
+						</div>
+						<div class="loader-wrap hiding hide">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</div>
+					</section>
+    			
+    		</div>
+    	
+    		<div class="col-md-6">
+    			
+    				<section class="widget  header">
+						<header>
+							
+								<h4>
+									<span>
+										
+												BAR
+										
+										
+										<small>가로바차트</small>
+										
+									</span>
+								</h4>
+							
+							
+							
+							<div class="widget-controls">
+								
+									<!-- New Window -->
+									<a title="" href="#" class="scenario_btn"><i class="fa fa-file-code-o"></i></a>
+									<a title="" href="#" class="dashboard_btn"><i class="fa fa-dashboard"></i></a>
+								
+								
+									
+									
+									
+								
+								
+							</div>
+						</header>
+						<div class="body " 
+							style=" height:200px;" 
+							id="demo_12" >
+							
+							
+							
+								
+									
+									
+										<div class="chart_content" id="demo_12_con" style=" height:100%;"></div>
+									
+								
+								<input type="hidden" class="d_search_id" value="" />
+								<input type="hidden" class="d_scenario_id" value="874e982411a5438688aa887224705a75" />
+								<input type="hidden" class="d_recipe_name" value="demo_12" />
+								<input type="hidden" class="d_search_span_key" value="" />
+			                    <input type="hidden" class="d_search_span_unit" value="" />
+			                    <input type="hidden" class="d_search_span_num" value="" />
+								<input type="hidden" class="d_search_type" value="" />
+								<input type="hidden" class="d_spec_object" value="" />
+								<input type="hidden" class="d_search_obj" value="" />
+								<input type="hidden" class="d_chart_type" value="BAR" />
+								<input type="hidden" class="d_chart_de" value="BARH" />
+								<input type="hidden" class="d_height" value="200px" />
+								<input type="hidden" class="d_fields" value="" />
+								<input type="hidden" class="d_classes" value="" />
+								<input type="hidden" class="d_data_add" value="" />
+								<input type="hidden" class="d_data_field" value="{&#034;x_format&#034;:&#034;&#034;,&#034;y_format&#034;:&#034;&#034;,&#034;y_label&#034;:&#034;&#034;,&#034;stacked&#034;:&#034;false&#034;,&#034;color&#034;:[],&#034;href_type&#034;:&#034;&#034;,&#034;showLegend&#034;:&#034;true&#034;,&#034;color_group&#034;:&#034;nexpom&#034;,&#034;href_param&#034;:[],&#034;x_format_type&#034;:&#034;&#034;,&#034;setInterval&#034;:&#034;true&#034;,&#034;y_format_type&#034;:&#034;&#034;,&#034;x&#034;:&#034;DATA&#034;,&#034;groupSpacing&#034;:&#034;0.2&#034;,&#034;value&#034;:&#034;VALUE&#034;,&#034;setIntervalTime&#034;:&#034;5000&#034;,&#034;key&#034;:&#034;DATA&#034;,&#034;showControls&#034;:&#034;false&#034;,&#034;href_url&#034;:&#034;&#034;}" />
+								<input type="hidden" class="d_search_arg" value="" />
+								<input type="hidden" class="d_search_url" value="/selectDataList.do" />
+								<input type="hidden" class="d_param_str" value="" />
+								<input type="hidden" class="d_required_values" value="" />
+								<input type="hidden" class="searchElementStr" value="" />
+								<script type="text/javascript">
+								$(function chart_param(){
+									var d_chart_id =  "demo_12";
+									if(!isNull(d_chart_id)){
+										var el = "#"+d_chart_id;
+										
+										var fields = [];
+										var classes = [];
+										
+										
+										$(el+" .d_fields").val(fields);
+										$(el+" .d_classes").val(classes);
+									}
+								});
+								</script>
+							
+						</div>
+						<div class="loader-wrap hiding hide">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</div>
+					</section>
+    			
+    		</div>
+    	
+    		<div class="col-md-6">
+    			
+    				<section class="widget  header">
+						<header>
+							
+								<h4>
+									<span>
+										
+												BAR
+										
+										
+										<small>Multi Bar</small>
+										
+									</span>
+								</h4>
+							
+							
+							
+							<div class="widget-controls">
+								
+									<!-- New Window -->
+									<a title="" href="#" class="scenario_btn"><i class="fa fa-file-code-o"></i></a>
+									<a title="" href="#" class="dashboard_btn"><i class="fa fa-dashboard"></i></a>
+								
+								
+									
+									
+									
+								
+								
+							</div>
+						</header>
+						<div class="body " 
+							style=" height:200px;" 
+							id="demo_13" >
+							
+							
+							
+								
+									
+									
+										<div class="chart_content" id="demo_13_con" style=" height:100%;"></div>
+									
+								
+								<input type="hidden" class="d_search_id" value="" />
+								<input type="hidden" class="d_scenario_id" value="874e982411a5438688aa887224705a75" />
+								<input type="hidden" class="d_recipe_name" value="demo_13" />
+								<input type="hidden" class="d_search_span_key" value="" />
+			                    <input type="hidden" class="d_search_span_unit" value="" />
+			                    <input type="hidden" class="d_search_span_num" value="" />
+								<input type="hidden" class="d_search_type" value="" />
+								<input type="hidden" class="d_spec_object" value="" />
+								<input type="hidden" class="d_search_obj" value="" />
+								<input type="hidden" class="d_chart_type" value="BAR" />
+								<input type="hidden" class="d_chart_de" value="MBAR" />
+								<input type="hidden" class="d_height" value="200px" />
+								<input type="hidden" class="d_fields" value="" />
+								<input type="hidden" class="d_classes" value="" />
+								<input type="hidden" class="d_data_add" value="" />
+								<input type="hidden" class="d_data_field" value="{&#034;x_format&#034;:&#034;&#034;,&#034;y_format&#034;:&#034;&#034;,&#034;stacked&#034;:&#034;true&#034;,&#034;color&#034;:[],&#034;showLegend&#034;:&#034;true&#034;,&#034;label&#034;:&#034;DATA&#034;,&#034;color_group&#034;:&#034;nexpom&#034;,&#034;href_param&#034;:[],&#034;x_format_type&#034;:&#034;&#034;,&#034;x_rotate&#034;:&#034;&#034;,&#034;setInterval&#034;:&#034;true&#034;,&#034;reduceXTicks&#034;:&#034;true&#034;,&#034;y_format_type&#034;:&#034;&#034;,&#034;value&#034;:[&#034;VALUE&#034;,&#034;VALUE2&#034;],&#034;setIntervalTime&#034;:&#034;5000&#034;,&#034;showControls&#034;:&#034;true&#034;,&#034;key&#034;:[&#034;값1&#034;,&#034;값2&#034;]}" />
+								<input type="hidden" class="d_search_arg" value="" />
+								<input type="hidden" class="d_search_url" value="/selectDataList.do" />
+								<input type="hidden" class="d_param_str" value="" />
+								<input type="hidden" class="d_required_values" value="" />
+								<input type="hidden" class="searchElementStr" value="" />
+								<script type="text/javascript">
+								$(function chart_param(){
+									var d_chart_id =  "demo_13";
+									if(!isNull(d_chart_id)){
+										var el = "#"+d_chart_id;
+										
+										var fields = [];
+										var classes = [];
+										
+										
+										$(el+" .d_fields").val(fields);
+										$(el+" .d_classes").val(classes);
+									}
+								});
+								</script>
+							
+						</div>
+						<div class="loader-wrap hiding hide">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</div>
+					</section>
+    			
+    		</div>
+    	
+    		<div class="col-md-6">
+    			
+    				<section class="widget  header">
+						<header>
+							
+								<h4>
+									<span>
+										
+												BAR
+										
+										
+										<small>가로 Multi Bar</small>
+										
+									</span>
+								</h4>
+							
+							
+							
+							<div class="widget-controls">
+								
+									<!-- New Window -->
+									<a title="" href="#" class="scenario_btn"><i class="fa fa-file-code-o"></i></a>
+									<a title="" href="#" class="dashboard_btn"><i class="fa fa-dashboard"></i></a>
+								
+								
+									
+									
+									
+								
+								
+							</div>
+						</header>
+						<div class="body " 
+							style=" height:200px;" 
+							id="demo_14" >
+							
+							
+							
+								
+									
+									
+										<div class="chart_content" id="demo_14_con" style=" height:100%;"></div>
+									
+								
+								<input type="hidden" class="d_search_id" value="" />
+								<input type="hidden" class="d_scenario_id" value="874e982411a5438688aa887224705a75" />
+								<input type="hidden" class="d_recipe_name" value="demo_14" />
+								<input type="hidden" class="d_search_span_key" value="" />
+			                    <input type="hidden" class="d_search_span_unit" value="" />
+			                    <input type="hidden" class="d_search_span_num" value="" />
+								<input type="hidden" class="d_search_type" value="" />
+								<input type="hidden" class="d_spec_object" value="" />
+								<input type="hidden" class="d_search_obj" value="" />
+								<input type="hidden" class="d_chart_type" value="BAR" />
+								<input type="hidden" class="d_chart_de" value="MBARH" />
+								<input type="hidden" class="d_height" value="200px" />
+								<input type="hidden" class="d_fields" value="" />
+								<input type="hidden" class="d_classes" value="" />
+								<input type="hidden" class="d_data_add" value="" />
+								<input type="hidden" class="d_data_field" value="{&#034;x_format&#034;:&#034;&#034;,&#034;margin&#034;:{&#034;top&#034;:5,&#034;left&#034;:15,&#034;bottom&#034;:30,&#034;right&#034;:15},&#034;stacked&#034;:&#034;true&#034;,&#034;y_format&#034;:&#034;s&#034;,&#034;color&#034;:[],&#034;label_obj&#034;:{&#034;show&#034;:&#034;true&#034;},&#034;showLegend&#034;:&#034;true&#034;,&#034;label&#034;:&#034;DATA&#034;,&#034;type&#034;:[&#034;bar&#034;,&#034;bar&#034;,&#034;bar&#034;],&#034;color_group&#034;:&#034;nexpom&#034;,&#034;x_format_type&#034;:&#034;&#034;,&#034;x_rotate&#034;:&#034;30&#034;,&#034;setInterval&#034;:&#034;true&#034;,&#034;reduceXTicks&#034;:&#034;false&#034;,&#034;yDomain&#034;:&#034;false&#034;,&#034;y_format_type&#034;:&#034;NUMBER&#034;,&#034;value&#034;:[&#034;VALUE&#034;,&#034;VALUE2&#034;,&#034;VALUE3&#034;],&#034;setIntervalTime&#034;:&#034;5000&#034;,&#034;key&#034;:[&#034;값1&#034;,&#034;값2&#034;,&#034;값3&#034;]}" />
+								<input type="hidden" class="d_search_arg" value="" />
+								<input type="hidden" class="d_search_url" value="/selectDataList.do" />
+								<input type="hidden" class="d_param_str" value="" />
+								<input type="hidden" class="d_required_values" value="" />
+								<input type="hidden" class="searchElementStr" value="" />
+								<script type="text/javascript">
+								$(function chart_param(){
+									var d_chart_id =  "demo_14";
+									if(!isNull(d_chart_id)){
+										var el = "#"+d_chart_id;
+										
+										var fields = [];
+										var classes = [];
+										
+										
+										$(el+" .d_fields").val(fields);
+										$(el+" .d_classes").val(classes);
+									}
+								});
+								</script>
+							
+						</div>
+						<div class="loader-wrap hiding hide">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</div>
+					</section>
+    			
+    		</div>
+    	
+	</div>
+
+
+
+	
+		
+			
+							
+			
+				
+				
+				
+			
+		
+	
+		
+			
+							
+			
+				
+				
+				
+			
+		
+	
+
+	
+		
+			
+							
+			
+				
+				
+				
+			
+		
+	
+		
+			
+							
+			
+				
+				
+				
+			
+		
+	
+		
+			
+							
+			
+				
+				
+				
+			
+		
+	
+		
+			
+							
+			
+				
+				
+				
+			
+		
+	
+		
+			
+							
+			
+				
+				
+				
+			
+		
+	
+		
+			
+							
+			
+				
+				
+				
+			
+		
+	
+		
+			
+							
+			
+				
+				
+				
+			
+		
+	
+		
+			
+							
+			
+				
+				
+				
+			
+		
+	
+		
+			
+							
+			
+				
+				
+				
+			
+		
+	
+		
+			
+							
+			
+				
+				
+				
+			
+		
+	
+		
+			
+							
+			
+				
+				
+				
+			
+		
+	
+		
+			
+							
+			
+				
+				
+				
+			
+		
+	
+
+	
+
+</div>
+				
+				
+			
+		</div>
+	</div>
+	<!-- page specific libs -->
+	
+		
+			
+				
+					
+						
+						
+						
+							<script type="text/javascript" src="/js/nexpom/com/charts.v3.0.js"></script>
+							<script type="text/javascript" src="/lib/echart/v5/dist/echarts.min.js"></script>
+							<script type="text/javascript" src="/lib/echart/v5/theme/dark.js"></script>
+							<script type="text/javascript" src="/js/nexpom/com/charts_obj.v3.0.js"></script>
+							<script type="text/javascript" src="/js/nexpom/com/charts_process.v3.0.js"></script>
+							<script type="text/javascript" src="/lib/echarts-stat/ecStat.min.js"></script>
+							<script type="text/javascript" src="/lib/d3.js/d3.v3.min.js"></script>
+							<script src="/lib/fullcalendar/main.js"></script>
+							<script src="/lib/fullcalendar-daygrid/main.js"></script>
+							<script src="/lib/fullcalendar-timegrid/main.js"></script>
+							<script src="/lib/fullcalendar-interaction/main.js"></script>
+							<script src="/lib/fullcalendar-bootstrap/main.js"></script>
+							<script src="/lib/fullcalendar/popper/popper.js"></script>
+							<script src="/lib/fullcalendar/tooltip/tooltip.js"></script>
+						
+							
+					
+				
+				
+			
+		
+		
+	
+
+	<script type="text/javascript" src="/js/nexpom/com/spc.min.js"></script>
+	<script type="text/javascript" src="/js/nexpom/com/colorgroups.js"></script>
+	<script type="text/javascript" src="/lib/jquery-ui/jquery-ui.js"></script>
+
+	<script type="text/javascript" src="/lib/jquery-multiselect/js/jquery.multiselect.js"></script>
+	<script type="text/javascript" src="/lib/jquery-multiselect/js/jquery.multiselect.filter.js"></script>
+
+	<script type="text/javascript" src="/lib/excelExport/jquery.table2excel.js"></script>
+	<!-- page script -->
+	<script type="text/javascript">
+	<!--
+		$(function() {
+			console.log("v3.0");
+			var offset = $(".side-nav").offset();
+			var topPadding = 100;
+			$(window).scroll(function() {
+				if ($(window).scrollTop() > offset.top) {
+					$(".side-nav").stop().animate({
+						marginTop : $(window).scrollTop() - 100
+					});
+				} else {
+					$(".side-nav").stop().animate({
+						marginTop : 0
+					});
+				}
+				;
+			});
+		});
+		$(function() {
+			$(".multiselect-filter").multiselect({
+				minWidth : '100%',
+				classes : 'light',
+				checkAllText : '전체',
+				uncheckAllText : '취소',
+				noneSelectedText : '선택',
+				selectedText : function(numChecked, numTotal, checkedItems) {
+					for (var i = 0; i < checkedItems.length; i++) {
+						return $(checkedItems[i]).siblings().text();
+					}
+				},
+				selectedList : 3
+			}).multiselectfilter();
+
+			$(".select-filter").multiselect({
+				multiple : false,
+				classes : 'light',
+				checkAllText : 'All',
+				uncheckAllText : 'Uncheck',
+				noneSelectedText : 'Select',
+				selectedText : function(numChecked, numTotal, checkedItems) {
+					for (var i = 0; i < checkedItems.length; i++) {
+						return $(checkedItems[i]).siblings().text();
+					}
+				},
+				selectedList : 1,
+				minWidth : '100%'
+			}).multiselectfilter();
+			$(".ground-select").multiselect({
+				multiple : false,
+				classes : 'light',
+				checkAllText : 'All',
+				uncheckAllText : 'Uncheck',
+				noneSelectedText : 'Select',
+				selectedText : function(numChecked, numTotal, checkedItems) {
+					for (var i = 0; i < checkedItems.length; i++) {
+						return $(checkedItems[i]).siblings().text();
+					}
+				},
+				selectedList : 1,
+				minWidth : '100%'
+			}).multiselectfilter();
+			$(".select").multiselect({
+				multiple : false,
+				header : false,
+				selectedList : 1,
+				classes : 'light',
+				minWidth : '100%',
+				selectedText : function(numChecked, numTotal, checkedItems) {
+					for (var i = 0; i < checkedItems.length; i++) {
+						return $(checkedItems[i]).siblings().text();
+					}
+				},
+				click : function(event, ui) {
+					var data_target = $(this).data('target');
+					var data_id = $(this).attr('id');
+				},
+			});
+			$(".arg_list").each(
+					function(index) {
+						var el_name = $(this).attr("name");
+						var el_value = $(this).val();
+						if ($(".tabs li").length > 0) {
+							$(".tabs li").removeClass('active');
+							$(".tabs li .tab-element_" + el_value).parent()
+									.addClass('active');
+						}
+					});
+			
+
+			function pageLoad() {
+				var o_search_type = $("#d_search_type").val();
+				if (o_search_type != 'spc_report'
+						&& o_search_type != 'spc_table') {
+					fnSearch();
+				} else {
+					init();
+				}
+			}
+
+			pageLoad();
+			PjaxApp.onPageLoad(pageLoad);
+
+			$('.scenario_btn').on(
+					'click',
+					function() {
+						var target = $(this).parent().parent().parent().find(
+								'.body .d_scenario_id').val();
+						var app = $(document).find('#app').val();
+						var url = '/scenario/' + app + '/' + target;
+						/* window.open(url); */
+						$('#commonFrm').attr("action", url);
+						$('#commonFrm').attr("method", "POST");
+						$('#commonFrm').attr("target", target);
+						window.open("", target, "");
+						$('#commonFrm').submit();
+					});
+		});
+
+		function fnSearch() {
+			var searchElementStr = "";
+			var searchElementJson = {};
+			var date_type = "";
+			$(".loading").addClass('show');
+
+			if ($("#input_search_action").val() == "refresh") {
+				var searchInputData = $(".searchInput").getInputData(
+						searchElementJson);
+				var sid = $("#d_id").val()
+				var app = $("#app").val();
+				var params = {};
+				params = {
+					'sid' : sid,
+					'app' : app,
+					"searchElementJson" : searchInputData
+				};
+
+				$("#row_content").load("/dsb/dashboard_view.do", params,
+						function(e) {
+							init();
+						});
+			} else {
+				init();
+			}
+		}
+
+		function init() {
+			var o_search_type = $("#d_search_type").val();
+
+			if (o_search_type == 'all') {
+				var d_search_id = $("#d_search_id").val();
+				var d_search_span_key = $("#d_search_span_key").val();
+				var d_search_span_unit = $("#d_search_span_unit").val();
+				var d_search_span_num = $("#d_search_span_num").val();
+				var d_page_type = $("#d_page_type").val();
+				var d_search_type = $("#d_search_type").val();
+				var d_search_url = $("#d_search_url").val();
+				var d_spec_object = $("#d_spec_object").val();
+				var d_search_obj = $("#d_search_obj").val();
+
+				if (!isNull(d_search_obj))
+					d_search_obj = jQuery.parseJSON(d_search_obj);
+				if (!isNull(d_spec_object))
+					d_spec_object = jQuery.parseJSON(d_spec_object);
+
+				if (!isNull(d_search_id)) {
+					var searchElementStr = "";
+					var searchElementJson = {};
+
+					$(".arg_list").each(function(index) {
+						var el_name = $(this).attr("name");
+						var el_value = $(this).val();
+						if (!isNull(el_value)) {
+							searchElementJson[el_name] = el_value;
+						}
+					});
+
+					var date_type = "";
+					$(".searchInput")
+							.each(
+									function(index) {
+										var el_name = $(this).attr("name");
+										var el_value = $(this).val();
+										var el_multiple = $(this).attr(
+												"multiple");
+										var el_result_format = $(this).data(
+												"result-format");
+										var el_search_type = $(this).data(
+												"search-type");
+										if (!isNull($(this).data("date-type")))
+											date_type = $(this).data(
+													"date-type");
+
+										if (!isNull(el_result_format)
+												&& !isNull(el_value)) {
+											el_value = getUnixtime(el_value,
+													el_result_format, false);
+										}
+
+										if (!isNull(el_multiple)) {
+											searchElementStr = "";
+											if (!isNull(el_value)
+													&& isArray(el_value)) {
+												if (el_value.length > 0) {
+													searchElementStr += "(";
+													for (var i = 0; i < el_value.length; i++) {
+														if (!isNull(el_value[i])) {
+															if (i > 0) {
+																searchElementStr += "OR "
+															}
+															searchElementStr += el_name
+																	+ "=\""
+																	+ el_value[i]
+																	+ "\" ";
+														}
+													}
+													searchElementStr += ")";
+												}
+											} else {
+												searchElementStr += el_name
+														+ "=\"*\" ";
+											}
+											searchElementJson[el_name] = searchElementStr;
+										} else {
+											searchElementStr = "";
+											//if(!isNull(el_value)) {
+											searchElementJson[el_name] = el_value;
+											//}
+										}
+									});
+					searchElementJson = getDateValueSetting(searchElementJson,
+							false);
+					var params = {};
+					params = {
+						'searchId' : d_search_id,
+						"searchSpanKey" : d_search_span_key,
+						"searchSpanUnit" : d_search_span_unit,
+						"searchSpanNum" : d_search_span_num,
+						"searchElementJson" : searchElementJson
+					};
+					if ($("#input_search_action").val() == "reload") {
+						var chart_element = [];
+						$(".widget .body")
+								.each(
+										function(index) {
+											var chart_obj = {};
+											var d_chart_id = $(this).attr("id");
+											var d_chart_type = $(this).find(
+													".d_chart_type").val();
+											var d_chart_de = $(this).find(
+													".d_chart_de").val();
+											var d_data_field = $(this).find(
+													".d_data_field").val();
+											var d_data_add = $(this).find(
+													".d_data_add").val();
+
+											if (!isNull(d_data_field))
+												d_data_field = jQuery
+														.parseJSON(d_data_field);
+											if (!isNull(d_data_add))
+												d_data_add = jQuery
+														.parseJSON(d_data_add);
+
+											if (!isNull(d_chart_id)) {
+
+												if (!isNull(d_chart_id)
+														&& !isNull(d_search_id)) {
+													$(
+															'#'
+																	+ d_chart_id
+																	+ ' .chart_content')
+															.empty();
+													chart_obj["d_chart_id"] = d_chart_id;
+													chart_obj["d_chart_type"] = d_chart_type;
+													chart_obj["d_chart_de"] = d_chart_de;
+													chart_obj["d_data_field"] = d_data_field;
+													chart_obj["d_data_add"] = d_data_add;
+													chart_obj["d_spec_object"] = d_spec_object;
+													chart_obj["d_search_obj"] = d_search_obj;
+													chart_element
+															.push(chart_obj);
+												}
+											}
+										});
+
+						if (d_page_type == 'spc') {
+							if (d_spec_object.spec_data_type == "url"
+									&& !isNull(d_spec_object.spec_url)) {
+								$
+										.getJSON(
+												d_spec_object.spec_url,
+												function(s_data) {
+													var spec_data = s_data.result_data;
+													if (s_data.result_cd == "200") {
+														$
+																.getJSON(
+																		"/resource/property/spc_constant.conf",
+																		function(
+																				c_data) {
+																			$
+																					.each(
+																							spec_data,
+																							function(
+																									key1,
+																									data1) {
+																								var constant = findObjectFromJson(
+																										'.'
+																												+ data1.SubGroup,
+																										c_data)[0];
+																								constant['sample_size'] = data1.SubGroup;
+																								constant['uppertol1'] = data1.Utol;
+																								constant['lowertol1'] = data1.Ltol;
+																								constant['uppertol2'] = data1.Utol2;
+																								constant['lowertol2'] = data1.Ltol2;
+																								constant['Nominal'] = data1.Nominal;
+																								constant['key'] = d_search_obj.search_result_value;
+																								constant['SpecType'] = data1.SpecType;
+																								constant['unit'] = data1.Unit;
+																								data1['constant'] = jQuery
+																										.extend(
+																												{},
+																												constant);
+																							});
+																		})
+																.success(
+																		function() {
+																			chart_draw_main(
+																					params,
+																					chart_element,
+																					d_page_type,
+																					d_search_type,
+																					d_search_url,
+																					d_spec_object,
+																					spec_data,
+																					d_search_obj);
+																		});
+													} else {
+														console
+																.log("Spec Error!!");
+														return false;
+													}
+												}).error(function() {
+											alert("error");
+										});
+							} else if (d_spec_object.spec_data_type == "in-data") {
+								var spec_data = {};
+								$
+										.getJSON(
+												"/resource/property/spc_constant.conf",
+												function(constant_data) {
+													spec_data['constant'] = jQuery
+															.extend(
+																	{},
+																	constant_data.d);
+												}).success(
+												function() {
+													chart_draw_main(params,
+															chart_element,
+															d_page_type,
+															d_search_type,
+															d_search_url,
+															d_spec_object,
+															spec_data,
+															d_search_obj);
+												});
+							}
+						}
+					}
+				}
+			} else {
+				var searchElementStr = "";
+				var searchElementJson = {};
+				var date_type = "";
+
+				searchElementJson = $(".arg_list").getInputData(
+						searchElementJson);
+				searchElementJson = $(".searchInput").getInputData(
+						searchElementJson);
+				$.each(searchElementJson, function(s_key, s_value) {
+					if ($(".arg_" + s_key).length > 0)
+						$(".arg_" + s_key).text(s_value);
+				});
+				$(".widget .body").dashboardDraw(searchElementJson);
+			}
+			window.onresize = function() {
+				$(".chart_content").each(function() {
+					var id = $(this).attr('_echarts_instance_');
+					if (id) {
+						window.echarts.getInstanceById(id).resize();
+					}
+				});
+			};
+		}
+		var isScroll = $('input[name=AUTO_SCROLL]').val();
+		var autoScrollInterval;
+		var autoScrollContainerLength = $('#row_content .autoScroll').length;
+		if(!isNull(isScroll) && getBool(isScroll)){
+			var c = $('input[name=AUTO_SCROLL_CYCLE]').val();
+			var t = $('input[name=AUTO_SCROLL_TIME]').val();
+			doAutoScroll(c,t);
+		}
+		-->
+	</script>
+	
+
+
+
+
+
+	
+
+
+
+
+
+<h2 class="page-title"><small></small></h2>
+<div class="modal fade notice" id="notice_layer">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<input type="hidden" name="notice_seq" id="notice_seq" />
+			<input type="hidden" name="notice_title" id="notice_title" />
+			<div class="modal-header">
+				<a href="#" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">취소</span>
+				</a>
+				<div>
+					<h4 class="modal-title" style="width:100%;">공지사항</h4>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div >
+				<!-- <p class="text-center" style="font-size: 55px; color: cadetblue;"><i style="color: rgb(99 149 237);font-size:80px;" class="fa fa-info-circle"></i></p> -->
+				<div id="notice_content" style="resize: none;"></div>
+				</div>
+		     </div> <!-- /.modal-body -->
+		     <div class="modal-footer">
+		      <button class="btn_today_close"><span>오늘 하루 보지 않기</span></button>
+				<!-- <button type="button" id="setCookie" data-dismiss="modal" class="btn btn-primary">이제 다신 안봐</button> -->
+		     </div>
+	    </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+//var noticeCookie;
+
+function time(){
+	var today = new Date();
+	
+	var year = today.getFullYear();
+	var month = ('0' + (today.getMonth() + 1)).slice(-2);
+	var day = ('0' + today.getDate()).slice(-2);
+	var hours = ('0' + today.getHours()).slice(-2); 
+	var minutes = ('0' + today.getMinutes()).slice(-2);
+	var seconds = ('0' + today.getSeconds()).slice(-2); 
+	
+	return todaytime = (year + '-' + month + '-' + day + ' ' +hours + ':' + minutes + ':' + seconds);	
+}
+
+$(function(){
+	setInterval(function(){
+		checkNotice();
+    }, 20000);
+	
+	function checkNotice(){
+		var searchElementJson = {};
+    	$.ajax({
+    		data : {
+    				searchApp: 'demo',
+    				searchRecipe: '',
+    				searchScenario: '',
+    				//searchElementJson: searchElementJson
+    				},
+    		url : "/selectDataList.do",
+    		dataType : "json",
+    		type : 'POST',
+    		success : function(jData) {
+    			if (!isNull(jData.result_data)) {
+    				var data = jData.result_data;
+    				$.each(data, function (key, value) {
+    					
+    						notice_popup(value);
+    						check_notice_popup(value)
+    						
+    				});
+   					
+    			}
+    		},
+    		error : function(xhr, status, error) {
+    			console.log(error);
+    		}
+    	});
+        
+    }
+	
+	
+	
+	//공지사항 레이어
+	function notice_popup (value) {
+		
+		var todaytime = time();
+		var cookieCheck = value.title + '_' + value.seq;
+		
+		// 팝업 열때 쿠키 확인 하고 없으면 팝업 열기
+		if(getCookie(cookieCheck) != 'done') {
+			//OpenPopup('notice_layer');
+			if(todaytime > value.starttime && todaytime < value.endtime){
+	    		$('#notice_layer').modal('show');
+	    		
+	    		var content = unescapeHtml(value.content); // 특수문자 변환
+	    		$('#notice_content').html(content);
+	    		$('#notice_seq').val(value.seq);
+	    		$('#notice_title').val(value.title);
+	        	$('#notice_content').css('height','300px');
+	        	$('#notice_content').css('width','100%');
+	    	}
+		}
+	}
+	
+	// 오늘하루 열지않기 버튼 눌렀을 때 쿠키 설정하고 닫기
+	$('#notice_layer').on("click", ".btn_today_close", function (){
+		var cookieName = $('#notice_title').val() + '_' + $('#notice_seq').val() 
+		setCookies(cookieName, 'done', 1)
+		$('#notice_layer').modal('hide');
+	});
+	//쿠키 확인 
+	function getCookie(name) {
+	    var nameOfCookie=name+"=";
+	    var a=0;
+	        while(a<=document.cookie.length) {
+	        var b=(a+nameOfCookie.length);
+	            if(document.cookie.substring(a,b)==nameOfCookie) {
+	                if((endOfCookie=document.cookie.indexOf(";",b))==-1)
+	                endOfCookie=document.cookie.length;
+	                return unescape(document.cookie.substring(b,endOfCookie));
+	            }
+	            a=document.cookie.indexOf(" ",a) +1;
+	            if(a==0)
+	            break;
+	        }
+	    return "";
+	}
+	
+	// 쿠키 설정
+	function setCookies(name, value, expiredays){
+	    var todayDate = new Date();
+	    todayDate.setDate( todayDate.getDate() + expiredays );
+	    document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";";
+	}
+	
+	function check_notice_popup(data) {
+		var todaytime = time();
+		if(todaytime > data.endtime){ //레이어팝업 한개당 한개씩 늘려야되는 로직. 여러개 X
+			$('#notice_layer').modal('hide');
+			/* window.location.reload(); */
+		}
+	}
+	
+	// 특수문자 변환
+	function unescapeHtml(str) {
+		if (str == null) {
+			return "";
+		}
+		return str
+		.replace(/&amp;/g, '&')
+		.replace(/&lt;/g, '<')
+		.replace(/&gt;/g, '>')
+		.replace(/&quot;/g, '"')
+		.replace(/&#039;/g, "'")
+		.replace(/&#39;/g, "'");
+	}
+
+});
+	
+
+</script>
+
+
+<div class="modal fade" id="modelAndInspList" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">알람</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group col-md-12">
+          	<div class="form-group col-md-6">
+          		<label for="equipName" class="col-form-label">설비명 :</label>
+            	<input readonly="readonly" type="text" class="form-control" id="equipName">
+            	<input type="hidden" id="alarm-equip-code">
+          	</div>
+          	<div class="form-group col-md-6">
+          		<label for="itemName" class="col-form-label">항목명 :</label>
+            	<input readonly="readonly" type="text" class="form-control" id="itemName">
+            	<input type="hidden" id="alarm-item-code">
+          	</div>
+          	<div class="form-group col-md-12">
+            	<label for="alarm-info" class="col-form-label">알람정보 :</label>
+            	<input readonly="readonly" type="text" class="form-control" id="alarm-info">
+            </div>
+          </div>	
+          
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">조치자 :</label>
+            <input type="text" class="form-control" id="alarm-action-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">조치내용 :</label>
+            <textarea class="form-control" id="alarm-action-contents"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-success" id="alarm-action-save">저장</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade list_modal" id="fnConfirm">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<a href="#" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">취소</span>
+				</a>
+				<div>
+					<h4 class="modal-title" style="width:100%;">Message</h4>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div>
+				<p class="text-center" style="font-size: 55px; color: cadetblue;"><i style="color: rgb(99 149 237);font-size:80px;" class="fa fa-info-circle"></i></p>
+				<p id="messageBox" class="text-center" style="font-size: 50px; color: #666666;"></p>
+				</div>
+		     </div> <!-- /.modal-body -->
+		     <div class="modal-footer">
+				<button type="button" id="confirmCancel" data-dismiss="modal" class="btn btn-primary">취소</button>
+				<button type="button" id="confirmOk" data-dismiss="modal" class="btn btn-success">저장</button>
+		     </div>
+	    </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+
+var Editor = Editor || {};
+
+
+function getdate(){
+    let today = new Date();
+	var year = today.getFullYear();
+	var month = today.getMonth()+1;
+	var day = today.getDate();
+	var getdate = year+"-"+(("00"+month.toString()).slice(-2))+"-"+(("00"+day.toString()).slice(-2));
+	return getdate = getdate +' '+ today.getHours()+":"+(("00"+today.getUTCMinutes()).slice(-2))+":"+(("00"+today.getUTCSeconds()).slice(-2));
+}
+
+$(function(){
+	
+    var alarmShowYn = $('#alarmShowYn').val();
+    
+    Editor = {
+    		fullSave : function(){
+    			fnConfirm('모든 정상 데이터를 일괄 처리하시겠습니까?','알람', function(bool){
+    	    		if(bool){
+    	    			$.ajax({
+    	    	    		data : {
+    	    		    				equipCode: '',
+    	    		    				itemCode: '',
+    	    		    				alarmUser: '일괄처리',
+    	    		    				alarmContent : '일괄처리'
+    	    	 			},
+    	    	    		url : "/adm/mng/arm/insertAlarmAction.do",
+    	    	    		dataType : "json",
+    	    	    		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+    	    	    		type : 'POST',
+    	    	    		success: function(rdata) {
+    	    	    			if(rdata.insert_result_cd=='200' && rdata.delete_result_cd=='200'){
+    	    	    				location.reload();
+    	    	    			}else{
+    	    	    				alert('처리할 데이터가 없습니다.');
+    	    	    				return false;
+    	    	    			}
+    	    	    		},
+    	    	    		error : function(xhr, status, error) {
+    	    	    			console.log(error);
+    	    	    		}
+    	    	    	});
+    	    		}
+    	    	});
+            }
+        };
+    
+    $('#alarm-action-save').on('click', function(){
+    	
+    	fnConfirm('저장하시겠습니까?','알람', function(bool){
+    		if(bool){
+    			var alarm_user = $('#alarm-action-name').val();
+    	    	var contents = $('#alarm-action-contents').val();
+    	    	var equip_code = $('#alarm-equip-code').val();
+    	    	var item_code = $('#alarm-item-code').val();
+    			
+    	    	$.ajax({
+    	    		data : {
+    		    				equipCode: equip_code,
+    		    				itemCode: item_code,
+    		    				alarmUser: alarm_user,
+    		    				alarmContent : contents
+    	 			},
+    	    		url : "/adm/mng/arm/insertAlarmAction.do",
+    	    		dataType : "json",
+    	    		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+    	    		type : 'POST',
+    	    		success: function(rdata) {
+    	    			if(rdata.insert_result_cd=='200' && rdata.delete_result_cd=='200'){
+    	    				$('#modelAndInspList').modal('hide');
+    	    				location.reload();
+    	    			}
+    	    		},
+    	    		error : function(xhr, status, error) {
+    	    			console.log(error);
+    	    		}
+    	    	});
+    		}
+    	});
+    	
+    });
+    
+    
+    // ALARM TRUE
+    if(alarmShowYn==='Y'){
+    	$( document ).ready(function() {
+    		alarm_event();
+    		var alarm_show_cookie = $.cookie("alarm_show");
+    		if(alarm_show_cookie=='1'){
+    			$(".dropdown-alarm-menu").show();
+    		}else if(alarm_show_cookie=='0'){
+    			$(".dropdown-alarm-menu").hide();
+    		}
+    	});
+    	
+        setInterval(function(){
+        	alarm_event();
+        	toastr.remove();
+        }, 20000);
+    	
+    	/*
+    		info : 알람 내용
+    		level : 알람 등급
+    		equipcode : 설비코드
+    		equipname : 설비명
+    		itemcode : 항목코드
+    		itemname : 항목명
+    	*/
+        function alarm_event(){
+    		var searchElementJson = {};
+    		searchElementJson['levelId'] = '2';
+    		// 5 = 링크 / 6 = 핀 / 7 = 부쉬 / 8 = 슈 / 9 = 라인 (현대제철)
+        	$.ajax({
+        		data : {
+        				searchApp: '',
+        				searchRecipe: 'result',
+        				searchScenario: '',
+        				searchElementJson: searchElementJson
+        				},
+        		url : "/selectDataList.do",
+        		dataType : "json",
+        		type : 'POST',
+        		success : function(jData) {
+        			if (!isNull(jData.result_data)) {
+        				var data = jData.result_data;
+						var levels = {"danger":0, "warning":0, "success":0, 'total':0};
+        				$.each(data, function (key, value) {
+        					//var title = value.alarm_content + ' / ' + value.start_time ;
+        					//var title = value.equip + ' / ' + value.item ;
+        					var title = value.equip;
+        					var contents = value.info;
+        					
+        					if((value.level=="4")||(value.level=="1")){
+        						levels.danger += 1;
+        						levels.total += 1;
+        					}else if((value.level=="2")||(value.level=="3")){
+        						levels.warning += 1;
+        						levels.total += 1;
+        					}/* else if(value.level=="0"){
+        						levels.success += 1;
+        						levels.total += 1;
+        					} */
+        					
+        					if(value.level=='0'){
+        						notice_popup(value);
+        						check_notice_popup(value)
+        						/* toastr.success(contents, title,
+            				            {
+            				                timeOut: 0,
+            				                debug: false,
+            				                showDuration : 500,
+            				                hideDuration : 500,
+            				                extendedTimeOut : 0,
+            				                positionClass: "toast-top-right",
+            				                closeButton: false,
+            				                newestOnTop: true,
+            				                showEasing: "swing",
+            				                hideEasing: "linear",
+            				                showMethod: "fadeIn",
+            				                hideMethod: "fadeOut",
+            				                onclick : function() {
+            				                	$('#alarm-info').val(contents);
+												$('#alarm-equip-code').val(value.equip_code);
+												$('#equipName').val(value.equip_name);
+												$('#alarm-item-code').val(value.item_code);
+												$('#itemName').val(value.item_name);
+            				                	$('#modelAndInspList').modal('show');
+           				                	},
+           				                	tapToDismiss: false
+            				            }
+            				        ) */
+        					}else if((value.level=='2')||(value.level=='3')){
+        						toastr.warning(contents, title,
+            				            {
+            				                timeOut: 0,
+            				                showDuration : 500,
+            				                hideDuration : 500,
+            				                extendedTimeOut : 0,
+            				                positionClass: "toast-top-right",
+            				                closeButton: false,
+            				                newestOnTop: true,
+            				                showEasing: "swing",
+            				                hideEasing: "linear",
+            				                showMethod: "fadeIn",
+            				                hideMethod: "fadeOut",
+            				                tapToDismiss: false
+            				            }
+            				        )
+        					}else{
+        						toastr.error(contents, title,
+            				            {
+            				                timeOut: 0,
+            				                showDuration : 500,
+            				                hideDuration : 500,
+            				                extendedTimeOut : 0,
+            				                positionClass: "toast-top-right",
+            				                closeButton: false,
+            				                newestOnTop: true,
+            				                showEasing: "swing",
+            				                hideEasing: "linear",
+            				                showMethod: "fadeIn",
+            				                hideMethod: "fadeOut",
+            				                onclick : function() {
+            				                	$('#alarm-info').val(contents);
+												$('#alarm-equip-code').val(value.equip_code);
+												$('#equipName').val(value.equip_name);
+												$('#alarm-item-code').val(value.item_code);
+												$('#itemName').val(value.item_name);
+            				                	$('#modelAndInspList').modal('show');
+           				                	},
+            				                tapToDismiss: false
+            				            }
+            				        )
+        					}
+        				});
+        	    	   	
+        				var html = '<p class="alarm_info" style="width:380px; position: initial;background:black;">'
+        				html +=    '<a class="btn btn-app" style="width:25%;color: white;">';
+        				html +=    '	TPM';
+        				html +=    '	<span class="badge bg-danger" style="top:5px; right:74%;">'+ levels.danger +'</span>';
+        				html +=    '</a>'
+       					html +=    '<a class="btn btn-app" style="width:25%;color: white;">';
+        				html +=    '	재검측';
+        				html +=    '	<span class="badge bg-warning" style="top:5px; right:48%;">'+ levels.warning +'</span>';
+        				html +=    '</a>'
+       					/* html +=    '<a class="btn btn-app" style="width:25%;color: white;">';
+        				html +=    '	공지사항';
+        				html +=    '	<span class="badge bg-success" style="top:5px; right:23%;">'+ levels.success +'</span>';
+        				html +=    '</a>' */
+       					/* html +=    '<a class="btn btn-app" style="width:25%;color: white;">';
+       					html +=    '<button onclick="Editor.fullSave()" style="margin-left: 5px;" type="button" data-toggle="modal" class="btn btn-block btn-info"><span style="margin-left: -3px;">전체처리</span></button>'
+        				html +=    '</a>' */
+       					html +=    '</p>'
+     					$("#toast-container").prepend(html);
+        	    	 
+       					
+       					$('#alarm_hide').off('click').on('click', function(){
+        				    if($(".dropdown-alarm-menu").css("display") == "none"){
+        				        $(".dropdown-alarm-menu").show();
+        				        setCookie({'alarm_show':1})
+        				    }else{
+        				        $(".dropdown-alarm-menu").hide();
+        				        setCookie({'alarm_show':0})
+        				    }
+        				});
+       					
+       					
+       					
+       					$('#alarm_cnt').text(levels.total);
+       				
+        				var ex_p = $('#toast-container');
+        				var ex_wrap = $('.dropdown-alarm-menu');
+        				ex_wrap.append(ex_p);
+        			}
+        		},
+        		error : function(xhr, status, error) {
+        			console.log(error);
+        		}
+        	});
+            
+        }
+    }
+
+    function fnConfirm(m_str, title, callback){
+    	var result = false;
+    	if(title === "undefined")
+    		title = "Notify";
+    	
+    	$(".modal-title").text(title);
+    	$("#messageBox").text(m_str);
+    	$("#fnConfirm").modal("show");
+    	$("#confirmOk").off('click').on("click", function(event){
+    		callback(true);
+    		$("#fnConfirm").modal('hide');
+    		$( this ).off( event );
+    	});
+    	$("#confirmCancel").off('click').on("click", function(event){
+    		callback(false);
+    		$("#fnConfirm").modal('hide');
+    		$( this ).off( event );
+    	});
+    }
+    
+    //공지사항 레이어
+    /*
+ 		알람에서 실시간으로 데이터를 가져오기때문에
+ 		공지사항 쿼리를 거기에 붙여서 따로 가져오기보다 같이 가져오는걸로 함.
+    */
+    function notice_popup (value) {
+    	
+		var todaytime = time();
+		var cookieCheck = value.title + '_' + value.seq;
+		
+    	// 팝업 열때 쿠키 확인 하고 없으면 팝업 열기
+		if(getCookie(cookieCheck) != 'done') {
+			//OpenPopup('notice_layer');
+			if(todaytime > value.starttime && todaytime < value.endtime){
+	    		$('#notice_layer').modal('show');
+	    		
+	    		var content = unescapeHtml(value.content); // 특수문자 변환
+	    		console.log("value.content = " + value.content);
+	    		console.log("content = " + content);
+	    		$('#notice_content').html(content);
+	    		$('#notice_seq').val(value.seq);
+	    		$('#notice_title').val(value.title);
+	        	$('#notice_content').css('height','300px');
+	        	$('#notice_content').css('width','100%');
+	    	}
+		}
+    }
+
+    // 오늘하루 열지않기 버튼 눌렀을 때 쿠키 설정하고 닫기
+    $('#notice_layer').on("click", ".btn_today_close", function (){
+    	var cookieName = $('#notice_title').val() + '_' + $('#notice_seq').val() 
+    	setCookies(cookieName, 'done', 1)
+    	$('#notice_layer').modal('hide');
+    });
+
+    // 쿠키 확인 
+	function getCookie(name) {
+        var nameOfCookie=name+"=";
+        var a=0;
+            while(a<=document.cookie.length) {
+            var b=(a+nameOfCookie.length);
+                if(document.cookie.substring(a,b)==nameOfCookie) {
+                    if((endOfCookie=document.cookie.indexOf(";",b))==-1)
+                    endOfCookie=document.cookie.length;
+                    return unescape(document.cookie.substring(b,endOfCookie));
+                }
+                a=document.cookie.indexOf(" ",a) +1;
+                if(a==0)
+                break;
+            }
+        return "";
+    }
+
+    // 쿠키 설정
+    function setCookies(name, value, expiredays){
+        var todayDate = new Date();
+        todayDate.setDate( todayDate.getDate() + expiredays );
+        document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";";
+    }
+    
+    function check_notice_popup(data) {
+		var todaytime = time();
+    	if(todaytime > data.endtime){ //레이어팝업 한개당 한개씩 늘려야되는 로직. 여러개 X
+    		$('#notice_layer').modal('hide');
+    		/* window.location.reload(); */
+    	}
+    }
+    
+	// 특수문자 변환
+    function unescapeHtml(str) {
+		if (str == null) {
+			return "";
+		}
+		return str
+		.replace(/&amp;/g, '&')
+		.replace(/&lt;/g, '<')
+		.replace(/&gt;/g, '>')
+		.replace(/&quot;/g, '"')
+		.replace(/&#039;/g, "'")
+		.replace(/&#39;/g, "'");
+	}
+    
+    	
+});
+</script>
+
+
+
+
+<h2 class="page-title"><small></small></h2>
+<div class="modal fade notice" id="notice_layer">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<input type="hidden" name="notice_seq" id="notice_seq" />
+			<input type="hidden" name="notice_title" id="notice_title" />
+			<div class="modal-header">
+				<a href="#" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">취소</span>
+				</a>
+				<div>
+					<h4 class="modal-title" style="width:100%;">공지사항</h4>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div >
+				<!-- <p class="text-center" style="font-size: 55px; color: cadetblue;"><i style="color: rgb(99 149 237);font-size:80px;" class="fa fa-info-circle"></i></p> -->
+				<div id="notice_content" style="resize: none;"></div>
+				</div>
+		     </div> <!-- /.modal-body -->
+		     <div class="modal-footer">
+		      <button class="btn_today_close"><span>오늘 하루 보지 않기</span></button>
+				<!-- <button type="button" id="setCookie" data-dismiss="modal" class="btn btn-primary">이제 다신 안봐</button> -->
+		     </div>
+	    </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+//var noticeCookie;
+
+function time(){
+	var today = new Date();
+	
+	var year = today.getFullYear();
+	var month = ('0' + (today.getMonth() + 1)).slice(-2);
+	var day = ('0' + today.getDate()).slice(-2);
+	var hours = ('0' + today.getHours()).slice(-2); 
+	var minutes = ('0' + today.getMinutes()).slice(-2);
+	var seconds = ('0' + today.getSeconds()).slice(-2); 
+	
+	return todaytime = (year + '-' + month + '-' + day + ' ' +hours + ':' + minutes + ':' + seconds);	
+}
+
+$(function(){
+	setInterval(function(){
+		checkNotice();
+    }, 20000);
+	
+	function checkNotice(){
+		var searchElementJson = {};
+    	$.ajax({
+    		data : {
+    				searchApp: 'demo',
+    				searchRecipe: '',
+    				searchScenario: '',
+    				//searchElementJson: searchElementJson
+    				},
+    		url : "/selectDataList.do",
+    		dataType : "json",
+    		type : 'POST',
+    		success : function(jData) {
+    			if (!isNull(jData.result_data)) {
+    				var data = jData.result_data;
+    				$.each(data, function (key, value) {
+    					
+    						notice_popup(value);
+    						check_notice_popup(value)
+    						
+    				});
+   					
+    			}
+    		},
+    		error : function(xhr, status, error) {
+    			console.log(error);
+    		}
+    	});
+        
+    }
+	
+	
+	
+	//공지사항 레이어
+	function notice_popup (value) {
+		
+		var todaytime = time();
+		var cookieCheck = value.title + '_' + value.seq;
+		
+		// 팝업 열때 쿠키 확인 하고 없으면 팝업 열기
+		if(getCookie(cookieCheck) != 'done') {
+			//OpenPopup('notice_layer');
+			if(todaytime > value.starttime && todaytime < value.endtime){
+	    		$('#notice_layer').modal('show');
+	    		
+	    		var content = unescapeHtml(value.content); // 특수문자 변환
+	    		$('#notice_content').html(content);
+	    		$('#notice_seq').val(value.seq);
+	    		$('#notice_title').val(value.title);
+	        	$('#notice_content').css('height','300px');
+	        	$('#notice_content').css('width','100%');
+	    	}
+		}
+	}
+	
+	// 오늘하루 열지않기 버튼 눌렀을 때 쿠키 설정하고 닫기
+	$('#notice_layer').on("click", ".btn_today_close", function (){
+		var cookieName = $('#notice_title').val() + '_' + $('#notice_seq').val() 
+		setCookies(cookieName, 'done', 1)
+		$('#notice_layer').modal('hide');
+	});
+	//쿠키 확인 
+	function getCookie(name) {
+	    var nameOfCookie=name+"=";
+	    var a=0;
+	        while(a<=document.cookie.length) {
+	        var b=(a+nameOfCookie.length);
+	            if(document.cookie.substring(a,b)==nameOfCookie) {
+	                if((endOfCookie=document.cookie.indexOf(";",b))==-1)
+	                endOfCookie=document.cookie.length;
+	                return unescape(document.cookie.substring(b,endOfCookie));
+	            }
+	            a=document.cookie.indexOf(" ",a) +1;
+	            if(a==0)
+	            break;
+	        }
+	    return "";
+	}
+	
+	// 쿠키 설정
+	function setCookies(name, value, expiredays){
+	    var todayDate = new Date();
+	    todayDate.setDate( todayDate.getDate() + expiredays );
+	    document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";";
+	}
+	
+	function check_notice_popup(data) {
+		var todaytime = time();
+		if(todaytime > data.endtime){ //레이어팝업 한개당 한개씩 늘려야되는 로직. 여러개 X
+			$('#notice_layer').modal('hide');
+			/* window.location.reload(); */
+		}
+	}
+	
+	// 특수문자 변환
+	function unescapeHtml(str) {
+		if (str == null) {
+			return "";
+		}
+		return str
+		.replace(/&amp;/g, '&')
+		.replace(/&lt;/g, '<')
+		.replace(/&gt;/g, '>')
+		.replace(/&quot;/g, '"')
+		.replace(/&#039;/g, "'")
+		.replace(/&#39;/g, "'");
+	}
+
+});
+	
+
+</script>
+
+<footer class="main-footer">
+	<div class="pull-right hidden-xs">
+		
+		<b>Version</b> 1.0
+	</div>
+	<div class="modal fade list_modal in" id="modal-text-sort" style="display: none; padding-right: 15px;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<a href="#" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</a>
+					<div>
+						<h4 class="modal-title" style="width:100%;">재정렬</h4>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div id="dash_column_popup" class=" dash_column" >
+						<textarea id="chg_opt" rows="10" cols="78"></textarea>
+					</div>
+			     </div> <!-- /.modal-body -->
+			    <div class="modal-footer">
+			    	<button id="btn_change_opt" type="button" class="btn btn-success">변환</button>
+			    </div>
+		    </div>
+		</div>
+	</div>
+	<strong>Copyright &copy; 2019 <a target="_blank" href="http://www.wizcore.co.kr/">Wizcore</a>.</strong> All rights reserved. 
+	<script>
+	$(function(){
+		$('.change_option').on('click', function(){
+			$('#modal-text-sort').modal('show');
+		});
+		$('#btn_change_opt').on('click', function(){
+			var text = $('#chg_opt').val();
+			if(!isNull(text)){
+				var stringText = JSON.stringify(text.replaceAll(/\r\n\t/g,""));
+				var str2 = stringText.replaceAll(/\r\n\t/g,""); 
+				str2 = str2.replaceAll('\\t','');
+				str2 = str2.replaceAll('\\n','');
+				copyToClipboard(str2);
+			}
+		});
+		
+		function change_dashboard(){
+			var app = $("#app").val();
+			var cmd = $("input[name$='cmd']").val();
+			//var wcCode = $("select[name=WC_CODE]").val();
+			//var wcCode = wc_code;
+			var nextPageId = $("#nextPageId").val();
+			var nextPageUrl = $("#nextPageUrl").val();
+			var target_url = "";
+			if(!isNull(nextPageUrl)){
+				target_url = nextPageUrl;
+			}
+			if(!isNull(nextPageId)){
+				target_url = "/"+app+"/dsb/dashboard.do?sid="+nextPageId;
+			}
+			if(!isNull(target_url)){
+				if(!isNull(cmd)){
+					target_url += "&cmd="+cmd;
+				}/* if(!isNull(wcCode)){
+					target_url += "&WC_CODE="+wcCode;
+				} */
+				var changeIntervalTime = $("#changeIntervalTime").val();
+				var searchElementJson = {
+					"href_param_type": "true",
+					"searchIntervalTime": changeIntervalTime
+				};
+				
+				var page_change = setTimeout(function () {
+					pageMove(target_url, searchElementJson);
+			    }, changeIntervalTime*1000);
+				if($("#pageChangePause").hasClass("disabled")){
+					clearTimeout(page_change);
+					$(this).prop('disabled', true);
+					$("#changeIntervalTime").prop('readonly', false);
+					$("#pageChangeStart").prop('disabled', false);
+				}
+				$(document).on('click', '#pageChangePause', function (e) {
+					var pauseIntervalTime = $("#changeIntervalTime").val();
+					clearTimeout(page_change);
+					changeIntervalStatus("disabled", pauseIntervalTime);
+					$(this).prop('disabled', true);
+					$("#changeIntervalTime").prop('readonly', false);
+					$("#pageChangeStart").prop('disabled', false);
+				});
+				$(document).on('click', '#pageChangeStart', function (e) {
+					var startIntervalTime = $("#changeIntervalTime").val();
+					$(this).prop('disabled', true);
+					changeIntervalStatus("enabled", startIntervalTime);
+					$("#changeIntervalTime").prop('readonly', true);
+					$("#pageChangePause").prop('disabled', false).removeClass("disabled");
+					change_dashboard();
+				});
+			}
+		}
+		function changeIntervalStatus(intervalStatus, intervalTime){
+			$.ajax({
+				url: "/setChangeIntervalStatus.do",
+				data: {
+					"intervalStatus": intervalStatus, 
+					"intervalTime": intervalTime
+				},
+				dataType:"json",
+				type: 'POST',
+				success: function(data) {
+					console.log(data.result_msg);
+	        	},
+		        error: function(data) {
+		        	console.log(data.result_msg);
+					return false;
+				}
+			});
+		}
+	    function pageLoad(){
+    		
+
+	        //teach select2 to accept data-attributes
+	        $(".select2").each(function(){
+	           	$(this).select2($(this).data());
+	        });
+	        $('.widget').widgster();
+	        
+	        printTime();
+	        change_dashboard();
+	    }
+
+	    pageLoad();
+	    PjaxApp.onPageLoad(pageLoad);
+	});
+	</script>
+	
+</footer>
+<form name="commonFrm" id="commonFrm" method="post">
+<input name="param_csrf_token" type="hidden" value="5c23afd1-bd7c-4249-be3f-d29fa03d1f56" />
+<input id="alarmShowYn" type="hidden" value="Y" />
+<input name="cmd" type="hidden" value=""/>
+<input name="selectedIntId" type="hidden" value=""/>
+<input name="selectedStrId" type="hidden" value=""/>
+<input name="searchApp" type="hidden" value=""/>
+</form>
+<form name="exportFileFrm" id="exportFileFrm" method="post">
+</form>
+<div class="loading" style="display:none;"></div>
+</body>
+</html>
