@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+  	<script type="text/javascript" src="js/echarts.min.js"></script>
+    <title>🔰FTP</title>
+    <link rel="stylesheet" href="./monitoring-style.css">
+  </head>
+	<body style="height: 90%; margin: 10px">
+		
+  	
+	<script type="text/javascript" src=".barchart.jsp"></script>
+		<div>
+			<label>항목수: <input type="text" id="t_num" value="7"/></label><br>
+			<label>최대값: <input type="text" id="t_max" value="200"/></label><br>
+		   	<button type="button" id="fnchart" onClick="fn_chart()">바차트</button>
+		 	<button type="button" id="fnchart" onClick="fn_start()">자동시작</button>
+		 	<button type="button" id="fnchart" onClick="fn_stop()">자동종료</button>
+		   	<div id="message"></div>
+		  	</div>		
+		<div id="container" style="height: 80%"></div>
+	
+	</body>
+  </html>
+  

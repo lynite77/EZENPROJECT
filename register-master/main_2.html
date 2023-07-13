@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko"> 
+<head>
+<meta charset="utf-8">
+<title>상품등록 페이지</title> 
+<style type="text/css">
+    .wrap {
+        display: grid; 
+        grid-template-columns: 20% 80%;
+        grid-template-rows: 80px 1000px;
+    }
+    .wrap > div {margin: 1px; padding: 3px; /*font-size: 20px;*/}
+    .grid1 { 
+        grid-column-start: 1; grid-column-end: 2; 
+        background: rgb(21, 49, 14); 
+    }
+    .grid2 {
+        grid-column-start: 2; grid-column-end: 3;
+        background: rgb(41, 83, 30);
+        display: flex;
+        /*justify-content: center;*/
+        letter-spacing: 20px;
+    }
+    .grid3 {
+        grid-column-start: 1; grid-column-end: 3;
+        background: rgb(137, 233, 150);
+        position: relative;
+    }
+    .content{
+        background: rgb(181, 218, 172);
+        padding: 50px 100px;
+        position: absolute;
+        width: 1000px;
+        height: 600px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .c1 {
+        color : yellow;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        }
+
+    .c2 {
+        color : black;
+        /*text-align: center;*/
+        font-size: 20px;
+        padding: 5px;
+        /*font-weight: bold;*/
+        }
+
+    .c3 {
+        /*color : black;*/
+        text-align: center;
+        font-size: 20px;
+        padding: 10px;
+        /*font-weight: bold;*/
+        
+        }
+
+    .c4 {
+         text-align: center;
+         color : black;
+         margin: 50px;
+        }
+    
+</style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="grid1"><p class="c1">품질관리시스템</p></div>
+        <div class="grid2"><p class="c2">상품등록 상품확인 상태확인</p></div>
+        <div class="grid3">
+            <div class="content">
+            <p class="c3">
+                상품명 </label><input type="text" title="상품명을 입력하시오." required="required"><input type="button" value="검색">
+                <br>
+            </p>
+            <p class="c4">
+                
+            </p>
+        </div>
+    </div>
+</body>
+
