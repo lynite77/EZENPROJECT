@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<meta charset="UTF-8">
+  	<title>Class 셀렉터 연습</title>
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript"> 
+		$(function() {
+		    $("#btn_addimage").click(function() {
+		 		$(".class1").html("<img src='../images/duke.png'>");
+		    });
+		    $("#btn_delimage").click(function() {
+		 		$(".class1").html("");
+		    });
+		});
+
+	</script>
+</head>
+<body>
+  <button id="btn_addimage">이미지 추가</button>
+  <button id="btn_delimage">이미지 제거</button>
+  <div class="class1"></div>
+  <div class="class1"></div>
+</body>
+</html>
+

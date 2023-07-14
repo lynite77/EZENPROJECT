@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ajax Test 1</title>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">
+      function fn_process(){
+       $.ajax({
+         type: "get",
+         dataType: "text",
+         async: false,  
+         url: "http://localhost:8584/SMFAjax23SP/ajax1",
+         data: { param: "Hi!, Ajax Server" },
+         
+         success:function (data,textStatus){
+            $('#message').append(data + "<br>");
+         },
+         error:function(data,textStatus){
+            alert("에러 발생...");
+         },
+         complete:function(data,textStatus){
+            alert("작업 완료.");
+         }
+      });	
+   }		
+</script>
+</head>
+<body>
+<input type="button" value="전송하기" onClick="fn_process()" /><br><br>
+<div id="message"></div>
+</body>
+</html>

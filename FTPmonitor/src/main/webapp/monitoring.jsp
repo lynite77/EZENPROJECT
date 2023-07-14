@@ -7,12 +7,14 @@
 <%@ page import="main.ErrorLog" %>
 <%@ page import="javax.servlet.http.HttpServletResponse" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-    
+        
 <% 
 	ErrorLogDAO errorLogDAO = new ErrorLogDAO();
 	List<ErrorLog> errorLogs = errorLogDAO.getAllErrorLogs();
 	int petot = errorLogDAO.getProductPetot();
 	int etot = errorLogDAO.getProductEtot();
+	
+	System.out.printf("[monitoring] petot(%d), etot(%d)\n", petot, etot);
 %>
 
 <!DOCTYPE html>
@@ -21,8 +23,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monitoring</title>
-    <link href="./styles.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <link href="./styles.css" rel="stylesheet" />
     <script>
 	    function openPopup() {
 	        window.open("add_data.jsp", "_blank", "width=500,height=400");
@@ -195,12 +199,16 @@
             </div>
         </div>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="chart/area1.js"></script>
     <script src="chart/area2.js"></script>
     <script src="chart/bar.js"></script>
     <script src="chart/pie.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="js/datatables.js"></script>
+    <script>
+		var petot = <%=petot%>;
+		var tot = petot + <%=etot%>; 
+		// alert(petot + ", " + tot);
+    	chartProductPetotEtot(tot, petot);
+    </script>
 </body>
 </html>
