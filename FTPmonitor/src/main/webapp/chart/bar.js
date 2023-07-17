@@ -2,12 +2,6 @@
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
-/*
-var petot = ErrorLogDAO.getProductPetot();
-var etot = ErrorLogDAO.getProductEtot();
-var tot = etot + petot;
-*/
-
 // Bar Chart 생성
 function chartProductPetotEtot(tot, petot) {
 	var ctx = document.getElementById("myBarChart");
@@ -26,19 +20,19 @@ function chartProductPetotEtot(tot, petot) {
 	    scales: {
 	      xAxes: [{
 	        time: {
-	          unit: 'week'
+	          unit: 'date'
 	        },
 	        gridLines: {
 	          display: false
 	        },
 	        ticks: {
-	          maxTicksLimit: 6
+	          maxTicksLimit: 3
 	        }
 	      }],
 	      yAxes: [{
 	        ticks: {
 	          min: 0,
-	          max: 10000,
+	          max: 5000,
 	          maxTicksLimit: 5
 	        },
 	        gridLines: {

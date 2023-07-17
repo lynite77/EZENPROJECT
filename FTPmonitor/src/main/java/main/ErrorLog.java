@@ -19,7 +19,6 @@ public class ErrorLog {
         this.errorDate = errorDate;
         this.petot = petot;
         this.etot = etot;
-        
     }
     
     public String getProductCode() {
@@ -63,21 +62,21 @@ public class ErrorLog {
     }
 
     public int getPetot() {
-    	return petot;
+        return petot;
     }
-    
+
     public void setPetot(int petot) {
-    	this.petot = petot;
+        this.petot = petot;
     }
-    
+
     public int getEtot() {
-    	return etot;
+        return etot;
     }
-    
+
     public void setEtot(int etot) {
-    	this.etot = etot;
+        this.etot = etot;
     }
-    
+
     public String getErrorDate() {
         return errorDate;
     }

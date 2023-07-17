@@ -3,19 +3,22 @@
 <%@ page import="javax.sql.*" %>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="java.util.List" %>
-<%@ page import="main.ErrorLogDAO" %>
+<%@ page import="Spring.monitoringDAO" %>
 <%@ page import="main.ErrorLog" %>
+<%@ page import="main.ProductPdata" %>
 <%@ page import="javax.servlet.http.HttpServletResponse" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
         
-<% 
-	ErrorLogDAO errorLogDAO = new ErrorLogDAO();
-	List<ErrorLog> errorLogs = errorLogDAO.getAllErrorLogs();
-	int petot = errorLogDAO.getProductPetot();
-	int etot = errorLogDAO.getProductEtot();
-	
-	System.out.printf("[monitoring] petot(%d), etot(%d)\n", petot, etot);
-%>
+<%
+        monitoringDAO errorLogDAO = new monitoringDAO();
+       	List<ErrorLog> errorLogs = errorLogDAO.getAllErrorLogs();
+        List<ProductPdata> productPdataList = errorLogDAO.getProductPdata();
+       	
+       	int petot = errorLogDAO.getProductPetot();
+       	int etot = errorLogDAO.getProductEtot();
+       	
+       	System.out.printf("[monitoring] petot(%d), etot(%d)\n", petot, etot);
+        %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +26,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monitoring</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <link href="./styles.css" rel="stylesheet" />
@@ -204,11 +207,43 @@
     <script src="chart/bar.js"></script>
     <script src="chart/pie.js"></script>
     <script src="js/datatables.js"></script>
-    <script>
+    <script>    	
 		var petot = <%=petot%>;
+		var etot = <%=etot%>;
 		var tot = petot + <%=etot%>; 
-		// alert(petot + ", " + tot);
-    	chartProductPetotEtot(tot, petot);
+		
+		// pie 차트
+		chartpercent(petot, etot);
+		// bar 차트
+		chartProductPetotEtot(tot, petot);
+    	
+    	// area1 차트
+    	var productPdata = [
+            <%
+            	for (ProductPdata pdata : productPdataList) { 
+            %>
+                {
+                    pname: '<%= pdata.getPname() %>',
+                    ptot: <%= pdata.getPtot() %>
+                },
+            <% } %>
+        ];
+    	        chartProductPdata(productPdata);
+        
+        // area2 차트
+        var errorLogsData = [
+            <%
+            	for (ErrorLog errorLog : errorLogs) { 
+            %>
+                {
+                	productName: '<%= errorLog.getProductName() %>',
+                    errorQuantity: <%= errorLog.getErrorQuantity() %>
+                },
+            <% } %>
+        ];
+        chartErrorLogs(errorLogsData);
+        chartpercent(petot, ptot);
     </script>
+    
 </body>
 </html>

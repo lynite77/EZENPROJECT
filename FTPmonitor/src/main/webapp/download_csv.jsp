@@ -5,7 +5,7 @@
 <%@ page import="javax.sql.DataSource" %>
 <%@ page import="javax.servlet.http.HttpServletResponse" %>
 <%@ page import="java.util.List" %>
-<%@ page import="main.ErrorLogDAO" %>
+<%@ page import="Spring.monitoringDAO" %>
 <%@ page import="main.ErrorLog" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -13,7 +13,7 @@
 // 데이터베이스 연결 및 데이터 조회
 try {
 
-    ErrorLogDAO errorLogDAO = new ErrorLogDAO();
+    monitoringDAO errorLogDAO = new monitoringDAO();
     List<ErrorLog> errorLogs = errorLogDAO.getAllErrorLogs();
     
  	// CSV 파일 생성
