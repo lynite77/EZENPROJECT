@@ -6,6 +6,7 @@
 <%@ page import="Spring.monitoringDAO" %>
 <%@ page import="main.ErrorLog" %>
 <%@ page import="main.ProductPdata" %>
+<%@ page import="main.ProductEpdata" %>
 <%@ page import="javax.servlet.http.HttpServletResponse" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
         
@@ -13,12 +14,13 @@
         monitoringDAO errorLogDAO = new monitoringDAO();
        	List<ErrorLog> errorLogs = errorLogDAO.getAllErrorLogs();
         List<ProductPdata> productPdataList = errorLogDAO.getProductPdata();
+        List<ProductEpdata> productEpdataList = errorLogDAO.getProductEpdata();
        	
        	int petot = errorLogDAO.getProductPetot();
        	int etot = errorLogDAO.getProductEtot();
        	
        	System.out.printf("[monitoring] petot(%d), etot(%d)\n", petot, etot);
-        %>
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,9 +44,6 @@
 	    });
     </script>
 <body class="maincontent">
-    <nav class="navbar">
-        <a href="Monitoring.html">FTP</a>
-    </nav>
     <main>
         <div class="container-fluid px-4">
             <h1 class="mt-4">종합화면</h1>
@@ -210,7 +209,7 @@
     <script>    	
 		var petot = <%=petot%>;
 		var etot = <%=etot%>;
-		var tot = petot + <%=etot%>; 
+		var tot = petot + <%=etot%>;
 		
 		// pie 차트
 		chartpercent(petot, etot);
@@ -228,21 +227,20 @@
                 },
             <% } %>
         ];
-    	        chartProductPdata(productPdata);
+    	chartProductPdata(productPdata);
         
-        // area2 차트
-        var errorLogsData = [
+        // area2 차트        
+		var productEpdata = [
             <%
-            	for (ErrorLog errorLog : errorLogs) { 
+            	for (ProductEpdata epdata : productEpdataList) { 
             %>
                 {
-                	productName: '<%= errorLog.getProductName() %>',
-                    errorQuantity: <%= errorLog.getErrorQuantity() %>
+                    pname: '<%= epdata.getPname() %>',
+                    eptot: <%= epdata.getEptot() %>
                 },
             <% } %>
         ];
-        chartErrorLogs(errorLogsData);
-        chartpercent(petot, ptot);
+        chartErrorLogs(productEpdata);
     </script>
     
 </body>

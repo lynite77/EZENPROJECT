@@ -32,7 +32,7 @@ function chartProductPetotEtot(tot, petot) {
 	      yAxes: [{
 	        ticks: {
 	          min: 0,
-	          max: 5000,
+	          max: Math.max(tot),
 	          maxTicksLimit: 5
 	        },
 	        gridLines: {

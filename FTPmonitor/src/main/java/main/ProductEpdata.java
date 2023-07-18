@@ -1,12 +1,12 @@
 package main;
 
-public class ErrorPdata {
+public class ProductEpdata {
 	private String pname;
-	private int ptot;
+	private int eptot;
 	    
-	    public ErrorPdata(String pname, int ptot) {
+	    public ProductEpdata(String pname, int eptot) {
 	        this.pname = pname;
-	        this.ptot = ptot;
+	        this.eptot = eptot;
 	    }
 	    
 	    public String getPname() {
@@ -17,11 +17,11 @@ public class ErrorPdata {
 	    	this.pname = pname;
 	    }
 	    
-	    public int getPtot() {
-	    	return ptot;
+	    public int getEptot() {
+	    	return eptot;
 	    }
 	    
-	    public void setPtot(int ptot) {
-	    	this.ptot = ptot;
+	    public void setEptot(int eptot) {
+	    	this.eptot = eptot;
 	    }
 }

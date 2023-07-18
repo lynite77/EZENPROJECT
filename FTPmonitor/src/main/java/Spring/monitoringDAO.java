@@ -13,6 +13,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import main.ErrorLog;
+import main.ProductEpdata;
 import main.ProductPdata;
 
 public class monitoringDAO {
@@ -128,8 +129,50 @@ public class monitoringDAO {
         return productPdatas;
     }
 	
+	public List<ProductEpdata> getProductEpdata() {
+		List<ProductEpdata> productEpdatas = new ArrayList<>();
+        
+        try {
+            connection = this.dataSource.getConnection();
+            
+            // 데이터 조회
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT DISTINCT P_NAME, COUNT(*) OVER(PARTITION BY E_NAME) as EPTOT FROM ERROR_LOG WHERE P_NAME IN ('여름 반팔A','여름 반팔B', '여름 반팔C','여름 반바지B','어린이 반팔B','어린이 반바지B','여름 원피스B')");
+            
+            // 결과 처리
+            while (resultSet.next()) {
+            	String pname = resultSet.getString("P_NAME");
+            	int eptot = resultSet.getInt("EPTOT");
+                
+            	ProductEpdata productEpdata = new ProductEpdata(pname, eptot);
+            	productEpdatas.add(productEpdata);
+            }
+            // 연결 및 리소스 정리
+            resultSet.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+        	try {
+	        	if(statement != null) {
+	        		statement.close();
+	        	}
+	        	
+	        	if(connection != null) {
+	        		connection.close();
+	        	}
+        	}
+        	catch(SQLException e) {
+        		System.out.println("[EPLOG]connection, statement exception: " + e.getMessage());
+        		
+        	}
+        }
+        
+        return productEpdatas;
+    }
+	
     // 생산실적 총합 (정상제품)
-    public int getProductPetot() {
+	public int getProductPetot() {
         
         int petot = 0;
         

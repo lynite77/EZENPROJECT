@@ -3,12 +3,12 @@ Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSyste
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Area Chart Example
-function chartErrorLogs(errorLogs) {
+function chartErrorLogs(pname, eptot) {
     var labels = [];
     var datas = [];
-    for (var i = 0; i < errorLogs.length; i++) {
-        labels.push(errorLogs[i].productName); // 제품명 값을 labels 배열에 추가
-        datas.push(errorLogs[i].errorQuantity); // 에러 수량 값을 datas 배열에 추가
+    for (var i = 0; i < productEpdata.length; i++) {
+        labels.push(productEpdata[i].pname); // 제품명 값을 labels 배열에 추가
+        datas.push(productEpdata[i].eptot); // 에러 수량 값을 datas 배열에 추가
     }
 	var ctx = document.getElementById("myAreaChart2");
 	var myLineChart = new Chart(ctx, {
