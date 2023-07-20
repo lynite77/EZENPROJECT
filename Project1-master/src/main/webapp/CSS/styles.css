@@ -470,7 +470,9 @@ output {
 }
 
 iframe {
-  border: 0;
+	height: 100%;
+	width: 100%;
+	border: 0;
 }
 
 summary {
@@ -6575,10 +6577,8 @@ textarea.form-control-lg {
   line-height: 1.5;
 }
 
-.offcanvas-body {
-  flex-grow: 1;
-  padding: var(--bs-offcanvas-padding-y) var(--bs-offcanvas-padding-x);
-  overflow-y: auto;
+.offcanvas-body a {
+  color: white; text-decoration: none;
 }
 
 .placeholder {
@@ -8157,7 +8157,7 @@ textarea.form-control-lg {
 
 .bg-body {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !important;
+  background-color: #FFFFCC;
 }
 
 .bg-transparent {
@@ -10810,6 +10810,16 @@ body {
   height: 100%;
 }
 
+footer {
+    position: fixed;
+    bottom: 0px;
+}
+
+main{
+	overflow:hidden;
+    min-height:100%;
+    }
+    
 #layoutAuthentication {
   display: flex;
   flex-direction: column;

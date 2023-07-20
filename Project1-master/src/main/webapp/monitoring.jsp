@@ -4,9 +4,9 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Spring.monitoringDAO" %>
-<%@ page import="main.ErrorLog" %>
-<%@ page import="main.ProductPdata" %>
-<%@ page import="main.ProductEpdata" %>
+<%@ page import="bean.ErrorLog" %>
+<%@ page import="bean.ProductPdata" %>
+<%@ page import="bean.ProductEpdata" %>
 <%@ page import="javax.servlet.http.HttpServletResponse" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
         
@@ -25,24 +25,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitoring</title>
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-    <link href="./styles.css" rel="stylesheet" />
-    <script>
-	    function openPopup() {
-	        window.open("add_data.jsp", "_blank", "width=500,height=400");
-	    }
-	    
-	    $(document).ready(function() {
-	        $("#addDataButton").click(function() {
-	            openPopup();
-	        });
-	    });
-    </script>
+    <link href="./CSS/styles.css" rel="stylesheet" />
 </head>
 <body class="maincontent">
     <main>
@@ -196,9 +184,6 @@
                         </tbody>
                     </table>
                 </div>
-        <!-- "Add Data" 버튼 -->
-        <button onclick="openPopup()">Add Data</button>
-        <a href="download_csv.jsp" class="btn btn-primary">Download CSV</a>
             </div>
         </div>
     </main>
