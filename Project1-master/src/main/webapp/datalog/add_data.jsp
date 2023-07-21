@@ -11,6 +11,11 @@
 <body>
     <h2>Add Data</h2>
     <form id="addDataForm">
+	    <label for="databaseType">데이터베이스 선택:</label>
+	    <select id="databaseType" name="databaseType">
+	        <option value="DB_A">ErrorLog 테이블</option>
+	        <option value="DB_B">Product 테이블</option>
+	    </select><br>
         <label for="productCode">제품코드:</label>
         <input type="text" id="productCode" name="productCode" required><br>
         
@@ -29,7 +34,7 @@
         <label for="errorDate">에러발생시기:</label>
         <input type="text" id="errorDate" name="errorDate" required><br>
         
-        <input type="submit" value="Add Data">
+        <input type="submit" value="데이터 추가">
     </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -50,7 +55,8 @@
                 errorCode: $("#errorCode").val(),
                 errorName: $("#errorName").val(),
                 errorQuantity: $("#errorQuantity").val(),
-                errorDate: $("#errorDate").val()
+                errorDate: $("#errorDate").val(),
+                databaseType: $("#databaseType").val()
             };
             
             $.ajax({

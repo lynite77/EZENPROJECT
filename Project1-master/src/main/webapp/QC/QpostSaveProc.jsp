@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="java.util.*,qc.*"%>
+<%@ page import="java.util.*"%>
+<%@ page import="Spring.*"%>
+<%@ page import="bean.*"%>
 <jsp:useBean id="qDao" class="Spring.QualityDAO"/>
 <%
 	request.setCharacterEncoding("UTF-8");

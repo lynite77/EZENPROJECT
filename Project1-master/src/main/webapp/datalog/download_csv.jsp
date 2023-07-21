@@ -9,6 +9,7 @@
 <%@ page import="bean.ErrorLog" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<!-- 에러데이터 다운로드 -->
 <%
 // 데이터베이스 연결 및 데이터 조회
 try {

@@ -17,7 +17,6 @@ public class DBConnectionMgr {
 
 
     private Vector connections = new Vector(10);
-    
     private boolean _traceOn = false;
     private boolean initialized = false;
     private int _openConnections = 50;

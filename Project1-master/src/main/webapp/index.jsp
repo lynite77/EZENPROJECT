@@ -103,8 +103,8 @@
 				 </a>
 				 <ul class="collapse show" id="collapse4">
 					  <li><a href="<%=tPath%>/download_csv.jsp" target="content">에러데이터 다운</a></li>
-					  <li><a href="<%=tPath%>/add_data.jsp" target="content">오류데이터 삽입</a></li>
-					  <li><a href="<%=tPath%>/주소" target="content">3</a></li>
+					  <li><a href="<%=tPath%>/download_csv2.jsp" target="content">양품데이터 다운</a></li>
+					  <li><a href="javascript:void(0);" onclick="openPopup('<%=tPath%>/add_data.jsp')">데이터 삽입</a></li>  
 				 </ul>
 		  </div>
 	</div>
@@ -120,6 +120,16 @@
 		}
 		getClock();
 		setInterval(getClock, 1000);	
+		
+		function openPopup(url) {
+	        var width = 800;
+	        var height = 600;
+	        var left = (window.innerWidth - width) / 2;
+	        var top = (window.innerHeight - height) / 2;
+	        var options = `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes`;
+
+	        window.open(url, 'popupWindow', options);
+	    }
 </script>
 </body>
 </html>

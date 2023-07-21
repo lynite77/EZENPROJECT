@@ -228,6 +228,5 @@
         ];
         chartErrorLogs(productEpdata);
     </script>
-    
 </body>
 </html>
