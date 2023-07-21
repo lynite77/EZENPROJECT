@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>회원가입</title>
-<link href="./member/style.css" rel="stylesheet" type="text/css">
+<link href="style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="script.js"></script>
 <script type="text/javascript">
 	function idCheck(id) {
@@ -61,7 +61,6 @@
 									type="button" value="ID중복확인"
 									onClick="idCheck(this.form.id.value)">
 									</td>
-
 							</tr>
 							<tr>
 								<td>패스워드</td>

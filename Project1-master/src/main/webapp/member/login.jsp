@@ -1,19 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page import="Spring.MemberDAO"%>
+<%@ page import="member.MemberMgr"%>
 <%
-request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
 	String id = (String) session.getAttribute("idKey");
 	String role = null;
 	if (id != null) {
 		// 로그인한 경우
-		MemberDAO memberDao = new MemberDAO();
-		role = memberDao.getRole(id);
+		MemberMgr memberMgr = new MemberMgr();
+		role = memberMgr.getRole(id);
 	}
 %>
 <html>
 <head>
 <title>로그인</title>
-<link href="./member/style.css" rel="stylesheet" type="text/css">
+<link href="style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	function loginCheck() {
 		if (document.loginFrm.id.value == "") {

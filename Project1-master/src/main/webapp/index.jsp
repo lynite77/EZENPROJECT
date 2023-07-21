@@ -2,25 +2,14 @@
 <%@ page import="java.time.*"%>
 <%@ page import="java.util.*"%>
 <jsp:useBean id="qMgr" class="Spring.QualityDAO"/>
+<jsp:useBean id="Mgr" class="member.MemberMgr"/>
 <%
-	String grade = "guest";
-	String id = "2020030001";
+    String id = request.getParameter("id");
 	session.setAttribute("idKey", id);
+	String grade = Mgr.getRole(id);
 	String tPath = request.getContextPath();
-	/* String id = (String)session.getAttribute("idKey"); 
-	 String level = (String)session.getAttribute("level");
- 	switch(level){
- 	case "1": grade = "작업자"; break;
- 	case "2": grade = "중간관리자"; break;
- 	case "3": grade = "시스템관리자"; break;
- 	}*/ 
-	if(id == null){
-%> 
-<script>
-   alert("로그인 되지 않았습니다.");
-   location.href="Login.jsp";
-</script>
-<%}%>
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +44,7 @@
 	  </div>
 	</nav>
 	<div style="background-color:gray; color: white;">
-		<span class="d-flex justify-content-end">로그인 정보 : USER(<%=qMgr.findmember(Integer.valueOf(id))%>), 등급(<%=grade%>)&nbsp;&nbsp;</span>
+		<span class="d-flex justify-content-end">로그인 정보 : USER(<%=id%>), 등급(<%=grade%>)&nbsp;&nbsp;</span>
 	</div>
 	<main>
         <iframe name="content" src="<%=tPath%>/MainMylist.jsp" style="overflow-x:hidden; overflow:auto; width:100%; min-height:1000px;

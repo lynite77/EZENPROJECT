@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="Spring.MemberDAO" %>
-<%@ page import="bean.MemberBean" %>
+<%@ page import="member.MemberBean" %>
+<%@ page import="member.MemberMgr" %>
 <%
-request.setCharacterEncoding("UTF-8");
+    request.setCharacterEncoding("UTF-8");
     javax.servlet.http.HttpSession httpSession = request.getSession();
     
     String loggedInId = (String) httpSession.getAttribute("idKey");
@@ -12,6 +12,8 @@ request.setCharacterEncoding("UTF-8");
     String tel3 = request.getParameter("tel3");
     String tel = tel1 + "-" + tel2 + "-" + tel3;
     String email = request.getParameter("email");
+    String zipcode = request.getParameter("zipcode");
+    String address = request.getParameter("address");
     String code = request.getParameter("code");
 
     MemberBean bean = new MemberBean();
@@ -21,9 +23,11 @@ request.setCharacterEncoding("UTF-8");
     bean.setTel2(tel2);
     bean.setTel3(tel3);
     bean.setEmail(email);
+    bean.setZipcode(zipcode);
+    bean.setAddress(address);
     bean.setCode(code);
 
-    MemberDAO mMgr = new MemberDAO();
+    MemberMgr mMgr = new MemberMgr();
     boolean result = false;
     String errorMessage = "";
 

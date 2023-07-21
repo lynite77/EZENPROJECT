@@ -1,4 +1,4 @@
-package bean;
+package member;
 
 import java.time.LocalDate;
 
@@ -13,8 +13,6 @@ public class MemberBean {
     private String tel2;	// 전화번호 중간자리
     private String tel3;	// 전화번호 뒷자리
     private String email;
-    private String zipcode;	// 우편번호
-    private String address;	// 상세주소
     private String code;    // 사원번호
     private LocalDate timedate;	// 가입당시 날짜
     private String role;	// 등급
@@ -91,22 +89,6 @@ public class MemberBean {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getZipcode() {
-		return zipcode;
-	}
-
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
 
 	public String getCode() {
         return code;

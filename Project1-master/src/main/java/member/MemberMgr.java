@@ -1,4 +1,4 @@
-package Spring;
+package member;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,15 +6,16 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.Vector;
 
-import bean.MemberBean;
-import database.DBConnectionMgr;
+import member.MemberBean;
+import member.DBConnectionMgr;
 
-public class MemberDAO {
+public class MemberMgr {
+    // MemberMgr.java	
 
     private DBConnectionMgr pool;
 
-    public MemberDAO() {
-        try {	
+    public MemberMgr() {
+        try {
             pool = DBConnectionMgr.getInstance();
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,7 +82,7 @@ public class MemberDAO {
             }
 
             // 중복되지 않은 ID인 경우, 회원 가입 처리
-            sql = "insert into memuser (id, pwd, name, rrn, tel, email, code, regdate) values (?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "insert into memuser (ID,PWD,NAME,RRN,TEL,EMAIL,CODE) values (?, ?, ?, ?, ?, ?, ?)";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, bean.getId());
             pstmt.setString(2, bean.getPwd());
@@ -90,7 +91,6 @@ public class MemberDAO {
             pstmt.setString(5, bean.getTel1() + "-" + bean.getTel2() + "-" + bean.getTel3());
             pstmt.setString(6, bean.getEmail());
             pstmt.setString(7, bean.getCode());
-            pstmt.setObject(8, LocalDate.now()); // 현재 날짜로 가입일자 설정
             if (pstmt.executeUpdate() == 1)
                 flag = true;
         } catch (Exception e) {

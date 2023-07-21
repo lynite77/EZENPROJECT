@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<jsp:useBean id="mMgr" class="Spring.MemberDAO" />
+<jsp:useBean id="mMgr" class="member.MemberMgr" />
 
 <%
 request.setCharacterEncoding("UTF-8");
@@ -20,10 +20,10 @@ response.getWriter().close();
     function setCodeResult(result) {
         opener.document.regFrm.code.value = "<%=code%>";
         if (result) {
-            opener.document.regFrm.codeCheck.value = "이미 존재하는 Code입니다.";
+            opener.document.regFrm.codeCheck.value = "true";
             opener.document.getElementByCode("codeCheckResult").innerHTML = "<font color='red'>이미 존재하는 Code입니다.</font>";
         } else {
-            opener.document.regFrm.codeCheck.value = "사용 가능한 Code입니다.";
+            opener.document.regFrm.codeCheck.value = "false";
             opener.document.getElementByCode("codeCheckResult").innerHTML = "<font color='green'>사용 가능한 Code입니다.</font>";
         }
         self.close();

@@ -1,11 +1,11 @@
 <%@ page import="java.util.List" %>
-<%@ page import="Spring.MemberDAO" %>
-<%@ page import="bean.MemberBean" %>
+<%@ page import="member.MemberMgr" %>
+<%@ page import="member.MemberBean" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
 // 현재 로그인한 사용자의 권한 가져오기
 String role = (String) session.getAttribute("role");
-
+String tPath = request.getContextPath();
 // 권한에 따른 페이지 접근 제어
 if (role == null) {
     // 로그인하지 않은 경우, 로그인 페이지로 이동
@@ -21,6 +21,7 @@ if (role == null) {
     <body>
         <h1>관리자 페이지</h1>
         <p>제한된 기능을 사용할 수 있습니다.<p/>
+        <a href="<%=tPath %>/index.jsp">일하러가자</a>&nbsp;&nbsp;
         <a href="logout.jsp">로그아웃</a>&nbsp;&nbsp;
         <a href="update.jsp">회원정보 수정</a>&nbsp;&nbsp;
         <a href="grant.jsp">권한 수정</a>&nbsp;&nbsp;

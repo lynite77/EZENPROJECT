@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="Spring.MemberDAO" %>
+<%@ page import="member.MemberMgr" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,27 +18,27 @@
     </script>
 </head>
 <body>
-    <%
+    <% 
     String idToDelete = request.getParameter("username");
-                String adminPassword = request.getParameter("adminPassword");
+    String adminPassword = request.getParameter("adminPassword");
 
-                // 관리자 비밀번호 확인
-                String expectedAdminPassword = "1234"; // 실제 관리자 비밀번호로 바꿔주세요
-                if (!adminPassword.equals(expectedAdminPassword)) {
-                    // 만약 관리자 비밀번호가 올바르지 않으면, 오류 메시지를 보여줍니다
-    %>
+    // 관리자 비밀번호 확인
+    String expectedAdminPassword = "1234"; // 실제 관리자 비밀번호로 바꿔주세요
+    if (!adminPassword.equals(expectedAdminPassword)) {
+        // 만약 관리자 비밀번호가 올바르지 않으면, 오류 메시지를 보여줍니다
+        %>
         <h1>비밀번호 오류</h1>
         <p>관리자 비밀번호가 올바르지 않습니다.</p>
         <a href="delete.jsp">돌아가기</a>
         <%
-        } else {
-                                // 관리자 비밀번호가 올바르면 회원 삭제를 진행합니다
-                                MemberDAO memberMgr = new MemberDAO();
-                                boolean success = memberMgr.deleteMember(idToDelete);
+    } else {
+        // 관리자 비밀번호가 올바르면 회원 삭제를 진행합니다
+        MemberMgr memberMgr = new MemberMgr();
+        boolean success = memberMgr.deleteMember(idToDelete);
 
-                                if (success) {
-                                    // 회원 삭제 성공
-        %>
+        if (success) {
+            // 회원 삭제 성공
+            %>
             <h1>회원 삭제 완료</h1>
             <p>회원이 성공적으로 삭제되었습니다.</p>
             <a href="admin.jsp">관리자 페이지로 돌아가기</a>

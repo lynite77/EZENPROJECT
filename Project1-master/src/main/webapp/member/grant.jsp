@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="Spring.MemberDAO" %>
-<%@ page import="bean.MemberBean" %>
+<%@ page import="member.MemberMgr" %>
+<%@ page import="member.MemberBean" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
 // 현재 로그인한 사용자의 권한 가져오기
@@ -12,7 +12,7 @@ if (role == null) {
     response.sendRedirect("login.jsp");
 } else if (role.equals("admin")) {
     // admin 권한의 경우에만 접속 가능
-%>
+    %>
     <!DOCTYPE html>
     <html>
     <head>
@@ -40,10 +40,10 @@ if (role == null) {
                 <th>Email</th>
                 <th>권한</th>
             </tr>
-            <%
+            <% 
             // 모든 회원 조회
-                                                List<MemberBean> memberList = new MemberDAO().getAllMembers();
-                                                for (MemberBean member : memberList) {
+            List<MemberBean> memberList = new MemberMgr().getAllMembers();
+            for (MemberBean member : memberList) {
             %>
             <tr>
                 <td><%= member.getId() %></td>

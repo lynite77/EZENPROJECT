@@ -1,7 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%request.setCharacterEncoding("UTF-8");%>
-<jsp:useBean id="mgr" class="Spring.MemberDAO"/>
-<jsp:useBean id="bean" class="bean.MemberBean"/>
+<jsp:useBean id="mgr" class="member.MemberMgr"/>
+<jsp:useBean id="bean" class="member.MemberBean"/>
 <jsp:setProperty property="*" name="bean"/>
 <%
 		boolean result = mgr.insertMember(bean);

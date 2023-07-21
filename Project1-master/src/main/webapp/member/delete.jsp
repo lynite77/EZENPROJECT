@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="Spring.MemberDAO" %>
+<%@ page import="member.MemberMgr" %>
 <%
 // 현재 로그인한 사용자의 권한 가져오기
 String role = (String) session.getAttribute("role");

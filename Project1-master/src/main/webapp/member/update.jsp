@@ -83,6 +83,16 @@
 								<td><input type="email" name="email" size="20"></td>
 							</tr>
 							<tr>
+								<td>우편번호</td>
+								<td><input name="zipcode" size="5" readonly>
+									<input type="button" value="우편번호찾기" onClick="zipSearch()">
+								</td>
+							</tr>
+							<tr>
+								<td>상세주소</td>
+								<td><input name="address" size="35"></td>
+							</tr>
+							<tr>
 								<td>사원번호</td>
 								<td width="50%"><input name="code" size="6" maxlength="4">
 									<input type="button" value="사원번호 중복확인"

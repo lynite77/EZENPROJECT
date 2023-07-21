@@ -1,0 +1,21 @@
+CREATE TABLE MEMUSER
+   (	"ID" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	"PWD" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	"NAME" VARCHAR2(50 BYTE) NOT NULL ENABLE, 
+	"RRN" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	"TEL" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	"EMAIL" VARCHAR2(100 BYTE) NOT NULL ENABLE,
+	"CODE" NUMBER(6,0) NOT NULL ENABLE,
+	"ROLE" VARCHAR2(20 BYTE) DEFAULT 'guest' NOT NULL ENABLE, 
+	 CONSTRAINT "MEMUSER_PK" PRIMARY KEY ("ID", "CODE"));
+	 
+	 
+Insert into MEMUSER values ('admin','admin','어드민','989898-1515151','010-4321-5678','asd@sa.kr',2134,'admin');
+Insert into MEMUSER values ('user','user','사원','121313-5435345','010-4635-5675','asd@asd.com',6686,'user');
+Insert into MEMUSER values ('guest','guest','게스트','232566-7686455','010-5676-5756','asd@as.com',5756,'guest');
+
+commit;
+drop table memuser;
+select * from memuser;
+
+SELECT role FROM memuser;

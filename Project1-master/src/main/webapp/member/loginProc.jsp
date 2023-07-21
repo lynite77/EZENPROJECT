@@ -1,13 +1,14 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="Spring.MemberDAO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="member.MemberMgr" %>
 <%
-request.setCharacterEncoding("UTF-8");
+    request.setCharacterEncoding("UTF-8");
     String id = request.getParameter("id");
     String pwd = request.getParameter("pwd");
     String url = "login.jsp";
     String msg = "로그인에 실패하였습니다.";
 
-    MemberDAO memberMgr = new MemberDAO();
+    MemberMgr memberMgr = new MemberMgr();
     String role = memberMgr.loginMember(id, pwd);
     if (role != null) {
         // 로그인 성공
