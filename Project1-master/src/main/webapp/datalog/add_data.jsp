@@ -11,11 +11,6 @@
 <body>
     <h2>Add Data</h2>
     <form id="addDataForm">
-	    <label for="databaseType">데이터베이스 선택:</label>
-	    <select id="databaseType" name="databaseType">
-	        <option value="DB_A">ErrorLog 테이블</option>
-	        <option value="DB_B">Product 테이블</option>
-	    </select><br>
         <label for="productCode">제품코드:</label>
         <input type="text" id="productCode" name="productCode" required><br>
         
@@ -34,7 +29,7 @@
         <label for="errorDate">에러발생시기:</label>
         <input type="text" id="errorDate" name="errorDate" required><br>
         
-        <input type="submit" value="데이터 추가">
+        <input type="submit" value="Add Data">
     </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -55,13 +50,12 @@
                 errorCode: $("#errorCode").val(),
                 errorName: $("#errorName").val(),
                 errorQuantity: $("#errorQuantity").val(),
-                errorDate: $("#errorDate").val(),
-                databaseType: $("#databaseType").val()
+                errorDate: $("#errorDate").val()
             };
             
             $.ajax({
                 type: "POST",
-                url: "AddDataServlet",
+                url: "/AddDataServlet",
                 data: formData,
                 success: function(response) {
                     // 성공적으로 데이터를 추가한 경우 팝업 창 닫기 및 페이지 리로드

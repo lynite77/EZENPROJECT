@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Registered Products</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registered Products</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Manager</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% 
+            List<Product> products = register.ProductRegistrationConfirm1.getProducts();
+            for (Product product : products) {
+        %>
+        
+        <tr>
+            <td><%= product.getCode() %></td>
+            <td><%= product.getName() %></td>
+            <td><%= product.getManager() %></td>
+        </tr>
+        
+        <% } %>
+        </tbody>
+    </table>
+</body>
+</html>

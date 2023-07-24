@@ -13,6 +13,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import bean.ErrorLog;
+import bean.Gproduct;
 import bean.ProductEpdata;
 import bean.ProductPdata;
 
@@ -87,6 +88,52 @@ public class monitoringDAO {
         return errorLogs;
     }
     
+	public List<Gproduct> getAllGProducts() {
+	    List<Gproduct> products = new ArrayList<>();
+	    
+	    try {
+	        connection = this.dataSource.getConnection();
+	        
+	        // 데이터 조회
+	        statement = connection.createStatement();
+	        ResultSet resultSet = statement.executeQuery("SELECT * FROM PRODUCT");
+
+	        // 결과 처리
+	        while (resultSet.next()) {
+	            String productCode = resultSet.getString("P_CODE");
+	            String productName = resultSet.getString("P_NAME");
+	            String productColor = resultSet.getString("P_COLOR");
+	            String productSize = resultSet.getString("P_SIZE");
+	            String productLength = resultSet.getString("P_LENGTH");
+	            String productPrice = resultSet.getString("P_PRICE");
+	            String productInfo = resultSet.getString("P_INFO");
+	            
+	            Gproduct gproduct = new Gproduct(productCode, productName, productColor, productSize, productLength, productPrice, productInfo);
+	            products.add(gproduct);
+	        }
+	        // 연결 및 리소스 정리
+	        resultSet.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    finally {
+	        try {
+	            if(statement != null) {
+	                statement.close();
+	            }
+	            
+	            if(connection != null) {
+	                connection.close();
+	            }
+	        }
+	        catch(SQLException e) {
+	            System.out.println("[GLOG]connection, statement exception: " + e.getMessage());
+	        }
+	    }
+	    
+	    return products;
+	}
+
 	public List<ProductPdata> getProductPdata() {
 		List<ProductPdata> productPdatas = new ArrayList<>();
         

@@ -4,10 +4,15 @@
 <jsp:useBean id="qMgr" class="Spring.QualityDAO"/>
 <jsp:useBean id="Mgr" class="member.MemberMgr"/>
 <%
-    String id = request.getParameter("id");
-	session.setAttribute("idKey", id);
+	String id = (String)session.getAttribute("idKey");
+    String role = (String)session.getAttribute("role");
 	String grade = Mgr.getRole(id);
+	int memberCode = Mgr.findCode(id);
+	session.setAttribute("worker", memberCode);
 	String tPath = request.getContextPath();
+	if (id == null || role == "guest"){
+		response.sendRedirect(tPath+"/member/login.jsp");
+	}
 %>
 
 <!DOCTYPE html>
@@ -37,7 +42,7 @@
 		         	<a class="nav-link" href="<%=tPath%>/menu.jsp" target="content"><img style="margin-top:3px;" src="images/setting.png" border="0" width="30" height="30"></a>
 		        </li>
 		        <li class="nav-item">
-		        	<a class="nav-link" href="<%=tPath%>/logout.jsp"><img src="images/logout.png" border="0" width="35" height="35"></a>
+		        	<a class="nav-link" href="<%=tPath%>/member/logout.jsp"><img src="images/logout.png" border="0" width="35" height="35"></a>
 		        </li>
 	      	</ul>
 	    </div>
@@ -68,16 +73,23 @@
 				    <p style="font-weight: bold; text-transform: uppercase;"> 사용자 관리</p>
 				  </a>
 				 <ul class="collapse show" id="collapse1">
-					  <li><a href="<%=tPath%>/주소" target="content">1</a></li>
-					  <li><a href="<%=tPath%>/주소" target="content">2</a></li>
-					  <li><a href="<%=tPath%>/주소" target="content">3</a></li>
-				 </ul>
+				 	<div id="admin" style="display:block">
+					  <li><a href="<%=tPath%>/member/update.jsp" target="content">회원정보 수정</a></li>
+					  <li><a href="<%=tPath%>/member/grant.jsp" target="content">권한 수정</a></li>
+					  <li><a href="<%=tPath%>/member/delete.jsp" target="content">회원삭제</a></li>
+					  <li><a href="<%=tPath%>/member/logout.jsp">로그아웃</a></li>
+					</div>
+					<div id="user" style="display:block">
+					  <li><a href="<%=tPath%>/member/update.jsp" target="content">회원정보 수정</a></li>
+					  <li><a href="<%=tPath%>/member/logout.jsp">로그아웃</a></li>
+					</div>
+				 </ul>	 
 				 <a data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
 				   	<p style="font-weight: bold; text-transform: uppercase;">기준정보관리</p>
 				 </a>
 				 <ul class="collapse show" id="collapse2">
-					  <li><a href="<%=tPath%>/주소" target="content">1</a></li>
-					  <li><a href="<%=tPath%>/주소" target="content">2</a></li>
+					  <li><a href="<%=tPath%>/plans/planOrder.jsp" target="content">작업지시등록</a></li>
+					  <li><a href="<%=tPath%>/plans/planView.jsp" target="content">작업지시조회</a></li>
 					  <li><a href="<%=tPath%>/주소" target="content">3</a></li>
 				 </ul>
 				 <a data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
@@ -85,20 +97,28 @@
 				 </a>
 				 <ul class="collapse show" id="collapse3">
 					  <li><a href="<%=tPath%>/QC/list.jsp" target="content">품질 관리</a></li>
-					  <li><a href="<%=tPath%>/monitoring.jsp" target="content">모니터링</a></li>
+					  <li><a href="<%=tPath%>/monitoring/monitoring.jsp" target="content">모니터링</a></li>
 				 </ul>
 				 <a data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
 				   	<p style="font-weight: bold; text-transform: uppercase;">데이터전송</p>
 				 </a>
 				 <ul class="collapse show" id="collapse4">
-					  <li><a href="<%=tPath%>/download_csv.jsp" target="content">에러데이터 다운</a></li>
-					  <li><a href="<%=tPath%>/download_csv2.jsp" target="content">양품데이터 다운</a></li>
-					  <li><a href="javascript:void(0);" onclick="openPopup('<%=tPath%>/add_data.jsp')">데이터 삽입</a></li>  
+					  <li><a href="<%=tPath%>/datalog/download_csv.jsp" target="content">에러데이터 다운</a></li>
+					  <li><a href="<%=tPath%>/datalog/download_csv2.jsp" target="content">양품데이터 다운</a></li>
+					  <li><a href="javascript:void(0);" onclick="openPopup('<%=tPath%>/datalog/add_data.jsp')">에러데이터 삽입</a></li>
+					  <li><a href="javascript:void(0);" onclick="openPopup('<%=tPath%>/datalog/add_data2.jsp')">양품데이터 삽입</a></li> 
 				 </ul>
 		  </div>
 	</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script type="text/javascript">
+		if ("<%=role%>" == "admin"){
+			document.getElementById("user").style.display = 'none';
+		};
+		if ("<%=role%>" == "user"){
+			document.getElementById("admin").style.display = 'none';
+		};
+		
 		const clock = document.getElementById("time")
 		function getClock(){
 	 		const d = new Date();
@@ -111,14 +131,12 @@
 		setInterval(getClock, 1000);	
 		
 		function openPopup(url) {
-	        var width = 800;
-	        var height = 600;
-	        var left = (window.innerWidth - width) / 2;
-	        var top = (window.innerHeight - height) / 2;
-	        var options = `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes`;
-
-	        window.open(url, 'popupWindow', options);
-	    }
+	        var width = 400;
+	        var height = 300;
+	        var left = (window.screen.width - width) / 2;
+	        var top = (window.screen.height - height) / 2;
+	        window.open(url, "_blank", "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+		}
 </script>
 </body>
 </html>

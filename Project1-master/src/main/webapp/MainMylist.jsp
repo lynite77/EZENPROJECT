@@ -6,7 +6,7 @@
 <jsp:useBean id="qMgr" class="Spring.QualityDAO"/>
 <%	
 	request.setCharacterEncoding("UTF-8");
-	String id = (String)session.getAttribute("idKey");
+	int memberCode = (int)session.getAttribute("worker");
 	
 	int totalRecord=0;		// 전체레코드수
 	int numPerPage=100;		// 페이지당 레코드 수 
@@ -26,7 +26,7 @@
 	String before = LocalDate.now().toString();
 	String after =  LocalDate.now().toString();
 	String keyField = "TEMPORARY";
-	String keyWord = qMgr.findmember(Integer.valueOf(id));
+	String keyWord = qMgr.findmember(memberCode);
 
 	Vector<QualityBean> vlist = null;
 	if (request.getParameter("keyWord") != null) {

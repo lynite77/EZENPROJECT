@@ -60,7 +60,7 @@
 				<tr>
 					<td colspan="2">
 						<div align="right">
-							<input type="button" value="로그인" onclick="loginCheck()">&nbsp;
+							<input type="submit" value="로그인" onclick="loginCheck()">&nbsp;
 							<input type="button" value="회원가입"
 								onClick="javascript:location.href='member.jsp'">
 						</div>

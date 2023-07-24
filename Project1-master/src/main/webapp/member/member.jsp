@@ -16,17 +16,6 @@
 		url = "idCheck.jsp?id=" + id;
 		window.open(url, "IDCheck", "width=300,height=150");
 	}
-	
-	function codeCheck(code) {
-		frm = document.regFrm;
-		if (code == "") {
-			alert("사원번호를 입력해 주세요.");
-			frm.code.focus();
-			return;
-		}
-		url = "codeCheck.jsp?code=" + code;
-		window.open(url, "CODECheck", "width=300,height=150");
-	}
 </script>
 </head>
 <body bgcolor="" onLoad="regFrm.id.focus()">
@@ -100,13 +89,7 @@
 								<td><input type="email" name="email" size="20"></td>
 							</tr>
 							<tr>
-								<td>사원번호</td>
-								<td width="50%"><input name="code" size="6" maxlength="4">
-									<input type="button" value="사원번호 중복확인"
-									onClick="codeCheck(this.form.code.value)"></td>
-							</tr>
-							<tr>
-								<td colspan="3" align="center"><input type="button"
+								<td colspan="3" align="center"><input type="submit"
 									value="회원가입" onclick="inputCheck(); rrn(); tel();"> &nbsp;
 									&nbsp; <input type="reset" value="다시쓰기"> &nbsp; &nbsp;
 									<input type="button" value="로그인"

@@ -16,7 +16,7 @@ if (role == null) {
     <head>
         <title>회원 삭제</title>
     </head>
-    <body>
+    <body align="center">
         <h1>회원 삭제</h1>
         <p>삭제하려는 회원의 아이디와 관리자 비밀번호를 입력해주세요.</p>
         <form method="post" action="deleteProc.jsp">

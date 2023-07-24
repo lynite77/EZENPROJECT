@@ -15,17 +15,6 @@
 		url = "zipSearch.jsp?search=no";
 		window.open(url, "ZipCodeSearch","width=500,height=300,scrollbars=yes");
 	}
-	
-	function codeCheck(code) {
-		frm = document.regFrm;
-		if (code == "") {
-			alert("사원번호를 입력해 주세요.");
-			frm.code.focus();
-			return;
-		}
-		url = "codeCheck.jsp?code=" + code;
-		window.open(url, "CODECheck", "width=300,height=150");
-	}
 </script>
 </head>
 <body bgcolor="" onload="document.getElementsByName('regFrm')[0].id.focus()">
@@ -91,12 +80,6 @@
 							<tr>
 								<td>상세주소</td>
 								<td><input name="address" size="35"></td>
-							</tr>
-							<tr>
-								<td>사원번호</td>
-								<td width="50%"><input name="code" size="6" maxlength="4">
-									<input type="button" value="사원번호 중복확인"
-									onClick="codeCheck(this.form.code.value)"></td>
 							</tr>
 							<tr>
 								<td colspan="3" align="center">						

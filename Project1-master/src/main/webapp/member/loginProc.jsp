@@ -7,6 +7,7 @@
     String pwd = request.getParameter("pwd");
     String url = "login.jsp";
     String msg = "로그인에 실패하였습니다.";
+    String tPath = request.getContextPath();
 
     MemberMgr memberMgr = new MemberMgr();
     String role = memberMgr.loginMember(id, pwd);
@@ -16,10 +17,10 @@
         session.setAttribute("role", role);
         if (role.equals("admin")) {
             msg = "관리자로 로그인하였습니다.";
-            url = "admin.jsp";
+            url = tPath + "/index.jsp";
         } else if (role.equals("user")) {
             msg = "사용자로 로그인하였습니다.";
-            url = "user.jsp";
+            url = tPath + "/index.jsp";
         } else {
         	msg = "게스트로 로그인하였습니다.";
             url = "guest.jsp";

@@ -3,6 +3,9 @@ window.addEventListener('DOMContentLoaded', event => {
     
     const datatablesSimple = document.getElementById('datatablesSimple');
     if (datatablesSimple) {
-        new simpleDatatables.DataTable(datatablesSimple);
+        const inputElement = document.getElementById('productCode');
+        new simpleDatatables.DataTable(datatablesSimple, {
+            searchInput: inputElement
+        });
     }
 });

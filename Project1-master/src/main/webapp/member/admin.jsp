@@ -18,11 +18,8 @@ if (role == null) {
     <head>
         <title>관리자 페이지</title>
     </head>
-    <body>
+    <body align="center">
         <h1>관리자 페이지</h1>
-        <p>제한된 기능을 사용할 수 있습니다.<p/>
-        <a href="<%=tPath %>/index.jsp">일하러가자</a>&nbsp;&nbsp;
-        <a href="logout.jsp">로그아웃</a>&nbsp;&nbsp;
         <a href="update.jsp">회원정보 수정</a>&nbsp;&nbsp;
         <a href="grant.jsp">권한 수정</a>&nbsp;&nbsp;
         <a href="delete.jsp">회원삭제</a>

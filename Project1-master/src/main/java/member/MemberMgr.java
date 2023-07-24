@@ -31,7 +31,7 @@ public class MemberMgr {
         boolean flag = false;
         try {
             con = pool.getConnection();
-            sql = "SELECT id FROM memuser WHERE id = ?";
+            sql = "SELECT id FROM member_info WHERE id = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
@@ -44,6 +44,30 @@ public class MemberMgr {
         return flag;
     }
 
+	// 사원 코드 찾기
+    public int findCode(String id) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = null;
+        int mcode = 0;
+        try {
+            con = pool.getConnection();
+            sql = "SELECT member_code FROM member_info WHERE id = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+            	mcode = rs.getInt("member_code");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            pool.freeConnection(con, pstmt, rs);
+        }
+        return mcode;
+    }
+    
     // CODE 중복확인
     public boolean checkCode(String code) {
         Connection con = null;
@@ -53,7 +77,7 @@ public class MemberMgr {
         boolean flag = false;
         try {
             con = pool.getConnection();
-            sql = "SELECT code FROM memuser WHERE code = ?";
+            sql = "SELECT member_code FROM member_info WHERE member_code = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, code);
             rs = pstmt.executeQuery();
@@ -82,7 +106,7 @@ public class MemberMgr {
             }
 
             // 중복되지 않은 ID인 경우, 회원 가입 처리
-            sql = "insert into memuser (ID,PWD,NAME,RRN,TEL,EMAIL,CODE) values (?, ?, ?, ?, ?, ?, ?)";
+            sql = "insert into member_info (ID,PWD,member_NAME,RRN,TEL,EMAIL,member_CODE) values (?, ?, ?, ?, ?, ?, MEMBER_CODE_GET('now'))";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, bean.getId());
             pstmt.setString(2, bean.getPwd());
@@ -90,7 +114,6 @@ public class MemberMgr {
             pstmt.setString(4, bean.getRrn1() + "-" + bean.getRrn2());
             pstmt.setString(5, bean.getTel1() + "-" + bean.getTel2() + "-" + bean.getTel3());
             pstmt.setString(6, bean.getEmail());
-            pstmt.setString(7, bean.getCode());
             if (pstmt.executeUpdate() == 1)
                 flag = true;
         } catch (Exception e) {
@@ -111,7 +134,7 @@ public class MemberMgr {
 
         try {
             con = pool.getConnection();
-            sql = "SELECT role FROM memuser WHERE id = ? AND pwd = ?";
+            sql = "SELECT role FROM member_info WHERE id = ? AND pwd = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, id);
             pstmt.setString(2, pwd);
@@ -135,7 +158,7 @@ public class MemberMgr {
         MemberBean bean = null;
         try {
             con = pool.getConnection();
-            String sql = "select * from memuser where id = ?";
+            String sql = "select * from member_info where id = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
@@ -143,11 +166,11 @@ public class MemberMgr {
                 bean = new MemberBean();
                 bean.setId(rs.getString("id"));
                 bean.setPwd(rs.getString("pwd"));
-                bean.setName(rs.getString("name"));
+                bean.setName(rs.getString("member_name"));
                 bean.setRrn1(rs.getString("rrn"));
                 bean.setTel3(rs.getString("tel"));
                 bean.setEmail(rs.getString("email"));
-                bean.setCode(rs.getString("code"));
+                bean.setCode(rs.getString("member_code"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -164,13 +187,12 @@ public class MemberMgr {
         boolean flag = false;
         try {
             con = pool.getConnection();
-            String sql = "update memuser set pwd=?, tel=?, email=?, code=? where id = ?";
+            String sql = "update member_info set pwd=?, tel=?, email=? where id = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, bean.getPwd());
             pstmt.setString(2, bean.getTel1() + "-" + bean.getTel2() + "-" + bean.getTel3());
             pstmt.setString(3, bean.getEmail());
-            pstmt.setString(4, bean.getCode());
-            pstmt.setString(5, bean.getId());
+            pstmt.setString(4, bean.getId());
             int count = pstmt.executeUpdate();
             if (count > 0)
                 flag = true;
@@ -191,7 +213,7 @@ public class MemberMgr {
 
         try {
             con = pool.getConnection();
-            String sql = "SELECT role FROM memuser WHERE id = ?";
+            String sql = "SELECT role FROM member_info WHERE id = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
@@ -224,7 +246,7 @@ public class MemberMgr {
             String role = getRole(targetId);
             if (role != null && role.equals("admin")) {
                 // admin 권한을 가진 계정만 권한을 부여할 수 있도록 함
-                sql = "UPDATE memuser SET role = ? WHERE id = ?";
+                sql = "UPDATE member_info SET role = ? WHERE id = ?";
                 pstmt = con.prepareStatement(sql);
                 pstmt.setString(1, permission);
                 pstmt.setString(2, targetId);
@@ -256,7 +278,7 @@ public class MemberMgr {
             if (role != null) {
                 // 현재 사용자의 권한과 변경할 권한이 다를 경우에만 권한 변경
                 if (!role.equals(newPermission)) {
-                    String sql = "UPDATE memuser SET role = ? WHERE id = ?";
+                    String sql = "UPDATE member_info SET role = ? WHERE id = ?";
                     pstmt = con.prepareStatement(sql);
                     pstmt.setString(1, newPermission);
                     pstmt.setString(2, targetUsername);
@@ -285,13 +307,13 @@ public class MemberMgr {
 
         try {
             con = pool.getConnection();
-            String sql = "SELECT id, name, email, role FROM memuser";
+            String sql = "SELECT id, member_name, email, role FROM member_info";
             pstmt = con.prepareStatement(sql);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 MemberBean bean = new MemberBean();
                 bean.setId(rs.getString("id"));
-                bean.setName(rs.getString("name"));
+                bean.setName(rs.getString("member_name"));
                 bean.setEmail(rs.getString("email"));
                 bean.setRole(rs.getString("role"));
                 memberList.add(bean);
@@ -313,7 +335,7 @@ public class MemberMgr {
 
         try {
             con = pool.getConnection();
-            String sql = "DELETE FROM memuser WHERE id = ?";
+            String sql = "DELETE FROM member_info WHERE id = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, id);
             int rowsDeleted = pstmt.executeUpdate();

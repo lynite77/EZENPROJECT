@@ -42,11 +42,6 @@ function inputCheck() {
 		document.regFrm.email.focus();
 		return;
 	}
-	if (document.regFrm.code.value == "") {
-		alert("사원번호를 입력해 주세요.");
-		document.regFrm.code.focus();
-		return;
-	}
 	var str = document.regFrm.email.value;
 	var atPos = str.indexOf('@');
 	var atLastPos = str.lastIndexOf('@');
@@ -56,7 +51,8 @@ function inputCheck() {
 	var eMailSize = str.length;
 	if (atPos > 1 && atPos == atLastPos &&
 		dotPos > 3 && spacePos == -1 && commaPos == -1
-		&& atPos + 1 < dotPos && dotPos + 1 < eMailSize);
+		&& atPos + 1 < dotPos && dotPos + 1 < eMailSize){
+		}
 	else {
 		alert('E-mail주소 형식이 잘못되었습니다.\n\r다시 입력해 주세요!');
 		document.regFrm.email.focus();

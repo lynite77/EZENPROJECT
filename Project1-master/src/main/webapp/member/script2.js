@@ -35,12 +35,6 @@ function inputCheck() {
 		frm.elements['email'].focus();
 		return;
 	}
-	if (code === "") {
-		alert("사원번호를 입력해 주세요.");
-		frm.elements['code'].focus();
-		return;
-	}
-
 	var str = email;
 	var atPos = str.indexOf('@');
 	var atLastPos = str.lastIndexOf('@');

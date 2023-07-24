@@ -2,6 +2,7 @@
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
+// 제품별 불량현황
 // Area Chart Example
 function chartErrorLogs(pname, eptot) {
     var labels = [];

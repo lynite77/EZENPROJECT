@@ -6,33 +6,33 @@
 <%@ page import="javax.servlet.http.HttpServletResponse" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Spring.monitoringDAO" %>
-<%@ page import="bean.ErrorLog" %>
+<%@ page import="bean.Gproduct" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- 양품데이터 다운로드 -->
+<!-- 상품 데이터 다운로드 -->
 <%
 // 데이터베이스 연결 및 데이터 조회
 try {
-
-    monitoringDAO errorLogDAO = new monitoringDAO();
-    List<ErrorLog> errorLogs = errorLogDAO.getAllErrorLogs();
+    monitoringDAO productDAO = new monitoringDAO();
+    List<Gproduct> products = productDAO.getAllGProducts();
     
- 	// CSV 파일 생성
+    // CSV 파일 생성
     response.setContentType("text/csv");
-    response.setHeader("Content-Disposition", "attachment; filename=\"Good_log.csv\"");
+    response.setHeader("Content-Disposition", "attachment; filename=\"GProduct_log.csv\"");
     PrintWriter writer = response.getWriter();
-    writer.println("상품코드,상품명,에러코드,에러명,에러수량,에러발생날짜");
+    writer.println("상품코드,상품명,색상,사이즈,길이,가격,상품정보");
     
-    // 오류 로그 데이터 출력
-    for (ErrorLog errorLog : errorLogs) {
-        String productCode = errorLog.getProductCode();
-        String productName = errorLog.getProductName();
-        String errorCode = errorLog.getErrorCode();
-        String errorName = errorLog.getErrorName();
-        int errorQuantity = errorLog.getErrorQuantity();
-        String errorDate = errorLog.getErrorDate();
+    // 상품 데이터 출력
+    for (Gproduct product : products) {
+        String productCode = product.getProductCode();
+        String productName = product.getProductName();
+        String productColor = product.getProductColor();
+        String productSize = product.getProductSize();
+        String productLength = product.getProductLength();
+        String productPrice = product.getProductPrice();
+        String productInfo = product.getProductInfo();
         
-        writer.println(productCode + "," + productName + "," + errorCode + "," + errorName + "," + errorQuantity + "," + errorDate);
+        writer.println(productCode + "," + productName + "," + productColor + "," + productSize + "," + productLength + "," + productPrice + "," + productInfo);
     }
     writer.close();
 } catch (Exception e) {

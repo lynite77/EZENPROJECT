@@ -18,7 +18,7 @@ if (role == null) {
     <head>
         <title>관리자 페이지</title>
     </head>
-    <body> 
+    <body align="center"> 
         <h2>권한 부여</h2>
         <form method="post" action="grant-permission.jsp">
             <label for="username">계정 아이디:</label>

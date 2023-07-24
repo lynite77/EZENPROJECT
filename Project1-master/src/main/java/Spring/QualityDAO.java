@@ -365,8 +365,8 @@ public class QualityDAO {
 		 			bean.setMEMBER_NAME (rs.getString("member_name"));			
 		 			bean.setQUALITY_DATE (rs.getString("check_date"));
 					bean.setPRODUCT_NAME (rs.getString("product_name"));
-		 			bean.setMEMBER_LEVEL (rs.getString("MEMBER_LEVEL"));
-		 			bean.setPASSWORD (rs.getString("PASSWORD"));
+		 			bean.setMEMBER_LEVEL (rs.getString("role"));
+		 			bean.setPASSWORD (rs.getString("pwd"));
 		 			bean.setREGDATE (rs.getString("REGDATE"));
 		 			bean.setPRODUCT_INFO (rs.getString("PRODUCT_INFO"));
 		 			bean.setORDER_COUNT (rs.getInt("ORDER_COUNT"));
@@ -407,12 +407,12 @@ public class QualityDAO {
 					String pwd = null;
 						try {
 							con = pool.getConnection();
-							sql = "select password from member_info where member_code = ?";
+							sql = "select pwd from member_info where member_code = ?";
 							pstmt = con.prepareStatement(sql);
 							pstmt.setInt(1, member_code);
 							rs = pstmt.executeQuery();
 							if (rs.next()) {
-								pwd = rs.getString("password");
+								pwd = rs.getString("pwd");
 							}
 						} 
 						catch (Exception e) {

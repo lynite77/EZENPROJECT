@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>제품등록 페이지</title>
+	<link href="../CSS/pstyles.css" rel="stylesheet" />
+    <script>
+        function registerProduct() {
+            // 입력된 데이터 가져오기
+            var productCode = document.getElementById("productCode").value;
+            var productName = document.getElementById("productName").value;
+            var productManager = document.getElementById("productManager").value;
+            var materialCodes = [];
+            var materialCodeInputs = document.getElementsByClassName("materialCode");
+            for (var i = 0; i < materialCodeInputs.length; i++) {
+                materialCodes.push(materialCodeInputs[i].value);
+            }
+
+            // 서버로 데이터 전송 (AJAX 요청 등)
+            // 작업지시 등록 로직을 서버에서 수행
+            // 등록 결과에 따라 알림창 또는 메시지를 표시
+            alert("등록 완료되었습니다.");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="grid1">제품등록 페이지</h1>
+        <form>
+            <label for="productCode">제품코드:</label>
+            <input type="text" id="productCode" required>
+            <label for="productName">제품명:</label>
+            <input type="text" id="productName" required>
+            <label for="productManager">관리자:</label>
+            <input type="text" id="productManager" required>
+            <label for="materialCodes">자재코드:</label>
+            <input type="text" class="materialCode" required>
+            <input type="text" class="materialCode" required>
+            <input type="text" class="materialCode" required>
+            <br>
+            <button type="button" onclick="registerProduct()">
+            <a href="registerconfirm.htm">등록</a></button>
+        </form>
+    </div>
+</body>
+</html>

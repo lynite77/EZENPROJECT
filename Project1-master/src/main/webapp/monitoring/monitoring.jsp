@@ -26,11 +26,11 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Monitoring</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-    <link href="./CSS/styles.css" rel="stylesheet" />
+    <link href="../CSS/styles.css" rel="stylesheet" />
 </head>
 <body class="maincontent">
     <main>
@@ -187,11 +187,11 @@
             </div>
         </div>
     </main>
-    <script src="chart/area1.js"></script>
-    <script src="chart/area2.js"></script>
-    <script src="chart/bar.js"></script>
-    <script src="chart/pie.js"></script>
-    <script src="js/datatables.js"></script>
+    <script src="../chart/area1.js"></script>
+    <script src="../chart/area2.js"></script>
+    <script src="../chart/bar.js"></script>
+    <script src="../chart/pie.js"></script>
+    <script src="../js/datatables.js"></script>
     <script>    	
 		var petot = <%=petot%>;
 		var etot = <%=etot%>;

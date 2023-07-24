@@ -23,7 +23,7 @@
     String adminPassword = request.getParameter("adminPassword");
 
     // 관리자 비밀번호 확인
-    String expectedAdminPassword = "1234"; // 실제 관리자 비밀번호로 바꿔주세요
+    String expectedAdminPassword = "admin"; // 실제 관리자 비밀번호로 바꿔주세요
     if (!adminPassword.equals(expectedAdminPassword)) {
         // 만약 관리자 비밀번호가 올바르지 않으면, 오류 메시지를 보여줍니다
         %>

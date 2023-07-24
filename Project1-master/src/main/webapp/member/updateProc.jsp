@@ -14,7 +14,7 @@
     String email = request.getParameter("email");
     String zipcode = request.getParameter("zipcode");
     String address = request.getParameter("address");
-    String code = request.getParameter("code");
+    String code = request.getParameter("member_code");
 
     MemberBean bean = new MemberBean();
     bean.setId(loggedInId);
@@ -23,8 +23,6 @@
     bean.setTel2(tel2);
     bean.setTel3(tel3);
     bean.setEmail(email);
-    bean.setZipcode(zipcode);
-    bean.setAddress(address);
     bean.setCode(code);
 
     MemberMgr mMgr = new MemberMgr();
