@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,14 +14,13 @@ public class PAddDataServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 폼 데이터 추출
-        String productCode = request.getParameter("productCode");
+    	String productCode = request.getParameter("productCode");
         String productName = request.getParameter("productName");
         String productColor = request.getParameter("productColor");
         String productSize = request.getParameter("productSize");
         String productLength = request.getParameter("productLength");
         String productPrice = request.getParameter("productPrice");
         String productInfo = request.getParameter("productInfo");
-
         
         // 데이터베이스 연결 및 데이터 추가
         try {

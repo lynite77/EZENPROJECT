@@ -192,7 +192,12 @@
     <script src="../chart/bar.js"></script>
     <script src="../chart/pie.js"></script>
     <script src="../js/datatables.js"></script>
-    <script>    	
+    <script>    
+	    // 10초마다 새로고침
+    	setInterval(function() {
+	    	location.reload();
+	    }, 60000);
+    
 		var petot = <%=petot%>;
 		var etot = <%=etot%>;
 		var tot = petot + <%=etot%>;

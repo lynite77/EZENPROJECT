@@ -142,7 +142,7 @@ public class monitoringDAO {
             
             // 데이터 조회
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT DISTINCT P_NAME, COUNT(*) OVER(PARTITION BY P_NAME) as PTOT FROM PRODUCT WHERE P_NAME IN ('여름 반팔A','여름 반팔B', '여름 반팔C')");
+            ResultSet resultSet = statement.executeQuery("SELECT DISTINCT P_NAME, COUNT(*) OVER(PARTITION BY P_NAME) as PTOT FROM PRODUCT");
             
             // 결과 처리
             while (resultSet.next()) {
@@ -184,7 +184,7 @@ public class monitoringDAO {
             
             // 데이터 조회
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT DISTINCT P_NAME, COUNT(*) OVER(PARTITION BY E_NAME) as EPTOT FROM ERROR_LOG WHERE P_NAME IN ('여름 반팔A','여름 반팔B', '여름 반팔C','여름 반바지B','어린이 반팔B','어린이 반바지B','여름 원피스B')");
+            ResultSet resultSet = statement.executeQuery("SELECT DISTINCT P_NAME, COUNT(*) OVER(PARTITION BY E_NAME) as EPTOT FROM ERROR_LOG");
             
             // 결과 처리
             while (resultSet.next()) {
@@ -228,7 +228,7 @@ public class monitoringDAO {
             
             // 데이터 조회
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT SUM(PTOT) as PETOT FROM (SELECT DISTINCT P_NAME, COUNT(*) OVER(PARTITION BY P_NAME) as PTOT FROM PRODUCT WHERE P_NAME IN ('여름 반팔A','여름 반팔B', '여름 반팔C'))");
+            resultSet = statement.executeQuery("SELECT SUM(PTOT) as PETOT FROM (SELECT DISTINCT P_NAME, COUNT(*) OVER(PARTITION BY P_NAME) as PTOT FROM PRODUCT)");
             
             // 결과 처리
             while (resultSet.next()) {

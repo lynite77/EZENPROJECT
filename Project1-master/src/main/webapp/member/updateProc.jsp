@@ -12,8 +12,6 @@
     String tel3 = request.getParameter("tel3");
     String tel = tel1 + "-" + tel2 + "-" + tel3;
     String email = request.getParameter("email");
-    String zipcode = request.getParameter("zipcode");
-    String address = request.getParameter("address");
     String code = request.getParameter("member_code");
 
     MemberBean bean = new MemberBean();

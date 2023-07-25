@@ -1,0 +1,17 @@
+body {
+		min-height: 400px;
+	}
+	table {	
+		line-height: center;
+		text-align: center;
+		width: 100%;
+		border-collapse: collapse;
+		background-color: #232325;
+	}
+	tr, td {
+		border: 1px solid #FFFFFF;
+	}
+	td {
+		height: 400px;
+	}
+	

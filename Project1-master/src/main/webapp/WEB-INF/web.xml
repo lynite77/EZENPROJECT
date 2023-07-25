@@ -35,6 +35,16 @@
 		<servlet-name>PAddDataServlet</servlet-name>
 		<url-pattern>/PAddDataServlet</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PUploadServlet</servlet-name>
+		<servlet-class>servlet.PUploadServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>PUploadServlet</servlet-name>
+		<url-pattern>/PUploadServlet</url-pattern>
+	</servlet-mapping>
 	
 	<!-- 작업지시 -->
 	<servlet>

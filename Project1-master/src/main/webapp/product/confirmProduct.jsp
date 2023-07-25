@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!-- 등록된 제품 리스트 > 내꺼 양품리스트랑 연동하기 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>

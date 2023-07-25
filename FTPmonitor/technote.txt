@@ -1,9 +1,0 @@
-Severs에서 현재 사용하고있는 server - context.xml에 추가
-
-<Resource name="jdbc/your_datasource_name" auth="Container" type="javax.sql.DataSource"
-           maxTotal="100" maxIdle="30" maxWaitMillis="10000"
-           driverClassName="oracle.jdbc.driver.OracleDriver"
-           url="jdbc:oracle:thin:@localhost:1521:xe"
-           username="HELLOUSER" password="HELLOUSER" />
-           
-현재 나는 Tomcat을 사용하고 있으니, Tomcat v8.5.84-config - context.xml에 추가하기 

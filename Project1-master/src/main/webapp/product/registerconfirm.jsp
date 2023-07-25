@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
+	<!-- 위치 절대값줘서 정리 -->
 	<div class="container400">
         <div class="grid1"><h2 class="c1">제품 등록 확인</h2></div>
         <div class="form-group">
@@ -25,6 +26,7 @@
             <button onclick="getProduct()">조회</button>
         </div>
     </div>
+    
 	<div class="card-body">
 		<table id="datatablesSimple">
 			<thead>
@@ -57,7 +59,7 @@
 					    <td><%= gproduct.getProductColor()%></td>
 						<td><%= gproduct.getProductSize()%></td>
 						<td><%= gproduct.getProductLength()%></td>
-						<td><span class="badge badge-success w-75 py-2"><%= gproduct.getProductPrice()%></span></td>
+						<td><%= gproduct.getProductPrice()%></td>
 						<%
 							// getProductInfo() 값에 따라 badge 스타일을 지정합니다.
 							String productInfo = gproduct.getProductInfo();
