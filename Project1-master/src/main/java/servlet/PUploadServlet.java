@@ -4,64 +4,105 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.DriverManager;
 import java.sql.SQLException;
-import database.OracleConnector; // OracleConnector 클래스 import
+import java.sql.PreparedStatement;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
-@WebServlet("/PUploadServlet")
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.FileItemIterator;
+
+import Spring.monitoringDAO;
+import bean.ErrorLog;
+
 public class PUploadServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html; charset=UTF-8");
-
-        // 데이터베이스 연결 정보
-        String dbUrl = "jdbc:oracle:thin:@localhost:1521:xe";
-        String dbUsername = "HELLOUSER";
-        String dbPassword = "HELLOUSER";
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 데이터베이스 연결
         try {
-            // CSV 파일 업로드 처리
-            Part filePart = request.getPart("file");
-            InputStream fileContent = filePart.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(fileContent));
-            String line;
+            // 파일 업로드 처리
+            uploadFile(request);
 
-            // Oracle 데이터베이스 연결
-            Connection connection = OracleConnector.getConnection();
-            
-            // CSV 파일 데이터 처리
-            String query = "INSERT INTO error_log (product_code, product_name, error_code, error_name, error_quantity, error_date) VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement statement = connection.prepareStatement(query);
-            while ((line = reader.readLine()) != null) {
-                String[] data = line.split(",");
-                if (data.length == 6) {
-                    statement.setString(1, data[0]);
-                    statement.setString(2, data[1]);
-                    statement.setString(3, data[2]);
-                    statement.setString(4, data[3]);
-                    statement.setInt(5, Integer.parseInt(data[4]));
-                    statement.setDate(6, java.sql.Date.valueOf(data[5]));
-                    statement.executeUpdate();
-                }
+            // 데이터베이스 연결 및 처리
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "HELLOUSER", "HELLOUSER");
+            saveDataToDatabase(connection, request.getInputStream());
+            connection.close();
+
+            response.getWriter().println("CSV 파일 업로드 및 데이터베이스 저장이 완료되었습니다.");
+        } catch (Exception e) {
+            response.getWriter().println("오류 발생: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void uploadFile(HttpServletRequest request) throws Exception {
+        // Multipart 요청을 처리하여 CSV 파일 업로드
+        if (ServletFileUpload.isMultipartContent(request)) {
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            FileItemIterator iter = upload.getItemIterator(request);
+
+            // 파일의 첫 번째 라인(목록명) 무시
+            if (iter.hasNext()) {
+                iter.next();
             }
 
-            statement.close();
-            OracleConnector.closeConnection(); // 데이터베이스 연결 종료
+            while (iter.hasNext()) {
+                FileItemStream item = iter.next();
+                String name = item.getFieldName();
+                InputStream stream = item.openStream();
 
-            response.getWriter().println("데이터 업로드가 완료되었습니다.");
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.getWriter().println("데이터 업로드 중 오류가 발생했습니다.");
+                if (!item.isFormField() && name.equals("csvFile")) {
+                    // 파일을 저장하거나 처리하는 로직 추가 가능 (생략)
+                }
+            }
         }
+    }
+
+    
+    // CSV 파일을 파싱하여 데이터베이스에 저장하는 함수
+    private void saveDataToDatabase(Connection connection, InputStream inputStream) throws Exception {
+    	BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "EUC-KR"));
+        String line;
+        int petot = 0;
+        int etot = 0;
+        monitoringDAO errorLogDAO = new monitoringDAO();
+        int lineNumber = 2; // 데이터가 시작되는 라인 번호
+        while ((line = reader.readLine()) != null) {
+            if (lineNumber == 2) {
+                // 첫 번째 데이터인 경우에만 로그 출력
+                System.out.println("Data processing started...");
+            }
+            String[] data = line.split(",");
+            
+            if (data.length >= 5) {
+                String productCode = data[0];
+                String productName = data[1];
+                String errorCode = data[2];
+                String errorName = data[3];
+                int errorQuantity = Integer.parseInt(data[4]);
+                String errorDate = data[5];
+
+                // 데이터베이스에 저장
+                ErrorLog errorLog = new ErrorLog(productCode, productName, errorCode, errorName, errorQuantity, errorDate, petot, etot);
+                errorLogDAO.addErrorLog(errorLog);
+            } else {
+                // 데이터가 6개 열이 아닌 경우는 무시하고 다음 라인으로 넘어감
+                System.out.println("Invalid data format at line " + lineNumber + ": " + line);
+            }
+            
+            lineNumber++;
+        }
+        reader.close();
     }
 }

@@ -1,104 +1,120 @@
 package plans;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import plans.PlanVO;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+
+import bean.QualityBean;
+import database.DBConnectionMgr;
+import product.ProductVO;
 
 public class PlanDao {
-    DataSource dataSource = null;
-    Connection conn = null;
-    Statement stmt = null;
-    ResultSet rs = null;
-
-    public PlanDao(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-    
-    public PlanDao() {
-        try {
-            // 데이터베이스 연결 설정은 Context를 이용하여 DataSource를 직접 생성합니다.
-            Context context = new InitialContext();
-            this.dataSource = (DataSource) context.lookup("java:comp/env/jdbc/your_datasource_name");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("MonitoringDAO() : dataSource=" + (dataSource != null));
-    }
-
+	private JdbcTemplate jdbcTemplate;
+	
+	private DBConnectionMgr pool;
+	
+	public PlanDao(DataSource dataSource) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}	
+	
     // 메소드: 선택한 값들을 데이터베이스에 저장하는 기능
     public void saveSelectedValues(PlanVO vo) {
-        System.out.printf("[WorkDao] saveSelectedValues: color(%s), size(%s), len(%s), num(%s)\n", vo.getColor(), vo.getSize(), vo.getLen(), vo.getNum());
-
-        try {
-            conn = this.dataSource.getConnection(); // DBMS 접속 객체를 얻음
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO plan (color, psize, len, num) VALUES (?, ?, ?, ?)");
-
-            pstmt.setString(1, vo.getColor());
-            pstmt.setString(2, vo.getSize());
-            pstmt.setString(3, vo.getLen());
-            pstmt.setString(4, vo.getNum());
-
-            pstmt.executeUpdate();
-            pstmt.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                System.out.println("[saveSelectedValues] connection exception: " + e.getMessage());
-            }
-        }
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement pstmt = con.prepareStatement("INSERT INTO  order_info (order_code, product_code, order_count, order_info) VALUES (ORDER_CODE_GET('now'),?, ?, ?)");			
+	            pstmt.setInt(1, findPCode(vo.getProductName()));
+	            pstmt.setInt(2, vo.getOrderCount());
+	            pstmt.setString(3, vo.getOrderInfo());
+				return pstmt;}
+		});
+   }
+    
+    public List<PlanVO> listAll() {
+        return jdbcTemplate.query("select * from orderview", planRowMapper());
     }
-
-    public List<PlanVO> getPlanlist() {
-        List<PlanVO> planlists = new ArrayList<>();
-
-        try {
-            conn = this.dataSource.getConnection(); // DBMS 접속 객체를 얻음
-            stmt = conn.createStatement(); // 쿼리(SQL)를 실행 할 수 있는 객체를 얻음
-            rs = stmt.executeQuery("SELECT * FROM plan"); // 쿼리(SQL)를 실행, 결과를 리턴
-
-            while (rs.next()) { // 결과셋에 데이터가 있으면 true
-                String color = rs.getString("COLOR");
-                String size = rs.getString("PSIZE");
-                String len = rs.getString("LEN");
-                String num = rs.getString("NUM");
-
-                PlanVO planlist = new PlanVO(color, size, len, num);
-                planlists.add(planlist);
-            }
-            // 연결 및 리소스 정리
-            rs.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                System.out.println("[getPlanlist] connection, statement exception: " + e.getMessage());
-            }
-        }
-
-        return planlists;
+    
+	private RowMapper<PlanVO> planRowMapper() { 
+    return (rs, rowNum) -> { 
+    	PlanVO vo = new PlanVO(); 
+        vo.setOrderCode(rs.getString("ORDER_CODE")); 
+        vo.setProductCode(rs.getInt("PRODUCT_CODE"));
+        vo.setOrderCount(rs.getInt("ORDER_COUNT"));
+        vo.setOrderInfo(rs.getString("ORDER_INFO"));
+        vo.setOrderDate(rs.getString("ORDER_DATE"));
+        vo.setProductName(rs.getString("PRODUCT_NAME"));
+		return vo;
+        };
     }
+	
+	public List<ProductVO> productNamelist() {
+        return jdbcTemplate.query("select * from product_info order by product_name", productRowMapper());
+    }
+    
+	private RowMapper<ProductVO> productRowMapper() { 
+    return (rs, rowNum) -> { 
+    	ProductVO vo = new ProductVO(); 
+        vo.setProductCode(rs.getInt("PRODUCT_CODE")); 
+        vo.setProductName(rs.getString("PRODUCT_NAME"));
+        vo.setProductColor(rs.getString("Product_COLOR"));
+        vo.setProductSize(rs.getString("PRODUCT_SIZE"));
+        vo.setProductLength(rs.getString("PRODUCT_LENGTH"));
+        vo.setProductPrice(rs.getInt("PRODUCT_PRICE"));
+        vo.setProductInfo(rs.getString("PRODUCT_INFO"));
+		return vo;
+        };
+    }
+	
+/*	public List<QualityBean> memberNamelist() {
+        return jdbcTemplate.query("select * from member_info where role !='guest' order by member_name", memberRowMapper());
+    }
+    
+	private RowMapper<QualityBean> memberRowMapper() { 
+    return (rs, rowNum) -> { 
+    	QualityBean vo = new QualityBean(); 
+        vo.setMEMBER_NAME(rs.getString("MEMBER_NAME"));
+        vo.setMEMBER_CODE(rs.getInt("MEMBER_CODE"));
+		return vo;
+        };
+    }*/
+	
+	public int findPCode(String name) {
+		PlanVO pname = new PlanVO();
+		jdbcTemplate.query(
+				"select product_code from product_info where product_name = ?",
+				new RowMapper<PlanVO>() {
+					@Override
+					public PlanVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+						pname.setProductCode(rs.getInt("product_code"));
+						return pname;
+					}
+				}, name);
+		return pname.getProductCode();
+	}
+	
+/*	public int findMCode(String name) {
+		PlanVO mname = new PlanVO();
+		jdbcTemplate.query(
+				"select member_code from member_info where member_name = ?",
+				new RowMapper<PlanVO>() {
+					@Override
+					public PlanVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+						mname.setMemberCode(rs.getInt("member_code"));
+						return mname;
+					}
+				}, name);
+		return mname.getMemberCode();
+	}*/
 }

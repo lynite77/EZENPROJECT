@@ -1,52 +1,77 @@
 package plans;
 
 public class PlanVO {
-    String color;
-    String size;
-    String len;
-    String num;
-
-    public PlanVO() {}
+	String orderCode;
+	int productCode;
+    String orderInfo;
+    int orderCount;
+    //int memberCode;
+    String orderDate;
+    //String memberName;
+    String productName;
     
-	public String getColor() {
-		return color;
+	/*public String getMemberName() {
+		return memberName;
 	}
 
-	public void setColor(String color) {
-		this.color = color;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}*/
+
+	public String getProductName() {
+		return productName;
 	}
 
-	public String getSize() {
-		return size;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
-	public void setSize(String size) {
-		this.size = size;
+	public String getOrderCode() {
+		return orderCode;
 	}
 
-	public String getLen() {
-		return len;
+	public void setOrderCode(String orderCode) {
+		this.orderCode = orderCode;
 	}
 
-	public void setLen(String len) {
-		this.len = len;
+	public int getProductCode() {
+		return productCode;
 	}
 
-	public String getNum() {
-		return num;
+	public void setProductCode(int productCode) {
+		this.productCode = productCode;
 	}
 
-	public void setNum(String num) {
-		this.num = num;
+	public String getOrderInfo() {
+		return orderInfo;
 	}
 
-	public PlanVO(String color, String size, String len, String num) {
-		this.color = color;
-		this.size = size;
-		this.len = len;
-		this.num = num;
+	public void setOrderInfo(String orderInfo) {
+		this.orderInfo = orderInfo;
 	}
-    
-    
+
+	public int getOrderCount() {
+		return orderCount;
+	}
+
+	public void setOrderCount(int orderCount) {
+		this.orderCount = orderCount;
+	}
+
+	/*public int getMemberCode() {
+		return memberCode;
+	}
+
+	public void setMemberCode(int memberCode) {
+		this.memberCode = memberCode;
+	}*/
+
+	public String getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
 
 }

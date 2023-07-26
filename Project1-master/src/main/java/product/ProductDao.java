@@ -15,6 +15,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
+import plans.PlanVO;
+
 public class ProductDao {
 
 	private JdbcTemplate jdbcTemplate;
@@ -22,8 +24,8 @@ public class ProductDao {
 	public ProductDao(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-
-	public ProductVO selectByCode(String code) {
+	
+	/*public ProductVO selectByCode(String code) {
 		List<ProductVO> results = jdbcTemplate.query(
 				"select * from product where code = ?",
 				new RowMapper<ProductVO>() {
@@ -39,32 +41,29 @@ public class ProductDao {
 				}, code);
 
 		return results.isEmpty() ? null : results.get(0);
-	}
+	}*/
 	
 	
-	public void update(ProductVO product) {
-		jdbcTemplate.update(
-				"UPDATE product SET pname = ?, manager = ?, register_date = sysdate where code = ?",
-				product.getProductName(), product.getProductManager(), product.getProductCode());
-	}
-	
-	public void insert(ProductVO product) {
-		System.out.println("[ProductDao] insert: " + product.toString());
-		
-		jdbcTemplate.update(new PreparedStatementCreator() {
-			@Override
-			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-				PreparedStatement pstmt = con.prepareStatement("insert into product (code, pname, manager, register_date) values (?, ?, ?, sysdate)");
-
-				// 인덱스 파라미터 값 설정
-				pstmt.setString(1, product.getProductCode());
-				pstmt.setString(2, product.getProductName());
-				pstmt.setString(3, product.getProductManager());
-				return pstmt;
-			}
-		});
-	}
-	
+	/*
+	 * public void update(ProductVO product) { jdbcTemplate.update(
+	 * "UPDATE product SET pname = ?, manager = ?, register_date = sysdate where code = ?"
+	 * , product.getProductName(), product.getProductManager(),
+	 * product.getProductCode()); }
+	 * 
+	 * public void insert(ProductVO product) {
+	 * System.out.println("[ProductDao] insert: " + product.toString());
+	 * 
+	 * jdbcTemplate.update(new PreparedStatementCreator() {
+	 * 
+	 * @Override public PreparedStatement createPreparedStatement(Connection con)
+	 * throws SQLException { PreparedStatement pstmt = con.
+	 * prepareStatement("insert into product (code, pname, manager, register_date) values (?, ?, ?, sysdate)"
+	 * );
+	 * 
+	 * // 인덱스 파라미터 값 설정 pstmt.setString(1, product.getProductCode());
+	 * pstmt.setString(2, product.getProductName()); pstmt.setString(3,
+	 * product.getProductManager()); return pstmt; } }); }
+	 */	
 
 	/*
 	public Member selectByEmail(String email) {

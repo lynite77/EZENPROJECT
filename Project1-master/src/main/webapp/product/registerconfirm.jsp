@@ -11,7 +11,6 @@
 <head>
     <title>제품 등록 확인</title>
 	<link href="../CSS/styles.css" rel="stylesheet" />
-	<link href="../CSS/bootstyles.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
 </head>
 <body>

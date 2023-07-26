@@ -1,41 +1,19 @@
 package product;
 
-import java.time.LocalDateTime;
-
 public class ProductVO {
-	private String productCode;
-	private String productName;
-	private String productManager;
-	private LocalDateTime register_Date;
+	private int productCode;
+    private String productName;
+    private String productColor;
+    private String productSize;
+    private String productLength;
+    private int productPrice;
+    private String productInfo;
+    
 	
-	public ProductVO() {}
-	
-	public ProductVO(String productCode, String productName, String productManager) {
-		this.productCode = productCode;
-		this.productName = productName;
-		this.productManager = productManager;
-	}
-	
-	public ProductVO(String productCode, String productName, String productManager, LocalDateTime register_Date) {
-		this.productCode = productCode;
-		this.productName = productName;
-		this.productManager = productManager;
-		this.register_Date = register_Date;
-	}
-	
-	
-	public LocalDateTime getRegister_Date() {
-		return register_Date;
-	}
-
-	public void setRegister_Date(LocalDateTime register_Date) {
-		this.register_Date = register_Date;
-	}
-
-	public String getProductCode() {
+    public int getProductCode() {
 		return productCode;
 	}
-	public void setProductCode(String productCode) {
+	public void setProductCode(int productCode) {
 		this.productCode = productCode;
 	}
 	public String getProductName() {
@@ -44,18 +22,34 @@ public class ProductVO {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public String getProductManager() {
-		return productManager;
+	public String getProductColor() {
+		return productColor;
 	}
-	public void setProductManager(String productManager) {
-		this.productManager = productManager;
+	public void setProductColor(String productColor) {
+		this.productColor = productColor;
 	}
-
-	@Override
-	public String toString() {
-		return "ProductVO [productCode=" + productCode + ", productName=" + productName + ", productManager="
-				+ productManager + ", register_Date=" + register_Date + "]";
+	public String getProductSize() {
+		return productSize;
 	}
-	
-	
+	public void setProductSize(String productSize) {
+		this.productSize = productSize;
+	}
+	public String getProductLength() {
+		return productLength;
+	}
+	public void setProductLength(String productLength) {
+		this.productLength = productLength;
+	}
+	public int getProductPrice() {
+		return productPrice;
+	}
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
+	}
+	public String getProductInfo() {
+		return productInfo;
+	}
+	public void setProductInfo(String productInfo) {
+		this.productInfo = productInfo;
+	}
 }

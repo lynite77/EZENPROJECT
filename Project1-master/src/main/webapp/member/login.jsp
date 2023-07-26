@@ -13,7 +13,8 @@
 <html>
 <head>
 <title>로그인</title>
-<link href="style.css" rel="stylesheet" type="text/css">
+<link href="../CSS/login-styles.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function loginCheck() {
 		if (document.loginFrm.id.value == "") {
@@ -29,11 +30,7 @@
 		document.loginFrm.submit();
 	}
 </script>
-</head>
-<body bgcolor="">
-	<div align="center">
-		<br /> <br />
-		<%
+<%
 		if (id != null) {
 			if (role != null && role.equals("admin")) {
 				response.sendRedirect("admin.jsp");
@@ -43,35 +40,47 @@
 				response.sendRedirect("guest.jsp");
 			}
 		} else {
-		%>
-		<form name="loginFrm" method="post" action="loginProc.jsp">
-			<table>
-				<tr>
-					<td align="center" colspan="2"><h4>로그인</h4></td>
-				</tr>
-				<tr>
-					<td>아이디</td>
-					<td><input name="id"></td>
-				</tr>
-				<tr>
-					<td>비밀번호</td>
-					<td><input type="password" name="pwd"></td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<div align="right">
-							<input type="submit" value="로그인" onclick="loginCheck()">&nbsp;
-							<input type="button" value="회원가입"
-								onClick="javascript:location.href='member.jsp'">
-						</div>
-					</td>
-				</tr>
-			</table>
+%>
+</head>
+<body bgcolor="">
+	<div class="wrapper" align="center">
+	<div class="container">
+    <h1>Welcome</h1>
+		<form class="form" name="loginFrm" method="post" action="loginProc.jsp">
+		<input type="text"  name="id" placeholder="Username">
+		<input type="password" placeholder="Password" name="pwd">
+			<br>
+			<div>
+				<button id="login-button" type="submit" onclick="loginCheck()">로그인</button>
+			</div>
+			<div>
+				<button id="login-button" type="submit" onClick="javascript:location.href='member.jsp'">회원가입</button>
+			</div>
 		</form>
-		<%
+		</div>
+		<ul class="bg-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+			<%
 		}
 		%>
-
-	</div>
+	<script>
+	$("#login-button").click(function(event){
+		event.preventDefault();
+	
+		$('form').fadeOut(500);
+		$('.wrapper').addClass('form-success');
+	});
+	</script>
 </body>
 </html>
