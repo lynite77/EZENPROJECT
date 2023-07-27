@@ -5,17 +5,18 @@
 <head>
     <title>회원 삭제 확인</title>
     <script>
-        function confirmDelete() {
-            var confirmed = confirm("정말로 회원을 삭제하시겠습니까?");
-            if (confirmed) {
-                return true;
-            } else {
-                // 취소 버튼을 누른 경우, 삭제를 취소합니다.
-                alert("회원 삭제가 취소되었습니다.");
-                return false;
-            }
-        }
-    </script>
+       
+					function confirmDelete() {
+						var confirmed = confirm("정말로 회원을 삭제하시겠습니까?");
+						if (confirmed) {
+							return true;
+						} else {
+							// 취소 버튼을 누른 경우, 삭제를 취소합니다.
+							alert("회원 삭제가 취소되었습니다.");
+							return false;
+						}
+					}
+				</script>
 </head>
 <body>
     <% 

@@ -60,7 +60,7 @@
 <html>
 <head>
 <title>My Task</title>
-<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="./CSS/styles.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	function list() {
 		document.listFrm.action = "list.jsp";

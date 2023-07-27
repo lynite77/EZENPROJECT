@@ -29,7 +29,7 @@ public class PAddDataServlet extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "HELLOUSER", "HELLOUSER");
             
             // 데이터 추가 SQL 문 작성
-            String sql = "INSERT INTO PRODUCT (P_CODE, P_NAME, P_COLOR, P_SIZE, P_LENGTH, P_PRICE, P_INFO) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO PRODUCT_INFO (Product_CODE, Product_NAME, Product_COLOR, Product_SIZE, Product_LENGTH, Product_PRICE, Product_INFO) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, productCode);
             statement.setString(2, productName);

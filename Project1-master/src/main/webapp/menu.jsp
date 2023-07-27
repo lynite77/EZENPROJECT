@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>menu</title>
-	<link href="../CSS/menu-styles.css" rel="stylesheet" />
+	<link href="./CSS/menu-styles.css" rel="stylesheet" />
 </head>
 <body>
 	<table>

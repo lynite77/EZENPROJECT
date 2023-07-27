@@ -153,7 +153,6 @@
 		                    <th>제품명</th>
 		                    <th>에러코드</th>
 		                    <th>에러명</th>
-		                    <th>에러수량</th>
 		                    <th>에러발생시기</th>
 		                </tr>
 		            </thead>
@@ -163,7 +162,6 @@
 		                    <th>제품명</th>
 		                    <th>에러코드</th>
 		                    <th>에러명</th>
-		                    <th>에러수량</th>
 		                    <th>에러발생시기</th>
 		                </tr>
 		            </tfoot>
@@ -176,7 +174,6 @@
 		                    <td><%= errorLog.getProductName() %></td>
 		                    <td><%= errorLog.getErrorCode() %></td>
 		                    <td><%= errorLog.getErrorName() %></td>
-		                    <td><%= errorLog.getErrorQuantity() %></td>
 		                    <td><%= errorLog.getErrorDate() %></td>
 		                </tr>
 		                <% 

@@ -10,6 +10,11 @@ CREATE OR REPLACE VIEW orderView
     AS
         select o.*, PRODUCT_NAME from order_info o, PRODUCT_INFO p where o.product_code = p.product_code order by order_code;
 
+-- 모니터링 부분 뷰 생성
+CREATE OR REPLACE VIEW ERROR_LOG
+	as
+		Select quality_code as Log_ID, q.PRODUCT_DUCT_CODE as P_CODE, PRODUCT_NAME as P_NAME, q.ERROR_CODE as E_CODE, ERROR_NAME as E_NAME, CHECK_DATE as ERROR_DATE FROM quality_INFO q, PRODUCT_INFO p, ERROR_INFO e where q.product_code = p.product_code and q.error_code = e.error_code order by quality_code;
+
 -- 목록 역순 조회
 SELECT rownum, a.* FROM (SELECT rownum rnum, b.* FROM (select * FROM qualitytable) b order by rnum desc) a;
 

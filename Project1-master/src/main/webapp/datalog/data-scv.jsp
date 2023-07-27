@@ -25,16 +25,5 @@
 			<a href="<%=tPath%>/datalog/add_data2.jsp" class="button close-button">데이터 일괄추가</a>
 		</div>
 	</div>
-	<script>
-	  const downloadButtons = document.querySelectorAll(".close-button");
-	  downloadButtons.forEach(button => {
-	    button.addEventListener("click", closeWindow);
-	  });
-	
-	  function closeWindow() {
-	    window.close();
-	  }
-	</script>
-
 </body>
 </html>

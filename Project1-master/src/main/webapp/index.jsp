@@ -88,25 +88,26 @@
 				   	<p style="font-weight: bold; text-transform: uppercase;">기준정보관리</p>
 				 </a>
 				 <ul class="collapse show" id="collapse2">
+					  <li><a href="<%=tPath%>/product/register.jsp" target="content">품목등록</a></li>
+					  <li><a href="<%=tPath%>/product/registerconfirm.jsp" target="content">품목리스트</a></li>
 					  <li><a href="<%=tPath%>/plans/planOrder.do" target="content">작업지시등록</a></li>
 					  <li><a href="<%=tPath%>/plans/planView" target="content">작업지시목록</a></li>
-					  <li><a href="<%=tPath%>/주소" target="content">3</a></li>
-					  <li><a href="<%=tPath%>/주소" target="content">4</a></li>
 				 </ul>
 				 <a data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
 				    <p style="font-weight: bold; text-transform: uppercase;">품질 검사</p>
 				 </a>
 				 <ul class="collapse show" id="collapse3">
 					  <li><a href="<%=tPath%>/QC/list.jsp" target="content">품질 관리</a></li>
-					  <li><a href="<%=tPath%>/monitoring.jsp" target="content">모니터링</a></li>
+					  <li><a href="<%=tPath%>/monitoring/monitoring.jsp" target="content">모니터링</a></li>
+					  <li><a href="<%=tPath%>/monitoring/rail.jsp" target="content">공정현황</a></li>
 				 </ul>
 				 <a data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
 				   	<p style="font-weight: bold; text-transform: uppercase;">데이터전송</p>
 				 </a>
 				 <ul class="collapse show" id="collapse4">
-					  <li><a href="<%=tPath%>/download_csv.jsp" target="content">에러데이터 다운</a></li>
-					  <li><a href="<%=tPath%>/download_csv2.jsp" target="content">양품데이터 다운</a></li>
-					  <li><a href="javascript:void(0);" onclick="openPopup('<%=tPath%>/add_data.jsp')">데이터 삽입</a></li>  
+					  <li><a href="<%=tPath%>/datalog/download_csv.jsp" target="content">에러데이터 다운</a></li>
+					  <li><a href="<%=tPath%>/datalog/download_csv2.jsp" target="content">양품데이터 다운</a></li>
+					  <li><a href="javascript:void(0);" onclick="openPopup('<%=tPath%>/datalog/add_data.jsp')">데이터 삽입</a></li>  
 				 </ul>
 		  </div>
 	</div>

@@ -21,7 +21,6 @@ public class AddDataServlet extends HttpServlet {
         String productName = request.getParameter("productName");
         String errorCode = request.getParameter("errorCode");
         String errorName = request.getParameter("errorName");
-        int errorQuantity = Integer.parseInt(request.getParameter("errorQuantity"));
         
         // 현재 날짜 및 시간 가져오기
         Date errorDate = new Date();
@@ -33,14 +32,13 @@ public class AddDataServlet extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "HELLOUSER", "HELLOUSER");
             
             // 데이터 추가 SQL 문 작성
-            String sql = "INSERT INTO ERROR_LOG (P_CODE, P_NAME, E_CODE, E_NAME, ERROR_COUNT, ERROR_DATE) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO ERROR_LOG (P_CODE, P_NAME, E_CODE, E_NAME, ERROR_DATE) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, productCode);
             statement.setString(2, productName);
             statement.setString(3, errorCode);
             statement.setString(4, errorName);
-            statement.setInt(5, errorQuantity);
-            statement.setTimestamp(6, new java.sql.Timestamp(errorDate.getTime()));
+            statement.setTimestamp(5, new java.sql.Timestamp(errorDate.getTime()));
             statement.executeUpdate();
             
             // 리소스 정리

@@ -6,8 +6,7 @@
 <jsp:useBean id="qDao" class="Spring.QualityDAO"/>
 <%	
 	request.setCharacterEncoding("UTF-8");
-	String worker = (String)session.getAttribute("idKey");	
-	
+	int worker = (int)session.getAttribute("worker");	
 	
 	int totalRecord=0;		// 전체레코드수
 	int numPerPage=15;		// 페이지당 레코드 수 
@@ -317,7 +316,9 @@
 		<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
 		<input type="hidden" name="keyField" value="<%=keyField%>"> 
 		<input type="hidden" name="keyWord" value="<%=keyWord%>">
-		<input type="hidden" name="numPerPage" value="<%=numPerPage%>">		
+		<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
+		<input type="hidden" name="before" value="<%=before%>">
+		<input type="hidden" name="after" value="<%=after%>">		
 	</form>
 </div>
 </body>

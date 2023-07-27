@@ -23,7 +23,7 @@ try {
     
     // CSV 데이터를 문자열로 생성
     StringBuilder csvData = new StringBuilder();
-    csvData.append("상품코드,상품명,에러코드,에러명,에러수량,에러발생날짜");
+    csvData.append("상품코드,상품명,에러코드,에러명,에러발생날짜\n");
     
     // 오류 로그 데이터 출력
     for (ErrorLog errorLog : errorLogs) {
@@ -31,11 +31,10 @@ try {
         String productName = errorLog.getProductName();
         String errorCode = errorLog.getErrorCode();
         String errorName = errorLog.getErrorName();
-        int errorQuantity = errorLog.getErrorQuantity();
         String errorDate = errorLog.getErrorDate();
         
         csvData.append(productCode).append(",").append(productName).append(",").append(errorCode)
-               .append(",").append(errorName).append(",").append(errorQuantity).append(",").append(errorDate)
+               .append(",").append(errorName).append(",").append(errorDate)
                .append("\n");
     }
 

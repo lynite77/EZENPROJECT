@@ -4,13 +4,16 @@
 <%@ page import="Spring.*"%>
 <%@ page import="bean.*"%>
 <jsp:useBean id="qDao" class="Spring.QualityDAO"/>
-
+<jsp:useBean id="Mgr" class="member.MemberMgr"/>
 <% 
+		String id = (String)session.getAttribute("idKey");
+		int memberCode = Mgr.findCode(id);
 		request.setCharacterEncoding("UTF-8");		
 		String qcode = request.getParameter("qcode");
 		String worker = request.getParameter("worker");
 		String w_name = qDao.findmember(Integer.valueOf(worker));
 		QualityBean bean = qDao.getBoard(qcode);
+		int mcode = bean.getMEMBER_CODE();
 		String pname = bean.getPRODUCT_NAME();
 		String pcode = Integer.toString(bean.getPRODUCT_CODE());
 		String pinfo = bean.getPRODUCT_INFO();
@@ -96,9 +99,13 @@ function save() {
 		</table>
 		<table class="foot2" align="center">
 			<tr>
+<% if (memberCode == mcode){ %>
 				<td align="right">
 					 <input style="font-size:14pt;" type="submit" value="수  정" onClick="javascript:save()">
-				</td>	
+				</td>
+				<%} else {%>
+				<td align="right"></td>
+				<%} %>	
 				<td align="center">
 					 <input style="font-size:14pt;" type="button" value="목  록" onClick="javascript:location.href='list.jsp'">
 				</td>

@@ -58,10 +58,9 @@ public class monitoringDAO {
                 String productName = resultSet.getString("P_NAME");
                 String errorCode = resultSet.getString("E_CODE");
                 String errorName = resultSet.getString("E_NAME");
-                int errorQuantity = resultSet.getInt("ERROR_COUNT");
                 String errorDate = resultSet.getString("ERROR_DATE");
                 
-                ErrorLog errorLog = new ErrorLog(productCode, productName, errorCode, errorName, errorQuantity, errorDate, petot, etot);
+                ErrorLog errorLog = new ErrorLog(productCode, productName, errorCode, errorName, errorDate, petot, etot);
                 errorLogs.add(errorLog);
             }
             // 연결 및 리소스 정리
@@ -96,17 +95,17 @@ public class monitoringDAO {
 	        
 	        // 데이터 조회
 	        statement = connection.createStatement();
-	        ResultSet resultSet = statement.executeQuery("SELECT * FROM PRODUCT");
+	        ResultSet resultSet = statement.executeQuery("SELECT * FROM PRODUCT_INFO");
 
 	        // 결과 처리
 	        while (resultSet.next()) {
-	            String productCode = resultSet.getString("P_CODE");
-	            String productName = resultSet.getString("P_NAME");
-	            String productColor = resultSet.getString("P_COLOR");
-	            String productSize = resultSet.getString("P_SIZE");
-	            String productLength = resultSet.getString("P_LENGTH");
-	            String productPrice = resultSet.getString("P_PRICE");
-	            String productInfo = resultSet.getString("P_INFO");
+	            String productCode = resultSet.getString("PRODUCT_CODE");
+	            String productName = resultSet.getString("PRODUCT_NAME");
+	            String productColor = resultSet.getString("PRODUCT_COLOR");
+	            String productSize = resultSet.getString("PRODUCT_SIZE");
+	            String productLength = resultSet.getString("PRODUCT_LENGTH");
+	            String productPrice = resultSet.getString("PRODUCT_PRICE");
+	            String productInfo = resultSet.getString("PRODUCT_INFO");
 	            
 	            Gproduct gproduct = new Gproduct(productCode, productName, productColor, productSize, productLength, productPrice, productInfo);
 	            products.add(gproduct);
@@ -142,11 +141,11 @@ public class monitoringDAO {
             
             // 데이터 조회
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT DISTINCT P_NAME, COUNT(*) OVER(PARTITION BY P_NAME) as PTOT FROM PRODUCT");
+            ResultSet resultSet = statement.executeQuery("SELECT DISTINCT PRODUCT_NAME, COUNT(*) OVER(PARTITION BY PRODUCT_NAME) as PTOT FROM PRODUCT_INFO");
             
             // 결과 처리
             while (resultSet.next()) {
-            	String pname = resultSet.getString("P_NAME");
+            	String pname = resultSet.getString("PRODUCT_NAME");
             	int ptot = resultSet.getInt("PTOT");
                 
             	ProductPdata productPdata = new ProductPdata(pname, ptot);
@@ -228,7 +227,7 @@ public class monitoringDAO {
             
             // 데이터 조회
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT SUM(PTOT) as PETOT FROM (SELECT DISTINCT P_NAME, COUNT(*) OVER(PARTITION BY P_NAME) as PTOT FROM PRODUCT)");
+            resultSet = statement.executeQuery("SELECT count(*) as PETOT FROM qualitytable where error_code is null and check_date is not null");
             
             // 결과 처리
             while (resultSet.next()) {
@@ -271,7 +270,7 @@ public class monitoringDAO {
          
          // 데이터 조회
          statement = connection.createStatement();
-         resultSet = statement.executeQuery("SELECT SUM(ERROR_COUNT) as ETOT FROM ERROR_LOG");
+         resultSet = statement.executeQuery("SELECT COUNT(*) as ETOT FROM ERROR_LOG");
          
          // 결과 처리
          while (resultSet.next()) {

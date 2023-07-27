@@ -5,17 +5,15 @@ public class ErrorLog {
     private String productName;
     private String errorCode;
     private String errorName;
-    private int errorQuantity;
     private String errorDate;
     private int petot;
     private int etot;
 
-    public ErrorLog(String productCode, String productName, String errorCode, String errorName, int errorQuantity, String errorDate, int petot, int etot) {
+    public ErrorLog(String productCode, String productName, String errorCode, String errorName, String errorDate, int petot, int etot) {
         this.productCode = productCode;
         this.productName = productName;
         this.errorCode = errorCode;
         this.errorName = errorName;
-        this.errorQuantity = errorQuantity;
         this.errorDate = errorDate;
         this.petot = petot;
         this.etot = etot;
@@ -51,14 +49,6 @@ public class ErrorLog {
 
     public void setErrorName(String errorName) {
         this.errorName = errorName;
-    }
-
-    public int getErrorQuantity() {
-        return errorQuantity;
-    }
-
-    public void setErrorQuantity(int errorQuantity) {
-        this.errorQuantity = errorQuantity;
     }
 
     public int getPetot() {

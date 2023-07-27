@@ -1,0 +1,108 @@
+h1 {
+	color: #000040;	
+	margin-bottom: 20px;
+	
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+div.align-center {
+  text-align: center;
+}
+
+form {
+  width: 450px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #ffffff;
+  margin: 30px auto;
+  padding: 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+form table tr th {
+  background-color: #996600;
+  color: #ffffff;
+  padding: 10px;
+  text-align: center;
+}
+
+form table tr td {
+  padding: 10px;
+}
+
+form table tr td input[type="text"],
+form table tr td input[id="login"],
+form table tr td input[name="pwd"],
+form table tr td input[name="repwd"],
+form table tr td input[type="email"],
+form table tr td input[name="name"],
+form table tr td select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form table tr td input[name="id"],
+form table tr td select {
+  width: 60%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form table tr td input[name="rrn1"],
+form table tr td input[name="rrn2"],
+form table tr td select {
+  width: 47%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form table tr td input[name="tel1"],
+form table tr td input[name="tel2"],
+form table tr td input[name="tel3"],
+form table tr td select {
+  width: 30%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form table tr td input[type="submit"],
+form table tr td input[type="reset"],
+form table tr td input[type="button"],
+form input[type="submit"],
+form input[type="button"]
+{
+  padding: 10px;
+  background-color: #996600;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+form table tr td input[type="submit"]:hover,
+form table tr td input[type="reset"]:hover,
+form table tr td input[type="button"]:hover {
+  background-color: #cc9900;
+}
+
+a {
+  color: #996600;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

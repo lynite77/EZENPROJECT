@@ -48,9 +48,6 @@
             <label for="errorName">에러명:</label>
             <input type="text" id="errorName" name="errorName"><br>
             
-            <label for="errorQuantity">에러수량:</label>
-            <input type="number" id="errorQuantity" name="errorQuantity"><br>
-            
             <label for="errorDate">에러발생시기:</label>
             <input type="text" id="errorDate" name="errorDate"><br>
         </div>
@@ -115,7 +112,6 @@
             } else if ($("#databaseType").val() === "ErrorLog") {
                 formData.errorCode = $("#errorCode").val();
                 formData.errorName = $("#errorName").val();
-                formData.errorQuantity = $("#errorQuantity").val();
                 formData.errorDate = $("#errorDate").val();
                 
                 // ErrorLog 테이블 선택 시 AddDataServlet으로 전송
